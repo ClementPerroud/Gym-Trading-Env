@@ -54,7 +54,7 @@ class CandleStickRenderer():
                                 shared_xaxes=True,
                                 vertical_spacing=0.10,
                                 row_heights=[0.55, 0.15, 0.15, 0.15],
-                                subplot_titles=('Price evolution',  'Agent action', 'Portfolio valuation', f'N-{self.reward_smoothing}-Smoothed reward')
+                                subplot_titles=('Price evolution',  'Portfolio position', 'Portfolio valuation', f'N-{self.reward_smoothing}-Smoothed reward')
                                 )
             
             fig.add_trace(
@@ -72,19 +72,17 @@ class CandleStickRenderer():
             x = temp_df.index.to_numpy()
             actions = temp_df["action"].to_numpy()
             fig.add_trace(
-                go.Scatter(x=x, y = actions, fill="tozeroy", mode='lines',fillcolor = "rgba(169,196,242,0.5)", line=dict(width=1,color="rgba(169,196,242,0.8)")),
+                go.Scatter(x=x, y = actions, fill="tozeroy", mode='lines',fillcolor = "#a3b0ff", line=dict(width=0.5,color="blue")),
                 row=2,
                 col=1
             )
-
-
             fig.add_trace(
-                go.Scatter(x=temp_df.index, y = temp_df["portfolio_value"], mode = None, line=dict(width=1, color='rgba(255,242,0,1)'),),
+                go.Scatter(x=temp_df.index, y = temp_df["portfolio_value"], line=dict(width=1, color='blue'),),
                 row=3,
                 col=1,
             )
             fig.add_trace(
-                go.Scatter(x=temp_df.index, y = temp_df["smoothed_reward"], mode = None, line=dict(width=1, color='blue'),),
+                go.Scatter(x=temp_df.index, y = temp_df["smoothed_reward"], fill="tozeroy", fillcolor="#a3b0ff", line=dict(width=1, color='blue'),),
                 row=4,
                 col=1,
             )
