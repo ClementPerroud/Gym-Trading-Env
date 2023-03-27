@@ -140,8 +140,6 @@ class TradingEnv(gym.Env):
     
     def step(self, position_index):
         self._take_action(self.positions[position_index])
-        print(self._portfolio)
-        print(self._portfolio_interest)
         self._step += 1
 
         self._update_interest()

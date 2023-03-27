@@ -37,9 +37,9 @@ env = TradingEnv(
 truncated = False
 observation, info = env.reset()
 while not truncated:
-    action = int(input("Action :"))#env.action_space.sample()
+    action = env.action_space.sample()
     observation, reward, done, truncated, info = env.step(action)
-    print(info)
+
 
 # Render
 env.render()
