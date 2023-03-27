@@ -4,8 +4,10 @@ from environments import TradingEnv
 import time
 
 # Import your datas
-df = pd.read_csv("data/BTC-Hourly.csv", parse_dates=["date"], index_col= "date")
+df = pd.read_csv("data/BTC_USD-Hourly.csv", parse_dates=["date"], index_col= "date")
 df.sort_index(inplace= True)
+df.dropna(inplace= True)
+df.drop_duplicates(inplace=True)
 
 # Generating features
 # WARNING : the column names need to contain keyword 'feature' !
@@ -15,8 +17,6 @@ df["feature_high"] = df["high"]/df["close"]
 df["feature_low"] = df["low"]/df["close"]
 df["feature_volume"] = df["Volume USD"] / df["Volume USD"].rolling(7*24).max()
 df.dropna(inplace= True)
-
-df["close"] = 1000
 
 # Create your own reward function with the history object
 def reward_function(history):
