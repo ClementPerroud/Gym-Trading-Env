@@ -18,7 +18,8 @@ class TradingEnv(gym.Env):
                 positions : list = [0, 1],
                 reward_function = lambda info : np.log(1 + info[-1]["portfolio_info"]["value"] / info[-2]["portfolio_info"]["value"]),
                 windows = None,
-                fees = 0,
+                trading_fees = 0,
+                borrow_interest_rate = 0,
                 max_leverage = None,
                 portfolio_initial_value = 1000,
                 initial_position = 0,
@@ -27,7 +28,8 @@ class TradingEnv(gym.Env):
         self.positions = positions
         self.reward_function = reward_function
         self.windows = windows
-        self.fees = fees
+        self.trading_fees = trading_fees
+        self.borrow_interest_rate = borrow_interest_rate
         self.max_leverage =max_leverage
         self.portfolio_initial_value = float(portfolio_initial_value)
         self.initial_position = initial_position
@@ -55,11 +57,13 @@ class TradingEnv(gym.Env):
         self._info_array = np.array(self.df[self._info_columns])
         self._price_array = np.array(self.df["close"])
     def _get_price(self, delta = 0): return self._price_array[self._step + delta]
-    def _get_portfolio_value(self): return  self._portfolio["asset"] * self._get_price() + self._portfolio["fiat"]
+    def _get_portfolio_value(self, ignore_interest = False):
+        if ignore_interest: return  self._portfolio["asset"] * self._get_price() + self._portfolio["fiat"]
+        return  (self._portfolio["asset"] - self._portfolio_interest["asset"]) * self._get_price() + self._portfolio["fiat"] - self._portfolio_interest["fiat"]
     def _generate_portfolio(self, position, portfolio_value):
         return {
             "asset": position * portfolio_value / self._get_price(),
-            "fiat": (1 - position) * portfolio_value
+            "fiat": (1 - position) * portfolio_value,
         }
     def _leverage_check(self, portfolio_repartition):
         if (portfolio_repartition["borrowed_asset"] * self._get_price() + portfolio_repartition["borrowed_fiat"]) > 0.95*self.max_leverage * (portfolio_repartition["asset"] * self._get_price() + portfolio_repartition["fiat"]):
@@ -71,7 +75,9 @@ class TradingEnv(gym.Env):
             "asset":max(0, self._portfolio["asset"]),
             "fiat":max(0, self._portfolio["fiat"]),
             "borrowed_asset":max(0, -self._portfolio["asset"]),
-            "borrowed_fiat":max(0, -self._portfolio["fiat"])
+            "borrowed_fiat":max(0, -self._portfolio["fiat"]),
+            "interest_asset":self._portfolio_interest["asset"],
+            "interest_fiat":self._portfolio_interest["fiat"],
         } 
     def _get_obs(self):
         if self.windows is None: _step_index = self._step
@@ -88,6 +94,7 @@ class TradingEnv(gym.Env):
         if self.windows is not None: self._step = self.windows
 
         self._portfolio  = self._generate_portfolio(self.positions[self.initial_position], self.portfolio_initial_value)
+        self._portfolio_interest = {"asset":0, "fiat":0}
         self._position = self.positions[self.initial_position]
         self.historical_info = [{
             "step": self._step,
@@ -102,21 +109,28 @@ class TradingEnv(gym.Env):
             } 
         }]
         return self._get_obs(), self.historical_info[0]
-    
+    def _update_interest(self):
+        for key in self._portfolio_interest.keys():
+            self._portfolio_interest[key] += max(0, -self._portfolio[key])*self.borrow_interest_rate
     def _trade(self, position):
         old_position = self._position
         if position * old_position < 0:
             self._trade(0)
             old_position = 0
 
-        target_portfolio = self._generate_portfolio(position, self._get_portfolio_value())
+        target_portfolio = self._generate_portfolio(position, self._get_portfolio_value(ignore_interest=True))
+        target_portfolio["asset"] -= -self._portfolio_interest["asset"] + self._portfolio_interest["fiat"] / self._get_price()
+        target_portfolio["fiat"] -= -self._portfolio_interest["fiat"] + self._portfolio_interest["asset"] * self._get_price()
 
         fee_factor = 1
-        if position <= 0 and old_position <= 0 < 0: fee_factor = 1/(1 - self.fees)
-        asset_mouvement = {asset:(target_portfolio[asset] - self._portfolio[asset])*fee_factor for asset in target_portfolio.keys()} 
-
-        asset_fees = {asset : mouvement * self.fees if mouvement > 0 else 0 for asset, mouvement in asset_mouvement.items()}
-        self._portfolio = {asset:self._portfolio[asset] + asset_mouvement[asset] - asset_fees[asset] for asset in target_portfolio.keys()}
+        if (position <= 0 and old_position <= 0) or (position >= 1 and old_position >= 1): fee_factor = 1/(1 - self.trading_fees)
+        asset_mouvement = {asset:(target_portfolio[asset] - self._portfolio[asset])*fee_factor for asset in target_portfolio.keys()}
+        
+        
+        asset_fees = {asset : mouvement * self.trading_fees if mouvement > 0 else 0 for asset, mouvement in asset_mouvement.items()}
+        for asset in target_portfolio.keys() : 
+            self._portfolio[asset] +=  asset_mouvement[asset] - asset_fees[asset] - self._portfolio_interest[asset]
+            self._portfolio_interest[asset] =  0
 
     def _take_action(self, position):
         if position != self._position:
@@ -126,11 +140,13 @@ class TradingEnv(gym.Env):
     
     def step(self, position_index):
         self._take_action(self.positions[position_index])
+        print(self._portfolio)
+        print(self._portfolio_interest)
         self._step += 1
 
+        self._update_interest()
         portfolio_value = self._get_portfolio_value()
         portfolio_repartion = self._get_portfolio_repartition()
-        
 
         done, truncated = False, False
         if self.max_leverage is not None:

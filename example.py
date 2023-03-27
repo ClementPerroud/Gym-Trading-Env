@@ -16,6 +16,7 @@ df["feature_low"] = df["low"]/df["close"]
 df["feature_volume"] = df["Volume USD"] / df["Volume USD"].rolling(7*24).max()
 df.dropna(inplace= True)
 
+df["close"] = 1000
 
 # Create your own reward function with the history object
 def reward_function(history):
@@ -24,9 +25,10 @@ def reward_function(history):
 env = TradingEnv(
         df = df,
         windows= 5,
-        positions = [ -1, -0.5, 0, 0.5, 1], # From -1 (=full SHORT), to +1 (=full LONG) with 0 = no position
+        positions = [ -1, -0.5, 0, 0.5, 1, 1.5, 2], # From -1 (=full SHORT), to +1 (=full LONG) with 0 = no position
         initial_position = 0, #Initial position
-        fees = 0.01/100, # 0.01% per stock buy / sell
+        trading_fees = 0.01/100, # 0.01% per stock buy / sell
+        borrow_interest_rate= 0.0003/100, #per timestep (= 1h here)
         reward_function = reward_function,
         portfolio_initial_value = 1000, # in FIAT (here, USD)
     )
@@ -35,8 +37,9 @@ env = TradingEnv(
 truncated = False
 observation, info = env.reset()
 while not truncated:
-    action = env.action_space.sample()
+    action = int(input("Action :"))#env.action_space.sample()
     observation, reward, done, truncated, info = env.step(action)
+    print(info)
 
 # Render
 env.render()
