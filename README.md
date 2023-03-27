@@ -92,7 +92,9 @@ while not truncated:
 ```python
 env.render()
 ```
-<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.JPG?raw=true" height = "300"/>
+<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.JPG?raw=true" height = "600"/>
+
+Enjoy :)
 
 
 
