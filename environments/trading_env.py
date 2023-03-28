@@ -16,7 +16,7 @@ class TradingEnv(gym.Env):
     def __init__(self,
                 df : pd.DataFrame,
                 positions : list = [0, 1],
-                reward_function = lambda info : np.log(1 + info[-1]["portfolio_info"]["value"] / info[-2]["portfolio_info"]["value"]),
+                reward_function = lambda history : np.log(history[-1]["portfolio_valuation"] / history[-2]["portfolio_valuation"]),
                 windows = None,
                 trading_fees = 0,
                 borrow_interest_rate = 0,
@@ -65,12 +65,12 @@ class TradingEnv(gym.Env):
             "asset": position * portfolio_value / self._get_price(),
             "fiat": (1 - position) * portfolio_value,
         }
-    def _leverage_check(self, portfolio_repartition):
-        if (portfolio_repartition["borrowed_asset"] * self._get_price() + portfolio_repartition["borrowed_fiat"]) > 0.95*self.max_leverage * (portfolio_repartition["asset"] * self._get_price() + portfolio_repartition["fiat"]):
+    def _leverage_check(self, portfolio_distribution):
+        if (portfolio_distribution["borrowed_asset"] * self._get_price() + portfolio_distribution["borrowed_fiat"]) > 0.95*self.max_leverage * (portfolio_distribution["asset"] * self._get_price() + portfolio_distribution["fiat"]):
             return True
         return False
     
-    def _get_portfolio_repartition(self):
+    def _get_portfolio_distribution(self):
         return {
             "asset":max(0, self._portfolio["asset"]),
             "fiat":max(0, self._portfolio["fiat"]),
@@ -102,11 +102,9 @@ class TradingEnv(gym.Env):
             "reward":0,
             "position_index": self.initial_position,
             "position" : self.positions[self.initial_position],
-            "pair_info": dict(zip(self._info_columns, self._info_array[self._step])),
-            "portfolio_info":{
-                "value" : self.portfolio_initial_value,
-                "repartition": self._get_portfolio_repartition()
-            } 
+            "df_info": dict(zip(self._info_columns, self._info_array[self._step])),
+            "portfolio_valuation" : self.portfolio_initial_value,
+            "portfolio_distribution":self._get_portfolio_distribution(), 
         }]
         return self._get_obs(), self.historical_info[0]
     def _update_interest(self):
@@ -144,7 +142,7 @@ class TradingEnv(gym.Env):
 
         self._update_interest()
         portfolio_value = self._get_portfolio_value()
-        portfolio_repartion = self._get_portfolio_repartition()
+        portfolio_repartion = self._get_portfolio_distribution()
 
         done, truncated = False, False
         if self.max_leverage is not None:
@@ -157,11 +155,9 @@ class TradingEnv(gym.Env):
             "date":self.df.index.values[self._step],
             "position_index": position_index,
             "position" : self.positions[position_index],
-            "pair_info": dict(zip(self._info_columns, self._info_array[self._step])),
-            "portfolio_info":{
-                "value" : portfolio_value,
-                "repartition": portfolio_repartion
-            } 
+            "df_info": dict(zip(self._info_columns, self._info_array[self._step])),
+            "portfolio_valuation" : portfolio_value,
+            "portfolio_distribution":portfolio_repartion, 
         })
         reward = self.reward_function(self.historical_info)
         self.historical_info[-1]["reward"] = reward
@@ -173,7 +169,7 @@ class TradingEnv(gym.Env):
                 self.historical_info[i]["date"],
                 self.historical_info[i]["position"], # action
                 self.historical_info[i]["reward"], # action
-                self.historical_info[i]["portfolio_info"]["value"], # portfolio_value
+                self.historical_info[i]["portfolio_valuation"], # portfolio_value
             ] for i in range(len(self.historical_info))
         ]
         history_df = pd.DataFrame(history)

@@ -20,14 +20,14 @@ df.dropna(inplace= True)
 
 # Create your own reward function with the history object
 def reward_function(history):
-    return np.log(history[-1]["portfolio_info"]["value"] / history[-2]["portfolio_info"]["value"]) #log (p_t / p_t-1 )
+    return np.log(history[-1]["portfolio_valuation"] / history[-2]["portfolio_valuation"]) #log (p_t / p_t-1 )
 
 env = TradingEnv(
         df = df,
         windows= 5,
         positions = [ -1, -0.5, 0, 0.5, 1, 1.5, 2], # From -1 (=full SHORT), to +1 (=full LONG) with 0 = no position
         initial_position = 0, #Initial position
-        trading_fees = 0.01/100, # 0.01% per stock buy / sell
+        trading_fees = 0.1/100, # 0.01% per stock buy / sell
         borrow_interest_rate= 0.0003/100, #per timestep (= 1h here)
         reward_function = reward_function,
         portfolio_initial_value = 1000, # in FIAT (here, USD)
@@ -39,7 +39,6 @@ observation, info = env.reset()
 while not truncated:
     action = env.action_space.sample()
     observation, reward, done, truncated, info = env.step(action)
-
 
 # Render
 env.render()
