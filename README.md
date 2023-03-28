@@ -13,7 +13,7 @@ Github is full of environments that consider actions such as **BUY**, **SELL**. 
 - ```0``` : We have sold as much as possible of stock Y (OUT); ideally, we have all of our stock's portfolio converted in our currency
 Now, we can imagine half position or others :
 - ```0.5``` : 50% in stock Y & 50% in currency
->- ```0.1``` : 10% in stock Y & 90% in currency
+- ```0.1``` : 10% in stock Y & 90% in currency
 
 In fact, it is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
 Plus, this environment supports more complex positions such as:
