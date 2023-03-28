@@ -45,7 +45,7 @@ df.dropna(inplace= True) # Clean your data !
 ```python
 import numpy as np
 def reward_function(history):
-    return np.log(history[-1]["portfolio_info"]["value"] / history[-2]["portfolio_info"]["value"]) #log (p_t / p_t-1 )
+    return np.log(history[-1]["portfolio_valuation"] / history[-2]["portfolio_valuation"]) #log (p_t / p_t-1 )
 
 >>> output : history[t] # data history at step t
 {
