@@ -93,6 +93,13 @@ while not truncated:
     action = env.action_space.sample()
     observation, reward, done, truncated, info = env.step(action)
 ```
+- ```observation``` returns a dict with items :
+    - ```features``` : Contains the features created. If windows is None, it contains the features of the current step (shape = (n_features,)). If windows is i (int), it contains the features the last i steps (shape = (5, n_features)).
+    - ```position``` : The last position of the environments. It can be useful to include this to the features, so the agent knows which position he is holding and gains stability and continuity.
+- ```reward``` : The step reward following the action taken.
+- ```done```: Always False.
+- ```truncated``` : Is true if we reached the end of the DataFrame.
+- ```info``` : Return the last history step of the object "history" presented above (in "3 - Create your own reward function")
 **(Optional) 6 - Render**
 
 Performed with Dash Plotly (local app).
