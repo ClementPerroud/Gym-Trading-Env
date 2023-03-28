@@ -3,7 +3,7 @@ sys.path.append("./")
 
 import pandas as pd
 import numpy as np
-from src.environments import TradingEnv
+from gym_trading_env import TradingEnv
 import time
 
 # Import your datas
