@@ -94,6 +94,7 @@ while not truncated:
     observation, reward, done, truncated, info = env.step(action)
 ```
 **(Optional) 6 - Render**
+
 Performed with Dash Plotly (local app).
 ```python
 env.render()
