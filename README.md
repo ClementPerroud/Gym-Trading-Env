@@ -98,7 +98,7 @@ Performed with Dash Plotly (local app).
 ```python
 env.render()
 ```
-<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.JPG?raw=true" height = "600"/>
+<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.PNG?raw=true" height = "600"/>
 
 Enjoy :)
 
