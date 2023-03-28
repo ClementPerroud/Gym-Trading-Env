@@ -100,6 +100,8 @@ while not truncated:
 - ```done```: Always False.
 - ```truncated``` : Is true if we reached the end of the DataFrame.
 - ```info``` : Return the last history step of the object "history" presented above (in "3 - Create your own reward function")
+
+
 **(Optional) 6 - Render**
 
 Performed with Dash Plotly (local app).
