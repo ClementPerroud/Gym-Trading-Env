@@ -4,7 +4,7 @@ An OpenAI Gym environment for simulating stocks and train Reinforcement Learning
 
 Designed to be **FAST** and **CUSTOMIZABLE** for an easy RL trading algorythms implementation.
 ## Install and import
-```pip install gym-trading-env```|
+```pip install gym-trading-env```
 
 Then import :
 
