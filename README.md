@@ -1,5 +1,8 @@
 # Crypto-Trading-Env
 
+
+<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.PNG?raw=true" width = "800"/>
+
 An OpenAI Gym environment for simulating stocks and train Reinforcement Learning trading agents.
 
 Designed to be **FAST** and **CUSTOMIZABLE** for an easy RL trading algorythms implementation.

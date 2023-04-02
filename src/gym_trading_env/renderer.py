@@ -148,7 +148,6 @@ class Renderer():
 
             # Custom Scatters
             for scatter in self.scatters:
-                print(scatter)
                 fig.add_trace(
                     go.Scatter(
                         x=temp_df.index,
