@@ -140,10 +140,7 @@ First, you need to save your results at the end of every episode you want to ren
 
 ```python
 ...
-while not truncated and not done:
-    action = env.action_space.sample()
-    observation, reward, done, truncated, info = env.step(action)
-# After each 
+# At the end of episode you want to render
 env.save_for_render(dir = "render_logs")
 ```
 

@@ -23,7 +23,7 @@ class Renderer():
     def add_scatter(self, name, function, scatter_args = None):
         self.scatters.append({"name": name, "function": function, "scatter_args": scatter_args})
     def add_metric(self, name, function):
-        self.metrics.append({"name": name, "function":function})
+        self.metrics.append({"name" : name, "function" : function})
     def update_list_df(self):
         self.pathes = glob.glob(f"{self.render_dir}/*.pkl")
         self.pathes_name = [Path(path).name for path in self.pathes]
@@ -65,7 +65,7 @@ class Renderer():
                 html.Div([
                     html.Div([
                         html.H4(metric["name"], style = {"margin-bottom":"10px"}),
-                        html.Span(metric["value"])
+                        html.Span(id = f"metric_{metric['name']}")
                     ]) for metric in self.metrics
                 ],style = {"display": "flex", "justify-content":"center", "gap":"20px", "row-gap":"10px", "flex-wrap": "wrap"}),
                 html.H3("Parameters", style = {"margin-top":"50px"}),
@@ -103,9 +103,12 @@ class Renderer():
         @self.app.callback(
             Output("graph_candlestick", "figure"),
             Output('updatemode-output-container', 'children'),
+            *[Output(f'metric_{metric["name"]}', 'children') for metric in self.metrics],
             Input('date-slider', 'value'),
             Input('candle-slider', 'value'),
-            Input('df-selector-dropdown', 'value'))
+            Input('df-selector-dropdown', 'value'),
+            
+            )
         def display_candlestick(i, k, df_path):
             if df_path != self.df_path:
                 self.update_df(df_path)
@@ -219,5 +222,8 @@ class Renderer():
                 xaxis = dict(spikemode='across+marker', showgrid=True),  
             )
             fig.update_traces(xaxis="x")
-            return fig, f"Displaying from {temp_df.iloc[0].name.strftime('%Y/%m/%d, %r')} to {temp_df.iloc[-1].name.strftime('%m/%d/%Y, %r')} with {n_candles} candlesticks"
+            return fig,\
+                f"Displaying from {temp_df.iloc[0].name.strftime('%Y/%m/%d, %r')} to {temp_df.iloc[-1].name.strftime('%m/%d/%Y, %r')} with {n_candles} candlesticks",\
+                *[metric['value'] for metric in self.metrics]
+
         self.app.run_server(debug=False)
