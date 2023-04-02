@@ -181,6 +181,10 @@ def max_drawdown(df):
 renderer.add_metric("Max drawdown", max_drawdown)
 ```
 
+<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render_customization.gif?raw=true" width = "800"/>
+
+
+
 ```.add_scatter``` takes arguments :
 - ```name``` : The name of the scatter
 - ```function``` : The function used to compute the line. The function must take an argument ```df``` which is a DateFrame and return a Series, 1D-Array or list.
