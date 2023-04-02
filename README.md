@@ -3,9 +3,9 @@
 
 <img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.gif?raw=true" width = "800"/>
 
-An OpenAI Gym environment for simulating stocks and train Reinforcement Learning trading agents.
+An OpenAI Gym environment for simulating stocks and train Reinforcement Learning (RL) trading agents.
 
-Designed to be **FAST** and **CUSTOMIZABLE** for an easy RL trading algorythms implementation.
+Designed to be **FAST** and **CUSTOMIZABLE** for easy RL trading algorythms implementation.
 ## Install and import
 ```pip install gym-trading-env```
 
@@ -19,10 +19,10 @@ from gym_trading_env import TradingEnv
 
 ### Actions space : positions
 
-Github is full of environments that consider actions such as **BUY**, **SELL**. In my opinion, it is a real mistake to think a RL-agent as a trader. Traders make trade and to do so, they place orders on the market (eg. Buy X of stock Y). But what really matter is the position reached. For example, a trader that sell half of his stocks Y, wants to reduce his risk, but also his potential gains. Now, imagine we labelled each position by a number :
-- ```1``` : We have bought as much as possible of stock Y (LONG); ideally, we have all of our stock's portfolio converted in the stock Y
-- ```0``` : We have sold as much as possible of stock Y (OUT); ideally, we have all of our stock's portfolio converted in our currency
-Now, we can imagine half position or others :
+Github is full of environments that consider actions such as **BUY**, **SELL**. In my opinion, it is a real mistake to consider a reinforcement learning agent in the same way as a trader. Traders make trade and to do so, they place orders on the market (eg. Buy X of stock Y). But what really matter is the position reached. Now, imagine we labelled each position by a number :
+- ```1``` : All of our portfolio is converted into stock Y. *BUY ALL*
+- ```0``` : All of our portfolio is converted into our fiat currency. *SELL ALL*
+Now, we can imagine half position and other variants :
 - ```0.5``` : 50% in stock Y & 50% in currency
 - Even : ```0.1``` : 10% in stock Y & 90% in currency
 ....
@@ -30,17 +30,17 @@ Now, we can imagine half position or others :
 
 In fact, it is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
 
-But if you want to use a really basic environments, you can use only 2 positions : ```1``` and ```0``` which is more of less equivalent to *BUY* and *SELL* actions.
+But if you want to use a really basic environment, you can use only 2 positions : ```1``` and ```0``` which is more of less equivalent to **BUY ALL** and **SELL ALL** actions.
 
 
 Plus, this environment supports more complex positions such as:
-- ```-1``` : once every stock Y is sold, we bet 100% of the portfolio value on the decline of asset Y. To perform this action, the environment borrows 100% of the portfolio valuation as stock Y to an imaginary person, and immediately sell it. When the agent closes the position (position 0), the environment buys the owed amount of stock Y and repays the imaginary person with it. If the price has fallen during the operation, we buy cheaper than we sold what we need to repay : the difference is our gain. The imaginary person is paid a small rent (parameter : ```borrow_interest_rate```)
-- ```+2``` : buy as much stock as possible, then we bet 100% of the portfolio value of the rise of asset Y. We use the same mechanism explained above, but we borrow currency and buy stock Y.
-- ```-10``` ? : We can BUT ...  We need to borrow 1000% of the portfolio valuation as asset Y. You need to understand that such a "leverage" is very risky. As if the stock price rise by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. **GAME OVER, you have 0$ left**. The leverage is very useful but also risky, as it increases your **gains** AND your **losses**. Always keep in mind that you can lose everything.
+- ```-1``` : Bet 100% of the portfolio value on the decline of asset Y (=SHORT). To perform this action, the environment borrows 100% of the portfolio valuation as stock Y to an imaginary person, and immediately sells it. When the agent closes this position, the environment buys the owed amount of stock Y and repays the imaginary person with it. If the price has fallen during the operation, we buy cheaper than we sold what we need to repay : the difference is our gain. The imaginary person is paid a small rent (parameter : ```borrow_interest_rate```)
+- ```+2``` : Bet 100% of the portfolio value of the rise of asset Y. We use the same mechanism explained above, but we borrow currency and buy stock Y.
+- ```-10``` ? : We can BUT ...  We need to borrow 1000% of the portfolio valuation as asset Y. You need to understand that such a "leverage" is very risky. As if the stock price rise by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) of your current portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. **GAME OVER, you have 0$ left**. The leverage is very useful but also risky, as it increases your **gains** AND your **losses**. Always keep in mind that you can lose everything.
 
 ### How to use ?
 
-**1 - Import and clean your data**. They need to be ordered by ascending date. Index must be a date.
+**1 - Import and clean your data**. They need to be ordered by ascending date. Index must be a date. Your DataFrame needs to contain a close price labelled ```close``` to run. If you want to render your results, your DataFrame needs to contain open, high, low, volume features respectively labelled ```open```, ```high```, ```low```, ```volume```.
 ```python
 df = pd.read_csv("data/BTC_USD-Hourly.csv", parse_dates=["date"], index_col= "date")
 df.sort_index(inplace= True)
