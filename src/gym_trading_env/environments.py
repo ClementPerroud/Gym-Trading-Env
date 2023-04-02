@@ -6,8 +6,8 @@ import datetime
 import glob
 
 from collections import Counter
-from src.gym_trading_env.utils.history import History
-from src.gym_trading_env.utils.portfolio import Portfolio, TargetPortfolio
+from .utils.history import History
+from .utils.portfolio import Portfolio, TargetPortfolio
 
 import tempfile, os
 import warnings

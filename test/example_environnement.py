@@ -25,7 +25,6 @@ df.dropna(inplace= True)
 
 # Create your own reward function with the history object
 def reward_function(history):
-    print(history.columns)
     return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2]) #log (p_t / p_t-1 )
 
 env = TradingEnv(

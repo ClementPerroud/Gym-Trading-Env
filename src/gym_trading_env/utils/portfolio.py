@@ -62,13 +62,3 @@ class TargetPortfolio(Portfolio):
             interest_asset = 0,
             interest_fiat = 0
         )
-
-if __name__ == "__main__":
-    price = 10
-    fee = 0.1/100
-    portfolio = Portfolio(asset = 150, fiat = -1000, interest_asset = 10,interest_fiat= 0)
-    portfolio.describe(price)
-
-    portfolio.trade_to_position(1.5, price, fee)
-    print(portfolio)
-    portfolio.describe(price)

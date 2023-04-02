@@ -72,26 +72,6 @@ class History:
         except ValueError as e:
             raise ValueError(f"Feature {column} does not exist ... Check the available features : {self.columns}")
         self.history_storage[:self.size][t, column_index] = value
-if __name__ == "__main__":
-    history = History(
-        feature1 = 15,
-        feature2 = "hello",
-        feature3 = [36, 84],
-        feature4 = {"titre1" : 48, "titre2": 72}
-    )
-    history.add(
-        feature1 = 16,
-        feature2 = "hello",
-        feature3 = [36, 84],
-        feature4 = {"titre1" : 48, "titre2": 72})
-    history.add(
-        feature1 = 17,
-        feature2 = "hello2",
-        feature3 = [36, 84],
-        feature4 = {"titre1" : 48, "titre2": 72})
-    print(history["feature1",0:10])
-    print(history[1])
-    print(history["feature2"])
 
 
         
