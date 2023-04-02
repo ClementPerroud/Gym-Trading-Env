@@ -22,6 +22,7 @@ df["feature_low"] = df["low"]/df["close"]
 df["feature_volume"] = df["Volume USD"] / df["Volume USD"].rolling(7*24).max()
 df.dropna(inplace= True)
 
+
 # Create your own reward function with the history object
 def reward_function(history):
     print(history.columns)

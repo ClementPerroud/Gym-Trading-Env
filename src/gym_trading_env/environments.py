@@ -152,20 +152,20 @@ class TradingEnv(gym.Env):
         if not os.path.exists(dir):os.makedirs(dir)
         render_df.to_pickle(f"{dir}/{self.name}_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pkl")
 
-    
 class MultiDatasetTradingEnv(TradingEnv):
     def __init(self, dataset_dir, *args, **kwargs):
         self.dataset_dir = dataset_dir
         self.dataset_pathes = glob.glob(self.dataset_dir)
         self.dataset_nb_uses = np.zeros(shape=(len(self.dataset_pathes), ))
         df = self.pick_dataset()
-        super().__init__(df = df, *args, **kwargs)
+        super().__init__(df, *args, **kwargs)
 
     def pick_dataset(self):
         # Find the indexes of the less explored dataset
         potential_dataset_pathes = np.where(self.dataset_nb_uses == self.dataset_nb_uses.min())[0]
         # Pick one of them
-        dataset_path = self.dataset_pathes[np.random.randint(potential_dataset_pathes.size)]
+        random_int = np.random.randint(potential_dataset_pathes.size)
+        dataset_path = self.dataset_pathes[random_int]
+        self.dataset_nb_uses[random_int] += 1 # Update nb use counts
         return pd.read_pickle(dataset_path)
-
-
+    
