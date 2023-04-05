@@ -13,7 +13,6 @@ import tempfile, os
 import warnings
 warnings.filterwarnings("error")
 
-
 class TradingEnv(gym.Env):
     """A trading environment for OpenAI gym"""
     metadata = {'render.modes': ['human']}
@@ -44,8 +43,8 @@ class TradingEnv(gym.Env):
         self.observation_space = spaces.Dict(
             {
                 "features": spaces.Box(
-                    self._obs_array.min(),
-                    self._obs_array.max(),
+                    self._obs_array.min() if self._nb_features > 0 else 0,
+                    self._obs_array.max() if self._nb_features > 0 else 1,
                     shape = (self._nb_features, self.windows) if self.windows is not None else (self._nb_features, )
                 ),
                 "position": spaces.Box(-1, 1)
@@ -61,6 +60,10 @@ class TradingEnv(gym.Env):
         self._obs_array = np.array(self.df[self._features_columns])
         self._info_array = np.array(self.df[self._info_columns])
         self._price_array = np.array(self.df["close"])
+
+    
+    def _get_ticker(self, delta = 0):
+        return self.df.iloc[self._step + delta]
     def _get_price(self, delta = 0):
         return self._price_array[self._step + delta]
 
@@ -82,20 +85,21 @@ class TradingEnv(gym.Env):
         super().reset(seed = seed)
         if df is not None: self._set_df(df)
         self._step = 0
+        self._limit_orders = {}
         if self.windows is not None: self._step = self.windows
 
         self._portfolio  = TargetPortfolio(
-            position=self.positions[self.initial_position],
+            position=self.initial_position,
             value= self.portfolio_initial_value,
             price = self._get_price()
         )
-        self._position = self.positions[self.initial_position]
+        self._position = self.initial_position
         self.historical_info = History(max_size= len(self.df))
         self.historical_info.set(
             step = self._step,
             date = self.df.index.values[self._step],
-            position_index = self.initial_position,
-            position = self.positions[self.initial_position],
+            action = None,
+            position = self._position,
             data =  dict(zip(self._info_columns, self._info_array[self._step])),
             portfolio_valuation = self.portfolio_initial_value,
             portfolio_distribution = self._portfolio.get_portfolio_distribution(),
@@ -103,18 +107,39 @@ class TradingEnv(gym.Env):
         )
         return self._get_obs(), self.historical_info[0]
 
-    def _trade(self, position):
-        self._portfolio.trade_to_position(position, price = self._get_price(), trading_fees = self.trading_fees)
+    def _trade(self, position, price = None):
+        self._portfolio.trade_to_position(
+            position, 
+            price = self._get_price() if price is None else price, 
+            trading_fees = self.trading_fees
+        )
+        self._position = position
 
     def _take_action(self, position):
         if position != self._position:
             self._trade(position)
-            self._position = position
-                    
-    def step(self, position_index):
-        self._take_action(self.positions[position_index])
+    
+    def _take_action_order_limit(self):
+        if len(self._limit_orders) > 0:
+            ticker = self._get_ticker()
+            for position, params in self._limit_orders.items():
+                if position != self._position and params['limit'] <= ticker["high"] and params['limit'] >= ticker["low"]:
+                    self._trade(position, price= params['limit'])
+                    if not params['persistent']: del self._limit_orders[position]
+
+
+    
+    def add_limit_order(self, position, limit, persistent = False):
+        self._limit_orders[position] = {
+            'limit' : limit,
+            'persistent': persistent
+        }
+    
+    def step(self, position_index = None):
+        if position_index is not None: self._take_action(self.positions[position_index])
         self._step += 1
 
+        self._take_action_order_limit()
         price = self._get_price()
         self._portfolio.update_interest(borrow_interest_rate= self.borrow_interest_rate)
         portfolio_value = self._portfolio.valorisation(price)
@@ -128,8 +153,8 @@ class TradingEnv(gym.Env):
         self.historical_info.add(
             step = self._step,
             date = self.df.index.values[self._step],
-            position_index = position_index,
-            position = self.positions[position_index],
+            action = position_index,
+            position = self._position,
             data =  dict(zip(self._info_columns, self._info_array[self._step])),
             portfolio_valuation = portfolio_value,
             portfolio_distribution = portfolio_distribution, 

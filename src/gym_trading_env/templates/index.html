@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dropdown</title>
+    <script src="https://cdn.bootcss.com/jquery/3.0.0/jquery.min.js"></script>
+    <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+</head>
+<style type="text/css">
+body{
+    font-family: 'Helvetica Neue';
+    font-size:14px;
+    color :#333333;
+}
+#main{
+    display : flex;
+    justify-content: center;
+    text-align: center;
+}
+#info{
+    position: -webkit-sticky;
+    position: sticky;
+    top: 30px;
+    max-width: 300px;
+}
+select{
+    padding: 10px;
+    border: 1px solid #ededed;
+    border-radius: 5%;
+}
+#metrics{
+    display: flex;
+    flex-wrap:  wrap;
+    justify-content: center;
+    gap: 15px;
+}
+.metric{
+    padding : 10px;
+    border: 1px solid #ededed;
+    max-width: 110px;
+    border-radius: 5%;
+}
+
+</style>
+<body>
+<div id ="main">
+    <div>
+        <h2> Stock Chart Dashboard </h2>
+        <div id="chart" style="width:950px; height:900px;"></div>
+    </div> 
+    
+    <div>
+        <div id="info">
+            <h2> Metrics </h2>
+            <div id = "metrics">
+
+            </div>
+            <h2 style="margin-top: 40px;"> Parameters </h2>
+            <p>Select render</p>
+            <select name='select_dataset' id = 'select_dataset' method="GET" action="/">
+                {% for name in render_names%}
+                    <option value= "{{name}}" SELECTED>{{ name }}</option>
+                {% endfor %}
+            </select>
+        </div>
+    </div>
+</div>
+
+<script>
+    var chart = echarts.init(document.getElementById('chart'), 'white', {renderer: 'canvas'});
+    
+    // Set chart on load
+    $(document).ready(function () {
+        fetchDataChart($('#select_dataset option:selected').val());
+    })
+    // Reset on select dataset
+    $('#select_dataset').on('change', function () {
+        fetchDataChart(this.value)
+    })
+    function fetchDataChart(name = "") {
+        url = "http://127.0.0.1:5000/update_data/" + name;
+        $.ajax({
+            type: "GET",
+            url: url,
+            dataType: 'json',
+            success: function (results1) {
+                chart.setOption(results1);
+                $.ajax({
+                    type: "GET",
+                    url: "http://127.0.0.1:5000/metrics",
+                    dataType: 'json',
+                    success: function (results2) {
+                        metrics_html = $("#metrics")
+                        metrics_html.empty()
+                        for(const result of results2){
+                            metrics_html.append(
+                                $("<div>").addClass('metric')
+                                    .append(
+                                        $("<p style = 'font-weight:700'>").text(result.name)
+                                    )
+                                    .append(
+                                        $("<p>").text(result.value)
+                                    )
+                            )
+                        }
+                    }
+                })
+            }
+        });
+    }
+
+</script>
+</body>
+</html>

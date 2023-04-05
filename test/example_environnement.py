@@ -1,11 +1,10 @@
 import sys  
-sys.path.append("./")
+sys.path.append("./src")
 
 import pandas as pd
 import numpy as np
 import time
-from src.gym_trading_env.environments import TradingEnv
-from src.gym_trading_env.renderer import Renderer
+from gym_trading_env.environments import TradingEnv
 
 # Import your datas
 df = pd.read_csv("test/data/BTC_USD-Hourly.csv", parse_dates=["date"], index_col= "date")

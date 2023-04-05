@@ -1,32 +1,25 @@
 import sys  
-sys.path.append("./")
+sys.path.append("./src")
 
-from src.gym_trading_env.renderer import Renderer
+import pandas as pd
+from gym_trading_env.renderer import Renderer
 
-renderer = Renderer(render_dir="render_logs")
 
-# - Simple Moving Average - 10
-renderer.add_scatter(
-        name = "sma10",
-        function = lambda df : df["close"].rolling(10).mean(),
-        scatter_args = {
-            "line": {"color":'blue'}
-        })
-# - Simple Moving Average - 40
-renderer.add_scatter(
-        name = "sma40",
-        function = lambda df : df["close"].rolling(40).mean(),
-        scatter_args = {
-            "line": {"color": "purple"}
-        })
+renderer = Renderer(render_logs_dir="render_logs")
 
-def max_drawdown(df):
-    current_max = df["portfolio_valuation"].iloc[0]
-    max_drawdown = 0
-    for i in range(len(df)):
-        current_max = max(df["portfolio_valuation"].iloc[i], current_max)
-        max_drawdown = min(max_drawdown, (df["portfolio_valuation"].iloc[i] - current_max)/current_max)
-    return f"{max_drawdown*100:0.2f}%"
+# Add Custom Lines (Simple Moving Average)
+renderer.add_line( name= "sma10", function= lambda df : df["close"].rolling(10).mean(), line_options ={"width" : 1, "color": "purple"})
+renderer.add_line( name= "sma20", function= lambda df : df["close"].rolling(20).mean(), line_options ={"width" : 1, "color": "blue"})
 
-renderer.add_metric("Max drawdown", max_drawdown)
+# Add Custom Metrics (Annualized metrics)
+renderer.add_metric(
+    name = "Annual Market Return",
+    function = lambda df : f"{ ((df['close'].iloc[-1] / df['close'].iloc[0])**(pd.Timedelta(days=365)/(df.index.values[-1] - df.index.values[0]))-1)*100:0.2f}%"
+)
+
+renderer.add_metric(
+        name = "Annual Portfolio Return",
+        function = lambda df : f"{((df['portfolio_valuation'].iloc[-1] / df['portfolio_valuation'].iloc[0])**(pd.Timedelta(days=365)/(df.index.values[-1] - df.index.values[0]))-1)*100:0.2f}%"
+)
+
 renderer.run()

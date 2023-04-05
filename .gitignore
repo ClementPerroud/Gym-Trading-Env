@@ -1,6 +1,7 @@
 __pycache__
 dist
 .ipynbcheckpoints
+render_logs
 
 my_example.py
 pyproject.toml
