@@ -149,7 +149,7 @@ while not truncated and not done:
 
 <img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.PNG?raw=true" height = "800"/>
 
-For the render not to perturb the training, the render needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. 
+For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. 
 
 First, you need to save your results at the end of every episode you want to render with ```env.save_for_render(...)```. And decide which file you want your logs to be stored in with paramter ```dir```. For example :
 
