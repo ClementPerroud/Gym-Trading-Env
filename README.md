@@ -199,7 +199,7 @@ renderer.run()
 >
 >
 >```.add_metric``` takes arguments :
-v- ```name``` : The name of the metric
+>- ```name``` : The name of the metric
 >- ```function``` : The function used to compute the line. The function must take an argument ```df``` which is a DateFrame and return a **string** !
 
 
