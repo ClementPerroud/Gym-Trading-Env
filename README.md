@@ -145,9 +145,9 @@ while not truncated and not done:
 >- ```info``` : Returns the last history step of the object "history" presented above (in "3 - Create your own reward function")
 
 
-**6 - Render** performed with Dash Plotly (local app).
+### 6 - Render performed with Flask (local app).
 
-<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.PNG?raw=true" height = "800"/>
+<img alt="Render example" src ="https://github.com/ClementPerroud/Gym-Trading-Env/blob/main/readme_images/render.gif?raw=true" width = "800"/>
 
 For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. 
 
@@ -165,6 +165,7 @@ from gym_trading_env.renderer import Renderer
 renderer = Renderer(render_logs_dir="render_logs")
 renderer.run()
 ```
+#### Custom render
 
 You can add **metrics** and plot **lines** with :
 ```python
