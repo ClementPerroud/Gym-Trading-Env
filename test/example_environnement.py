@@ -39,9 +39,9 @@ env = TradingEnv(
     )
 
 # Run the simulation
-truncated = False
+truncated, done = False, False
 observation, info = env.reset()
-while not truncated:
+while not truncated and not done:
     action = 5 #OR manually : action = int(input("Action : ")) 
     observation, reward, done, truncated, info = env.step(action)
 

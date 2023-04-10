@@ -7,3 +7,4 @@ my_example.py
 pyproject.toml
 .pypirc
 *.egg-info
+*.pkl

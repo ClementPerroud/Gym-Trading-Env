@@ -4,6 +4,7 @@ import pandas as pd
 import numpy as np
 import datetime
 import glob
+from pathlib import Path    
 
 from collections import Counter
 from .utils.history import History
@@ -81,9 +82,8 @@ class TradingEnv(gym.Env):
             "position" : self._position
             }
     
-    def reset(self, seed = None, df = None):
+    def reset(self, seed = None):
         super().reset(seed = seed)
-        if df is not None: self._set_df(df)
         self._step = 0
         self._limit_orders = {}
         if self.windows is not None: self._step = self.windows
@@ -178,19 +178,28 @@ class TradingEnv(gym.Env):
         render_df.to_pickle(f"{dir}/{self.name}_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pkl")
 
 class MultiDatasetTradingEnv(TradingEnv):
-    def __init(self, dataset_dir, *args, **kwargs):
+    def __init__(self, dataset_dir, preprocess, *args, **kwargs):
         self.dataset_dir = dataset_dir
+        self.preprocess = preprocess
         self.dataset_pathes = glob.glob(self.dataset_dir)
         self.dataset_nb_uses = np.zeros(shape=(len(self.dataset_pathes), ))
-        df = self.pick_dataset()
-        super().__init__(df, *args, **kwargs)
+        super().__init__(self.next_dataset(), *args, **kwargs)
 
-    def pick_dataset(self):
+    def next_dataset(self):
         # Find the indexes of the less explored dataset
         potential_dataset_pathes = np.where(self.dataset_nb_uses == self.dataset_nb_uses.min())[0]
         # Pick one of them
         random_int = np.random.randint(potential_dataset_pathes.size)
         dataset_path = self.dataset_pathes[random_int]
         self.dataset_nb_uses[random_int] += 1 # Update nb use counts
-        return pd.read_pickle(dataset_path)
+
+        self.name = Path(dataset_path).name
+        return self.preprocess(pd.read_pickle(dataset_path))
+
+    def reset(self, seed=None):
+        self._set_df(
+            self.next_dataset()
+        )
+        print(f"Selected dataset {self.name} ...")
+        return super().reset(seed)
     
