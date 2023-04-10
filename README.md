@@ -20,8 +20,8 @@ from gym_trading_env.environments import TradingEnv
 ### Actions space : positions
 
 Github is full of environments that consider actions such as **BUY**, **SELL**. In my opinion, it is a real mistake to consider a reinforcement learning agent in the same way as a trader. Traders make trade and to do so, they place orders on the market (eg. Buy X of stock Y). But what really matter is the position reached. Now, imagine we labelled each position by a number :
-- ```1``` : All of our portfolio is converted into stock Y. *BUY ALL*
-- ```0``` : All of our portfolio is converted into our fiat currency. *SELL ALL*
+- ```1``` : All of our portfolio is converted into stock Y. (=*BUY ALL*)
+- ```0``` : All of our portfolio is converted into our fiat currency. (=*SELL ALL*)
 Now, we can imagine half position and other variants :
 - ```0.5``` : 50% in stock Y & 50% in currency
 - Even : ```0.1``` : 10% in stock Y & 90% in currency
