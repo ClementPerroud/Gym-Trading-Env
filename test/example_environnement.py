@@ -30,7 +30,7 @@ env = TradingEnv(
         name= "BTCUSD",
         df = df,
         windows= 5,
-        positions = [ -1, -0.5, 0, 0.5, 1, 1.5, 2], # From -1 (=full SHORT), to +1 (=full LONG) with 0 = no position
+        positions = [ -1, -0.5, 0, 0.5, 1, 1.5, 2], # From -1 (=SHORT), to +1 (=LONG)
         initial_position = 0, #Initial position
         trading_fees = 0.01/100, # 0.01% per stock buy / sell
         borrow_interest_rate= 0.0003/100, #per timestep (= 1h here)

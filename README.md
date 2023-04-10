@@ -117,7 +117,17 @@ Accessible columns of history object :
 **4 - Initiate the environment**
 
 ```python
-env = TradingEnv(...)
+env = TradingEnv(
+        name= "BTCUSD",
+        df = df,
+        windows= 5,
+        positions = [ -1, -0.5, 0, 0.5, 1], # From -1 (=SHORT), to +1 (=LONG)
+        initial_position = 0,
+        trading_fees = 0.01/100, # 0.01% per stock buy / sell (Binance fees)
+        borrow_interest_rate= 0.0003/100, # 0.0003% per timestep (= 1h here)
+        reward_function = reward_function,
+        portfolio_initial_value = 1000, # here, in USDT
+    )
 ```
 Parameters :
 - ```name``` (required) : Name of your asset / symbol
