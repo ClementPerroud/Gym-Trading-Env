@@ -2,7 +2,6 @@ import asyncio
 import ccxt.async_support as ccxt
 import pandas as pd
 import datetime
-from tqdm import tqdm
 
 
 EXCHANGE_LIMIT_RATES = {
@@ -56,7 +55,9 @@ async def _download_symbols(exchange_name, symbols, dir, timeframe,  **kwargs):
     exchange = getattr(ccxt, exchange_name)({ 'enableRateLimit': True })
     for symbol in symbols:
         df = await _download_symbol(exchange = exchange, symbol = symbol, timeframe= timeframe, **kwargs)
-        df.to_pickle(f"{dir}/{exchange_name}-{symbol.replace('/', '')}-{timeframe}.pkl")
+        save_file = f"{dir}/{exchange_name}-{symbol.replace('/', '')}-{timeframe}.pkl"
+        print(f"{symbol} downloaded from {exchange_name} and stored at {save_file}")
+        df.to_pickle(save_file)
     await exchange.close()
 
 async def _download(exchange_names, symbols, timeframe, dir, since : datetime.datetime, until : datetime.datetime = datetime.datetime.now()):
