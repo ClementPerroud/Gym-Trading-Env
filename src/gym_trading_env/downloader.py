@@ -2,7 +2,7 @@ import asyncio
 import ccxt.async_support as ccxt
 import pandas as pd
 import datetime
-
+import numpy as np
 
 EXCHANGE_LIMIT_RATES = {
     "bitfinex2": {
@@ -24,7 +24,7 @@ EXCHANGE_LIMIT_RATES = {
 
 async def _ohlcv(exchange, symbol, timeframe, limit, step_since, timedelta):
     result = await exchange.fetch_ohlcv(symbol = symbol, timeframe= timeframe, limit= limit, since=step_since)
-    result_df = pd.DataFrame(result, columns=["timestamp_open", "open", "high", "low", "close", "volume"])
+    result_df = pd.DataFrame(result, columns=["timestamp_open", "open", "high", "low", "close", "volume"], dtype= np.float32)
     result_df["date_open"] = pd.to_datetime(result_df["timestamp_open"], unit= "ms")
     result_df["date_close"] = pd.to_datetime(result_df["timestamp_open"] + timedelta, unit= "ms")
     return result_df
