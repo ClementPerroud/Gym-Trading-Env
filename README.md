@@ -52,6 +52,8 @@ df.dropna(inplace= True)
 df.drop_duplicates(inplace=True)
 ```
 **1.1 (Optional) Download data** : The package provides an easy way to download data (works with CCTX and uses asyncio for FAST download) :
+
+Indeed, data is KING. To train RL Agent, you will need a big amount of good quality data. 
 ```python
 from gym_trading_env.downloader import download
 import datetime
@@ -64,8 +66,9 @@ download(
     since= datetime.datetime(year= 2019, month= 1, day=1),
     until = datetime.datetime(year= 2023, month= 1, day=1),
 )
+# It will download and save in folder 'test/data' both 'BTC/USDT' and 'ETH/USDT' historical data from all the exchanges mentionned.
 ```
-This function use pickle format to save the OHLCV data. You will need to import the dataset with ```pd.read_pickle('... .pkl', ...)```. The function supports exchange_names ```binance```, ```biftfinex2``` (API v2) and ```huobi```.
+This function uses pickle format to save the OHLCV data. You will need to import the dataset with ```pd.read_pickle('... .pkl', ...)```. The function supports exchange_names ```binance```, ```biftfinex2``` (API v2) and ```huobi```. 
 
 
 **2 - Create your features**. Your RL-agent will need some good, preprocessed features. It is your job to make sure it has everything it needs.
