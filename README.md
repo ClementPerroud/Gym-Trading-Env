@@ -159,7 +159,7 @@ First, you need to save your results at the end of every episode you want to ren
 env.save_for_render(dir = "render_logs")
 ```
 
-Then in the separated render script. You can import and initiate a render object, and run the render in a localhost web app :
+Then in the separated render script. You can import and initiate a renderer object, and run the render in a localhost web app :
 ```python
 from gym_trading_env.renderer import Renderer
 renderer = Renderer(render_logs_dir="render_logs")
