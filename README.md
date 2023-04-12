@@ -51,7 +51,7 @@ df.sort_index(inplace= True)
 df.dropna(inplace= True)
 df.drop_duplicates(inplace=True)
 ```
-**1.1 (Optional) Download data** : The package provide a easy way to download data (works with CCTX ans use asyncio to get FAST) :
+**1.1 (Optional) Download data** : The package provides an easy way to download data (works with CCTX and uses asyncio for FAST download) :
 ```python
 from gym_trading_env.downloader import download
 import datetime
