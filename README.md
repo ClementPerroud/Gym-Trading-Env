@@ -43,7 +43,7 @@ This environment supports more complex positions such as:
 
 ### How to use ?
 
-**1 - Import and clean your data**. They need to be ordered by ascending date. Index must be a date. Your DataFrame needs to contain a close price labelled ```close``` to run. If you want to render your results, your DataFrame needs to contain open, high, low, volume features respectively labelled ```open```, ```high```, ```low```, ```volume```.
+**1 - Import and clean your data**. They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a close price labelled ```close``` to run. If you want to render your results, your DataFrame needs to contain open, high, low, volume features respectively labelled ```open```, ```high```, ```low```, ```volume```.
 ```python
 # Available in the github repo : test/data/BTC_USD-Hourly.csv
 df = pd.read_csv("data/BTC_USD-Hourly.csv", parse_dates=["date"], index_col= "date")
