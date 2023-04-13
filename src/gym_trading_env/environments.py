@@ -176,7 +176,7 @@ class TradingEnv(gym.Env):
         if done or truncated: self.render(self.historical_info)
         return self._get_obs(),  self.historical_info["reward", -1], done, truncated, self.historical_info[-1]
     
-    def render(history):
+    def render(self, history):
         market_return = history["data_close", -1] / history["data_close", 0] -1
         portfolio_return = history["portfolio_valuation", -1] / history["portfolio_valuation", 0] -1
         sharpe_ratio = (portfolio_return - 0.04) / np.std(history["portfolio_valuation"])
