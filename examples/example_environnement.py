@@ -27,7 +27,8 @@ df.dropna(inplace= True)
 def reward_function(history):
     return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2]) #log (p_t / p_t-1 )
 
-env = TradingEnv(
+env = gym.make(
+        "TradingEnv",
         name= "BTCUSD",
         df = df,
         windows= 5,
@@ -45,3 +46,6 @@ observation, info = env.reset()
 while not done and not truncated:
     actions = 1
     observation, reward, done, truncated, info = env.step(actions)
+
+# Save for render
+env.save_for_render()

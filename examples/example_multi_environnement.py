@@ -3,7 +3,7 @@ sys.path.append("./src")
 
 import pandas as pd
 import numpy as np
-import time
+import gymnasium as gym
 from gym_trading_env.environments import MultiDatasetTradingEnv
 
 # Generating features
@@ -22,7 +22,8 @@ def preprocess(df):
 def reward_function(history):
     return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2]) #log (p_t / p_t-1 )
 
-env = MultiDatasetTradingEnv(
+env = gym.make(
+        "MultiDatasetTradingEnv",
         dataset_dir= 'examples/data/*.pkl',
         preprocess= preprocess,
         windows= 5,

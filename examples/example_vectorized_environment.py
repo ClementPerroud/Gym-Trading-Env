@@ -15,12 +15,12 @@ download(
     exchange_names = ["binance"],
     symbols= ["BTC/USDT"],
     timeframe= "30m",
-    dir = "test/data",
+    dir = "examples/data",
     since= datetime.datetime(year= 2019, month= 1, day=1),
 )
 
 # Import your datas
-df = pd.read_pickle("test/data/binance-BTCUSDT-30m.pkl")
+df = pd.read_pickle("examples/data/binance-BTCUSDT-30m.pkl")
 df.sort_index(inplace= True)
 df.dropna(inplace= True)
 df.drop_duplicates(inplace=True)
@@ -44,7 +44,6 @@ if __name__ == "__main__":
     env = gym.vector.make(
         id = "TradingEnv",
         num_envs = 3,
-        disable_env_checker= True,
 
         name= "BTCUSD",
         df = df,

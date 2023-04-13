@@ -36,7 +36,6 @@ if __name__ == "__main__":
     env = gym.vector.make(
         id = "MultiDatasetTradingEnv",
         num_envs = 3,
-        disable_env_checker= True,
 
         dataset_dir = 'examples/data/*.pkl',
         preprocess = add_features,
@@ -53,7 +52,5 @@ if __name__ == "__main__":
     while True:
         actions = [1, 2, 3]
         observation, reward, done, truncated, info = env.step(actions)
-
-        print(observation.shape)
 
 
