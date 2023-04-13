@@ -1,0 +1,24 @@
+[build-system]
+requires = ["setuptools>=61.0"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "gym-trading-env"
+version = "0.1.7"
+license = {file = "LICENSE.txt"}
+authors = [
+  { name="Clement Perroud", email="clement.perroud.pro@gmail.com" },
+]
+description = "A simple, easy, customizable Open IA Gym environments for trading."
+readme = "README.md"
+requires-python = ">=3.7"
+classifiers = [
+    "Programming Language :: Python :: 3",
+    "License :: OSI Approved :: MIT License",
+    "Operating System :: OS Independent",
+]
+dependencies = ["pandas>=1.5.3", "numpy>=1.23.1", "gymnasium>=0.28.1", "flask>=2.2.3", "pyecharts>=2.0.2", "ccxt==3.0.59", "numpy>=1.24.2", "nest_asyncio"]
+
+[project.urls]
+"Homepage" = "https://github.com/ClementPerroud/Gym-Trading-Env"
+"Bug Tracker" = "https://github.com/ClementPerroud/Gym-Trading-Env/issues"
