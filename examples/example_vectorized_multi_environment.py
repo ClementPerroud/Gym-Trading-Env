@@ -3,9 +3,11 @@ sys.path.append("./src")
 
 import pandas as pd
 import numpy as np
-import time
-import gym_trading_env
 import gymnasium as gym
+import datetime
+
+import gym_trading_env
+from gym_trading_env.downloader import download
 
 
 def add_features(df : pd.DataFrame):
@@ -22,12 +24,21 @@ def reward_function(history):
     return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2]) #log (p_t / p_t-1 )
 
 if __name__ == "__main__":
+
+    # Uncomment if needed
+    # download(
+    #     exchange_names = ["binance", "bitfinex2", "huobi"],
+    #     symbols= ["BTC/USDT", "ETH/USDT"],
+    #     timeframe= "30m",
+    #     dir = "examples/data",
+    #     since= datetime.datetime(year= 2019, month= 1, day=1),
+    # )
     env = gym.vector.make(
         id = "MultiDatasetTradingEnv",
         num_envs = 3,
         disable_env_checker= True,
 
-        dataset_dir = 'test/data/*.pkl',
+        dataset_dir = 'examples/data/*.pkl',
         preprocess = add_features,
         windows= 5,
         positions = [ -1, -0.5, 0, 0.5, 1, 1.5, 2],
@@ -42,5 +53,7 @@ if __name__ == "__main__":
     while True:
         actions = [1, 2, 3]
         observation, reward, done, truncated, info = env.step(actions)
+
+        print(observation.shape)
 
 
