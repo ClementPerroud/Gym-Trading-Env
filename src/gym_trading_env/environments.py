@@ -13,24 +13,27 @@ from .utils.portfolio import Portfolio, TargetPortfolio
 import tempfile, os
 import warnings
 warnings.filterwarnings("error")
+def basic_reward_function(history : History):
+    return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2])
 
 class TradingEnv(gym.Env):
     """A trading environment for OpenAI gym"""
-    metadata = {'render.modes': ['human']}
+    metadata = {'render_modes': ['human']}
     def __init__(self,
                 df : pd.DataFrame,
                 positions : list = [0, 1],
-                reward_function = lambda history : np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2]),
+                reward_function = basic_reward_function,
                 windows = None,
                 trading_fees = 0,
                 borrow_interest_rate = 0,
                 max_leverage = None,
                 portfolio_initial_value = 1000,
                 initial_position = 0,
+                include_position_in_features = True,
                 name = "Stock",
                 ):
         self.name = name
-        self._set_df(df)
+
         self.positions = positions
         self.reward_function = reward_function
         self.windows = windows
@@ -39,26 +42,36 @@ class TradingEnv(gym.Env):
         self.max_leverage =max_leverage
         self.portfolio_initial_value = float(portfolio_initial_value)
         self.initial_position = initial_position
+        assert self.initial_position in self.positions, "The 'initial_position' parameter must one position mentionned in the 'position' (default is [0, 1]) parameter."
+        self.include_position_in_features = include_position_in_features
+        self._set_df(df)
 
         self.action_space = spaces.Discrete(len(positions))
-        self.observation_space = spaces.Dict(
-            {
-                "features": spaces.Box(
-                    self._obs_array.min() if self._nb_features > 0 else 0,
-                    self._obs_array.max() if self._nb_features > 0 else 1,
-                    shape = (self._nb_features, self.windows) if self.windows is not None else (self._nb_features, )
-                ),
-                "position": spaces.Box(-1, 1)
-            }
+        self.observation_space = spaces.Box(
+            -np.inf,
+            np.inf,
+            shape = [self._nb_features]
         )
+        if self.windows is not None:
+            self.observation_space = spaces.Box(
+                -np.inf,
+                np.inf,
+                shape = [self.windows, self._nb_features]
+            )
+
 
     def _set_df(self, df):
+        df = df.copy()
         self._features_columns = [col for col in df.columns if "feature" in col]
         self._info_columns = list(set(list(df.columns) + ["close"]) - set(self._features_columns))
         self._nb_features = len(self._features_columns)
 
+        if self.include_position_in_features:
+            df["feature_position"] = self.initial_position
+            self._features_columns.append("feature_position")
+            self._nb_features += 1
         self.df = df
-        self._obs_array = np.array(self.df[self._features_columns])
+        self._obs_array = np.array(self.df[self._features_columns], dtype= np.float32)
         self._info_array = np.array(self.df[self._info_columns])
         self._price_array = np.array(self.df["close"])
 
@@ -67,22 +80,17 @@ class TradingEnv(gym.Env):
         return self.df.iloc[self._step + delta]
     def _get_price(self, delta = 0):
         return self._price_array[self._step + delta]
-
-    def _leverage_check(self, portfolio_distribution, price):
-        if (portfolio_distribution["borrowed_asset"] * price + portfolio_distribution["borrowed_fiat"]) > 0.95*self.max_leverage * (portfolio_distribution["asset"] * price + portfolio_distribution["fiat"]):
-            return True
-        return False
     
-
     def _get_obs(self):
-        if self.windows is None: _step_index = self._step
-        else: _step_index = np.arange(self._step + 1 - self.windows , self._step + 1)
-        return {
-            "features" : self._obs_array[_step_index],
-            "position" : self._position
-            }
+        if self.include_position_in_features: self._obs_array[self._step, -1] = self._position
+        if self.windows is None:
+            _step_index = self._step
+        else: 
+            _step_index = np.arange(self._step + 1 - self.windows , self._step + 1)
+        return self._obs_array[_step_index]
+
     
-    def reset(self, seed = None):
+    def reset(self, seed = None, options=None):
         super().reset(seed = seed)
         self._step = 0
         self._limit_orders = {}
@@ -98,13 +106,14 @@ class TradingEnv(gym.Env):
         self.historical_info.set(
             step = self._step,
             date = self.df.index.values[self._step],
-            action = None,
+            action = self.positions.index(self.initial_position),
             position = self._position,
             data =  dict(zip(self._info_columns, self._info_array[self._step])),
             portfolio_valuation = self.portfolio_initial_value,
             portfolio_distribution = self._portfolio.get_portfolio_distribution(),
             reward = 0,
         )
+
         return self._get_obs(), self.historical_info[0]
 
     def _trade(self, position, price = None):
@@ -114,6 +123,7 @@ class TradingEnv(gym.Env):
             trading_fees = self.trading_fees
         )
         self._position = position
+        return
 
     def _take_action(self, position):
         if position != self._position:
@@ -145,8 +155,7 @@ class TradingEnv(gym.Env):
         portfolio_value = self._portfolio.valorisation(price)
         portfolio_distribution = self._portfolio.get_portfolio_distribution()
         done, truncated = False, False
-        if self.max_leverage is not None:
-            done = self._leverage_check(portfolio_distribution, price)
+        if portfolio_value <= 0: done = True
         if self._step >= len(self.df) - 1:
             truncated = True
         
@@ -160,9 +169,11 @@ class TradingEnv(gym.Env):
             portfolio_distribution = portfolio_distribution, 
             reward = 0
         )
-        reward = self.reward_function(self.historical_info)
-        self.historical_info["reward", -1] = reward
-        return self._get_obs(),  self.reward_function(self.historical_info), done, truncated, self.historical_info[-1]
+        if not done:
+            reward = self.reward_function(self.historical_info)
+            self.historical_info["reward", -1] = reward
+
+        return self._get_obs(),  self.historical_info["reward", -1], done, truncated, self.historical_info[-1]
     
     def save_for_render(self, dir = "render_logs"):
         assert "open" in self.df and "high" in self.df and "low" in self.df and "close" in self.df, "Your DataFrame needs to contain columns : open, high, low, close to render !"

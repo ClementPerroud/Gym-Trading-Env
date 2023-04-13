@@ -28,6 +28,7 @@ async def _ohlcv(exchange, symbol, timeframe, limit, step_since, timedelta):
     result_df = pd.DataFrame(result, columns=["timestamp_open", "open", "high", "low", "close", "volume"])
     result_df["date_open"] = pd.to_datetime(result_df["timestamp_open"], unit= "ms")
     result_df["date_close"] = pd.to_datetime(result_df["timestamp_open"] + timedelta, unit= "ms")
+
     return result_df
 
 async def _download_symbol(exchange, symbol, timeframe = '5m', since = int(datetime.datetime(year=2020, month= 1, day= 1).timestamp()*1E3), until = int(datetime.datetime.now().timestamp()*1E3), limit = 1000, pause_every = 10, pause = 1):
@@ -46,6 +47,7 @@ async def _download_symbol(exchange, symbol, timeframe = '5m', since = int(datet
         results.extend(await asyncio.gather(*tasks))
     final_df = pd.concat(results, ignore_index= True)
     final_df = final_df.loc[(since < final_df["timestamp_open"]) & (final_df["timestamp_open"] < until), :]
+    del final_df["timestamp_open"]
     final_df.set_index('date_open', drop=True, inplace=True)
     final_df.sort_index(inplace= True)
     final_df.dropna(inplace=True)

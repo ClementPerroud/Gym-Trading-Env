@@ -5,6 +5,7 @@ import pandas as pd
 import numpy as np
 import time
 from gym_trading_env.environments import TradingEnv
+import gymnasium as gym
 
 # Import your datas
 df = pd.read_csv("test/data/BTC_USD-Hourly.csv", parse_dates=["date"], index_col= "date")
@@ -38,12 +39,9 @@ env = TradingEnv(
         portfolio_initial_value = 1000, # in FIAT (here, USD)
     )
 
-# Run the simulation
-truncated, done = False, False
-observation, info = env.reset()
-while not truncated and not done:
-    action = 5 #OR manually : action = int(input("Action : ")) 
-    observation, reward, done, truncated, info = env.step(action)
 
-# Render
-env.save_for_render()
+done, truncated = False, False
+observation, info = env.reset()
+while not done and not truncated:
+    actions = 1
+    observation, reward, done, truncated, info = env.step(actions)
