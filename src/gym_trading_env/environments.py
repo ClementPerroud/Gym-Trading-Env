@@ -173,7 +173,16 @@ class TradingEnv(gym.Env):
             reward = self.reward_function(self.historical_info)
             self.historical_info["reward", -1] = reward
 
+        if done or truncated: self.render(self.historical_info)
         return self._get_obs(),  self.historical_info["reward", -1], done, truncated, self.historical_info[-1]
+    
+    def render(history):
+        market_return = history["data_close", -1] / history["data_close", 0] -1
+        portfolio_return = history["portfolio_valuation", -1] / history["portfolio_valuation", 0] -1
+        sharpe_ratio = (portfolio_return - 0.04) / np.std(history["portfolio_valuation"])
+        nb_positions = (np.diff(history["position"])!= 0).sum(axis=0)
+
+        print(f"""Market Return : {100*market_return:5.2f}%   |   Portfolio Return : {100*portfolio_return:5.2f}%   |   Sharpe Ratio : {100*sharpe_ratio:4.2f}   |   Positions : {nb_positions:3d} """)
     
     def save_for_render(self, dir = "render_logs"):
         assert "open" in self.df and "high" in self.df and "low" in self.df and "close" in self.df, "Your DataFrame needs to contain columns : open, high, low, close to render !"
