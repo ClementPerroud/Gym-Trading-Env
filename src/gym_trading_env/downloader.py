@@ -2,8 +2,9 @@ import asyncio
 import ccxt.async_support as ccxt
 import pandas as pd
 import datetime
-from tqdm import tqdm
-
+import numpy as np
+import nest_asyncio
+nest_asyncio.apply()
 
 EXCHANGE_LIMIT_RATES = {
     "bitfinex2": {
@@ -26,6 +27,8 @@ EXCHANGE_LIMIT_RATES = {
 async def _ohlcv(exchange, symbol, timeframe, limit, step_since, timedelta):
     result = await exchange.fetch_ohlcv(symbol = symbol, timeframe= timeframe, limit= limit, since=step_since)
     result_df = pd.DataFrame(result, columns=["timestamp_open", "open", "high", "low", "close", "volume"])
+    for col in ["open", "high", "low", "close", "volume"]:
+        result_df[col] = pd.to_numeric(result_df[col])
     result_df["date_open"] = pd.to_datetime(result_df["timestamp_open"], unit= "ms")
     result_df["date_close"] = pd.to_datetime(result_df["timestamp_open"] + timedelta, unit= "ms")
 
@@ -58,7 +61,9 @@ async def _download_symbols(exchange_name, symbols, dir, timeframe,  **kwargs):
     exchange = getattr(ccxt, exchange_name)({ 'enableRateLimit': True })
     for symbol in symbols:
         df = await _download_symbol(exchange = exchange, symbol = symbol, timeframe= timeframe, **kwargs)
-        df.to_pickle(f"{dir}/{exchange_name}-{symbol.replace('/', '')}-{timeframe}.pkl")
+        save_file = f"{dir}/{exchange_name}-{symbol.replace('/', '')}-{timeframe}.pkl"
+        print(f"{symbol} downloaded from {exchange_name} and stored at {save_file}")
+        df.to_pickle(save_file)
     await exchange.close()
 
 async def _download(exchange_names, symbols, timeframe, dir, since : datetime.datetime, until : datetime.datetime = datetime.datetime.now()):
