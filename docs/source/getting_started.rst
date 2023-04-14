@@ -17,7 +17,7 @@ Or using git :
    git clone https://github.com/ClementPerroud/Gym-Trading-Env
 
 
-How does it work ?
+You must know
 ----------------------
 
 Positions
