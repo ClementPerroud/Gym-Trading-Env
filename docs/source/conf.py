@@ -2,9 +2,9 @@
 
 # -- Project information
 
-project = 'Lumache'
-copyright = '2021, Graziella'
-author = 'Graziella'
+project = 'Gym Trading Env'
+copyright = '2023, Clement Perroud'
+author = 'Clement Perroud'
 
 release = '0.1'
 version = '0.1.0'
