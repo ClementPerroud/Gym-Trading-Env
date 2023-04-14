@@ -65,6 +65,6 @@ Contents
 .. toctree::
    
    index
-   explanation
+   properties
    usage
    api
