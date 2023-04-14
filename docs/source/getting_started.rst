@@ -4,7 +4,7 @@ Gettings Started
 Installation
 ---------------
 
-Crypto Trading Env supports Python 3.9+ on Windows, Mac, and Linux. You can install PyBroker using pip:
+Crypto Trading Env supports Python 3.9+ on Windows, Mac, and Linux. You can install it using pip:
 
 .. code-block:: console
 
