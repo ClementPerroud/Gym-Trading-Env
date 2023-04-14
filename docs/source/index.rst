@@ -21,7 +21,7 @@ Crypto Trading Env
       </a>
       <br>
       <a href="https://github.com/ClementPerroud/Gym-Trading-Env">
-         <img src="https://img.shields.io/github/stars/edtechre/gym-trading-env?style=social" alt="Github stars">
+         <img src="https://img.shields.io/github/stars/ClementPerroud/gym-trading-env?style=social" alt="Github stars">
       </a>
    </section>
   
