@@ -6,6 +6,7 @@ Actions space : positions
 
 I have seen many environments that consider actions such as BUY, SELL. In my experience, it is a mistake to consider a reinforcement learning agent in the same way as a trader. Because, behind a trade, what really matter is the : **position reached**. In the environment, we label each position by a number :
 *example with pair BTC/USDT*
+
 * ``1`` : All of our portfolio is converted into BTC. **(=BUY ALL)**
 * ``0`` : All of our portfolio is converted into USDT. **(=SELL ALL)**
 *Now, we can imagine half position and other variants :*
