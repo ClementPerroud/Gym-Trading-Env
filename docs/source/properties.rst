@@ -24,7 +24,7 @@ In fact, it is way simpler for a RL-agent to work with positions. This way, it c
  
 
 Complex positions
------------------
+~~~~~~~~~~
 
 This environment supports more complex positions such as:
 
