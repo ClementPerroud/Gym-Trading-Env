@@ -38,6 +38,7 @@ Key features
 ---------------
 
 This package aims to greatly simplify the research phase by offering :
+
 * A quick way to download technical data on several exchanges
 * A simple and fast environment for the user and the AI, but which allows complex operations (Short, Margin trading).
 * A high performance rendering (can display several hundred thousand candles simultaneously), customizable to visualize the actions of its agent and its results.
