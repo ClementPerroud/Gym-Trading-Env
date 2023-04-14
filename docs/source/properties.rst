@@ -4,17 +4,23 @@ Environment properties
 Actions space : positions
 ---------------------------
 
-Github is full of environments that consider actions such as BUY, SELL. In my opinion, it is a real mistake to consider a reinforcement learning agent in the same way as a trader. Traders make trade and to do so, they place orders on the market (eg. Buy X of stock Y). But what really matter is the position reached. Now, imagine we labelled each position by a number :
+I have seen many environments that consider actions such as BUY, SELL. In my experience, it is a mistake to consider a reinforcement learning agent in the same way as a trader. Because, behind a trade, what really matter is the : **position reached**. In the environment, we label each position by a number :
+*example with pair BTC/USDT*
+* ``1`` : All of our portfolio is converted into BTC. **(=BUY ALL)**
+* ``0`` : All of our portfolio is converted into USDT. **(=SELL ALL)**
+*Now, we can imagine half position and other variants :*
 
-* 1 : All of our portfolio is converted into stock Y. (=BUY ALL)
-* 0 : All of our portfolio is converted into our fiat currency. (=SELL ALL)
-Now, we can imagine half position and other variants :
-
-* 0.5 : 50% in stock Y & 50% in currency
-* Even : 0.1 : 10% in stock Y & 90% in currency ....
+* ``0.5`` : 50% in stock Y & 50% in currency
+* Even : ``0.1`` : 10% in stock Y & 90% in currency ....
 In fact, it is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
 
-But if you want to use a really basic environment, you can use only 2 positions : 1 and 0 which is more of less equivalent to BUY ALL and SELL ALL actions.
+..code-block::python
+  
+    positions = [0, 0.5, 1]
+    #... environment has been initialized with your positions list on pair BTC/USDT
+    _ = env.step(1)
+    # You just told the environment the reached the position : positions[1] = 0.5 ! The environment manages the trades to reach this 50% BTC, 50% USDT
+ 
 
 Complex positions
 -----------------
