@@ -1,3 +1,8 @@
+.. meta::
+   :title: Crypto Trading Environment
+   :description: A crypto Trading Environment for Reinforcement Learning
+
+.. title:: Crypto Trading Environment for Reinforcement Learning
 =============
 Crypto Trading Env
 =============
