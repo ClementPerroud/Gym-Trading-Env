@@ -57,3 +57,11 @@ Or using git :
 .. code-block:: console
    
    git clone https://github.com/ClementPerroud/Gym-Trading-Env
+   
+Contents
+--------
+
+.. toctree::
+
+   usage
+   api
