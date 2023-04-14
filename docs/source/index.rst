@@ -29,7 +29,8 @@ Crypto Trading Env
 Cryto Trading Env is an OpenAI Gym environment for simulating stocks and train Reinforcement Learning (RL) trading agents.
 It was designed to be fast* and customizable for easy RL trading algorythms implementation.
 
-# Key features
+Key features
+=============
 
 This package aims to greatly simplify the research phase by offering :
 - A quick way to download technical data on several exchanges
@@ -37,7 +38,8 @@ This package aims to greatly simplify the research phase by offering :
 - A high performance rendering (can display several hundred thousand candles simultaneously), customizable to visualize the actions of its agent and its results.
 - (Coming soon) An easy way to backtest any RL-Agents or any king 
 
-## Installation
+Installation
+=============
 
 Crypto Trading Env supports Python 3.9+ on Windows, Mac, and Linux. You can install PyBroker using pip:
 
@@ -45,6 +47,7 @@ Crypto Trading Env supports Python 3.9+ on Windows, Mac, and Linux. You can inst
 
    pip install gym-trading-env
 
+Or using git :
 
 .. code-block:: console
    
