@@ -4,7 +4,7 @@
 
 .. title:: Crypto Trading Environment for Reinforcement Learning
 ===================
-Crypto Trading Env
+Crypto Trading Environment
 ===================
 .. raw:: html
    
