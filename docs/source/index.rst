@@ -15,10 +15,10 @@ Crypto Trading Env
       <img src="https://img.shields.io/badge/license-MIT%202.0%20Clause-green"
             alt="Apache 2.0 with Commons Clause">
       </a>
-      <a href="https://gym-trading-env.readthedocs.io/en/latest/">
-         <img src="https://readthedocs.org/projects/gym-trading-env/badge/?version=latest/"
-            alt="Documentation Status">
+      <a href='https://gym-trading-env.readthedocs.io/en/latest/?badge=latest'>
+          <img src='https://readthedocs.org/projects/gym-trading-env/badge/?version=latest' alt='Documentation Status' />
       </a>
+      
       <br>
       <a href="https://github.com/ClementPerroud/Gym-Trading-Env">
          <img src="https://img.shields.io/github/stars/ClementPerroud/gym-trading-env?style=social" alt="Github stars">
