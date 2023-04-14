@@ -39,10 +39,13 @@ This package aims to greatly simplify the research phase by offering :
 ## Installation
 
 Crypto Trading Env supports Python 3.9+ on Windows, Mac, and Linux. You can install PyBroker using pip:
+
 ```
 pip install gym-trading-env
 ```
+
 or git :
+
 ```
 git clone https://github.com/ClementPerroud/Gym-Trading-Env
 ```
