@@ -1,8 +1,6 @@
 Usage
 =====
 
-.. _installation:
-
 Installation
 ------------
 
