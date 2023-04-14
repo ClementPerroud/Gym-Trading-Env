@@ -64,7 +64,7 @@ Contents
 
 .. toctree::
    
-   index
+   getting_started
    properties
    usage
    api
