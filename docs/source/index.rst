@@ -32,14 +32,14 @@ Crypto Trading Environment
    </section>
   
 Cryto Trading Env is an OpenAI Gym environment for simulating stocks and train Reinforcement Learning (RL) trading agents.
-It was designed to be fast* and customizable for easy RL trading algorythms implementation.
+It was designed to be fast and customizable for easy RL trading algorythms implementation.
 
 Key features
 ---------------
 
 This package aims to greatly simplify the research phase by offering :
 
-* A quick way to download technical data on several exchanges
+* Easy and quick download technical data on several exchanges
 * A simple and fast environment for the user and the AI, but which allows complex operations (Short, Margin trading).
 * A high performance rendering (can display several hundred thousand candles simultaneously), customizable to visualize the actions of its agent and its results.
 * (Coming soon) An easy way to backtest any RL-Agents or any king 
@@ -65,5 +65,6 @@ Contents
 .. toctree::
    
    index
+   explanation
    usage
    api
