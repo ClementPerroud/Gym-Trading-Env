@@ -8,7 +8,7 @@ Positions
 ~~~~~~~~~~
 
 I have seen many environments that consider actions such as BUY, SELL. In my experience, it is a mistake to consider a reinforcement learning agent in the same way as a trader. Because, behind a trade, what really matter is the : **position reached**. In the environment, we label each position by a number :
-*example with pair BTC/USDT*
+*(example with pair BTC/USDT)*
 
 * ``1`` : All of our portfolio is converted into BTC. **(=BUY ALL)**
 * ``0`` : All of our portfolio is converted into USDT. **(=SELL ALL)**
@@ -69,4 +69,41 @@ The packaging also include an easy way to download historical data of crypto pai
   df = pd.read_pickle("./data/binance-BTCUSDT-1h.pkl")
 
 
+Create your features
+-------------------
 
+Your RL-agent will need inputs. It is your job to make sure it has everything it needs. 
+> **The environment will recognize as inputs every column that contains the keyword 'feature' in its name.**
+
+.. code-block:: python
+
+  # df is a DataFrame with columns : "open", "high", "low", "close", "Volume USD"
+  
+  # Create the feature : ( close[t] - close[t-1] )/ close[t-1]
+  df["feature_close"] = df["close"].pct_change() 
+  
+  # Create the feature : open[t] / close[t]
+  df["feature_open"] = df["open"]/df["close"]
+  
+  # Create the feature : high[t] / close[t]
+  df["feature_high"] = df["high"]/df["close"]
+  
+  # Create the feature : low[t] / close[t]
+  df["feature_low"] = df["low"]/df["close"]
+  
+   # Create the feature : volume[t] / max(*volume[t-7*24:t+1])
+  df["feature_volume"] = df["Volume USD"] / df["Volume USD"].rolling(7*24).max()
+  
+  df.dropna(inplace= True) # Clean again !
+  # Eatch step, the environment will return 5 inputs  : "feature_close", "feature_open", "feature_high", "feature_low", "feature_volume"
+  
+  
+Create your reward function
+-------------------
+
+Use the history object to create your custom reward function. Bellow is an example with a really basic reward function 
+.. code-block:: python
+  
+  import numpy as np
+  def reward_function(history):
+      return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2])
