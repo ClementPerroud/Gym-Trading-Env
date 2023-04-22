@@ -224,6 +224,6 @@ class MultiDatasetTradingEnv(TradingEnv):
         self._set_df(
             self.next_dataset()
         )
-        print(f"Selected dataset {self.name} ...")
+        if self.verbose > 1: print(f"Selected dataset {self.name} ...")
         return super().reset(seed)
     
