@@ -111,11 +111,14 @@ Use the history object to create your custom reward function. Bellow is an examp
 
 
 Create your first environment
+-------------------
 
+Well done, you did a good job configuring your fist environment !
 
 .. code-block:: python
 
-  env = TradingEnv(
+  import gymnasium as gym
+  env = gym.make("TradingEnv",
           name= "BTCUSD",
           df = df, # Your dataset with your custom features 
           positions = [ -1, 0, 1], # -1 (=SHORT), 0(=OUT), +1 (=LONG)
@@ -123,3 +126,21 @@ Create your first environment
           borrow_interest_rate= 0.0003/100, # 0.0003% per timestep (one timestep = 1h here)
           reward_function = reward_function # Your custom reward function
       )
+  
+Run the environment
+-------------------
+
+Now it's time to enjoy.
+
+.. code-block:: python
+ 
+  # Run an episode until it ends :
+  done, truncated = False, False
+  observation, info = env.reset()
+  while not done and not truncated:
+      # Pick a position by its index in your position list (=[-1, 0, 1])....usually something like : position_index = your_policy(observation)
+      position_index = env.action_space.sample() # At every timestep, pick a random position index from your position list (=[-1, 0, 1])
+      
+      observation, reward, done, truncated, info = env.step(position_index)
+      
+
