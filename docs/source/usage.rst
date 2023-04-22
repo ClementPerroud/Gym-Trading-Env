@@ -44,8 +44,9 @@ They need to be ordered by ascending date. Index must be DatetimeIndex. Your Dat
 
 .. code-block:: python
 
-  # Available in the github repo : test/data/BTC_USD-Hourly.csv
-  df = pd.read_csv("data/BTC_USD-Hourly.csv", parse_dates=["date"], index_col= "date")
+  # Available in the github repo : examples/data/BTC_USD-Hourly.csv
+  url = "https://raw.githubusercontent.com/ClementPerroud/Gym-Trading-Env/main/examples/data/BTC_USD-Hourly.csv"
+  df = pd.read_csv(url, parse_dates=["date"], index_col= "date")
   df.sort_index(inplace= True)
   df.dropna(inplace= True)
   df.drop_duplicates(inplace=True)
