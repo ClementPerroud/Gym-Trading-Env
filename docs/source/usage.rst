@@ -101,9 +101,24 @@ Your RL-agent will need inputs. It is your job to make sure it has everything it
 Create your reward function
 -------------------
 
-Use the history object to create your custom reward function. Bellow is an example with a really basic reward function 
+Use the history object to create your custom reward function. Bellow is an example with a really basic reward function :math:`ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t`. More information about the history object here... (Coming soon)
 .. code-block:: python
   
   import numpy as np
   def reward_function(history):
       return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2])
+
+
+Create your first environment
+
+
+.. code-block:: python
+
+  env = TradingEnv(
+          name= "BTCUSD",
+          df = df, # Your dataset with your custom features 
+          positions = [ -1, 0, 1], # -1 (=SHORT), 0(=OUT), +1 (=LONG)
+          trading_fees = 0.01/100, # 0.01% per stock buy / sell (Binance fees)
+          borrow_interest_rate= 0.0003/100, # 0.0003% per timestep (one timestep = 1h here)
+          reward_function = reward_function # Your custom reward function
+      )
