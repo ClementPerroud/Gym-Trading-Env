@@ -44,8 +44,8 @@ env = gym.make(
 done, truncated = False, False
 observation, info = env.reset()
 while not done and not truncated:
-    actions = 1
-    observation, reward, done, truncated, info = env.step(actions)
+    action = 1
+    observation, reward, done, truncated, info = env.step(action)
 
 # Save for render
 env.save_for_render()

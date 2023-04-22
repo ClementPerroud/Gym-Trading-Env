@@ -30,9 +30,11 @@ class TradingEnv(gym.Env):
                 portfolio_initial_value = 1000,
                 initial_position = 0,
                 include_position_in_features = True,
+                verbose = 1,
                 name = "Stock",
                 ):
         self.name = name
+        self.verbose = verbose
 
         self.positions = positions
         self.reward_function = reward_function
@@ -45,6 +47,7 @@ class TradingEnv(gym.Env):
         assert self.initial_position in self.positions, "The 'initial_position' parameter must one position mentionned in the 'position' (default is [0, 1]) parameter."
         self.include_position_in_features = include_position_in_features
         self._set_df(df)
+        
 
         self.action_space = spaces.Discrete(len(positions))
         self.observation_space = spaces.Box(
@@ -177,13 +180,14 @@ class TradingEnv(gym.Env):
         return self._get_obs(),  self.historical_info["reward", -1], done, truncated, self.historical_info[-1]
     
     def render(self, history):
-        market_return = history["data_close", -1] / history["data_close", 0] -1
-        portfolio_return = history["portfolio_valuation", -1] / history["portfolio_valuation", 0] -1
-        sharpe_ratio = (portfolio_return - 0.04) / np.std(history["portfolio_valuation"])
-        nb_positions = (np.diff(history["position"])!= 0).sum(axis=0)
+        if self.verbose > 0:
+            market_return = history["data_close", -1] / history["data_close", 0] -1
+            portfolio_return = history["portfolio_valuation", -1] / history["portfolio_valuation", 0] -1
+            sharpe_ratio = (portfolio_return - 0.04) / np.std(history["portfolio_valuation"])
+            nb_positions = (np.diff(history["position"])!= 0).sum(axis=0)
 
-        print(f"""Market Return : {100*market_return:5.2f}%   |   Portfolio Return : {100*portfolio_return:5.2f}%   |   Sharpe Ratio : {100*sharpe_ratio:4.2f}   |   Positions : {nb_positions:3d} """)
-    
+            print(f"""Market Return : {100*market_return:5.2f}%   |   Portfolio Return : {100*portfolio_return:5.2f}%   |   Sharpe Ratio : {100*sharpe_ratio:4.2f}   |   Positions : {nb_positions:3d} """)
+        
     def save_for_render(self, dir = "render_logs"):
         assert "open" in self.df and "high" in self.df and "low" in self.df and "close" in self.df, "Your DataFrame needs to contain columns : open, high, low, close to render !"
         columns = list(set(self.historical_info.columns) - set([f"date_{col}" for col in self._info_columns]))
