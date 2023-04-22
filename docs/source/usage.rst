@@ -1,4 +1,4 @@
-Usage
+Basic usage
 ===================
 
 Action spaces
@@ -144,3 +144,25 @@ Now it's time to enjoy.
       observation, reward, done, truncated, info = env.step(position_index)
       
 
+Your first render
+-------------------
+
+You can render an easily render an episode. For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. In the *running environment script*, you need to save your logs :
+
+.. code-block:: python
+
+  # At the end of the episode you want to render
+  env.save_for_render(dir = "render_logs")
+
+Then, in a *separate script* :
+
+.. code-block:: python
+
+  from gym_trading_env.renderer import Renderer
+  renderer = Renderer(render_logs_dir="render_logs")
+  renderer.run()
+ 
+Enjoy your render, running as a web app in localhost.
+
+
+  
