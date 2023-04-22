@@ -101,7 +101,8 @@ Your RL-agent will need inputs. It is your job to make sure it has everything it
 Create your reward function
 -------------------
 
-Use the history object to create your custom reward function. Bellow is an example with a really basic reward function :math:`ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t`. More information about the history object here... (Coming soon)
+Use the history object to create your custom reward function. Bellow is an example with a really basic reward function :math:`ln(\\frac{p_{t}}{p_{t-1}})\\text{ with }p_{t}\\text{ = portofolio valuation at timestep }t`. More information about the history object here... (Coming soon)
+
 .. code-block:: python
   
   import numpy as np
