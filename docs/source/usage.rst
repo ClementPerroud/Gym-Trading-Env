@@ -40,7 +40,7 @@ Import your data
 -------------------
 
 
-They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a close price labelled ``close``for the environment to run, and open, high, low, volume features respectively labelled ``open``, ``high``, ``low``, ``volume`` to perform renders.
+They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a close price labelled ``close`` for the environment to run, and open, high, low, volume features respectively labelled ``open`` , ``high`` , ``low`` , ``volume`` to perform renders.
 
 .. code-block:: python
 
