@@ -66,4 +66,6 @@ Contents
    
    getting_started
    usage
-   api
+   advanced_usage
+   environments
+   custom_render
