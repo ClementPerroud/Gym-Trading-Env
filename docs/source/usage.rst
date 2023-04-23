@@ -36,21 +36,27 @@ This environment supports more complex positions such as:
 * ``-10`` ? : We can BUT ... We need to borrow 1000% of the portfolio valuation as asset Y. You need to understand that such a "leverage" is very risky. As if the stock price rise by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) of your current portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. GAME OVER, you have 0$ left. The leverage is very useful but also risky, as it increases your gains AND your losses. Always keep in mind that you can lose everything.
 
 
-Import your data
+Market data
 -------------------
 
+Import your own dataset
+~~~~~~~~~~
 
 They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a close price labelled ``close`` for the environment to run, and open, high, low, volume features respectively labelled ``open`` , ``high`` , ``low`` , ``volume`` to perform renders.
 
 .. code-block:: python
 
-  # Available in the github repo : test/data/BTC_USD-Hourly.csv
-  df = pd.read_csv("data/BTC_USD-Hourly.csv", parse_dates=["date"], index_col= "date")
+  # Available in the github repo : examples/data/BTC_USD-Hourly.csv
+  url = "https://raw.githubusercontent.com/ClementPerroud/Gym-Trading-Env/main/examples/data/BTC_USD-Hourly.csv"
+  df = pd.read_csv(url, parse_dates=["date"], index_col= "date")
   df.sort_index(inplace= True)
   df.dropna(inplace= True)
   df.drop_duplicates(inplace=True)
+
   
-The packaging also include an easy way to download historical data of crypto pairs. Its stores data as .pkl for easy usage and fast reading. 
+Easy download for crypto
+~~~~~~~~~~
+The packaging also include an easy way to download historical data of crypto pairs. Its stores data as `.pkl` for easy and fast usage. 
 
 .. code-block:: python
 
@@ -140,14 +146,18 @@ Now it's time to enjoy.
   while not done and not truncated:
       # Pick a position by its index in your position list (=[-1, 0, 1])....usually something like : position_index = your_policy(observation)
       position_index = env.action_space.sample() # At every timestep, pick a random position index from your position list (=[-1, 0, 1])
-      
       observation, reward, done, truncated, info = env.step(position_index)
-      
+ 
+.. code-block:: bash
+
+  Market Return : 423.10%   |   Portfolio Return : -98.28%  |   Positions : 22023 
+
+Every episode produces an output with basic metrics that you can customize. More informations here ...
 
 Your first render
 -------------------
 
-You can render an easily render an episode. For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. In the *running environment script*, you need to save your logs :
+You can easily render an episode. For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. In the *running environment script*, you need to save your render logs :
 
 .. code-block:: python
 

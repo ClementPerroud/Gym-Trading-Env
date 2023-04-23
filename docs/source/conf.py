@@ -1,5 +1,6 @@
 # Configuration file for the Sphinx documentation builder.
-
+import os
+os.system('pip install sphinx-copybutton')
 # -- Project information
 
 project = 'Gym Trading Env'
@@ -17,6 +18,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.autosummary',
     'sphinx.ext.intersphinx',
+    'sphinx_copybutton',
 ]
 
 intersphinx_mapping = {
