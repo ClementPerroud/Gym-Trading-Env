@@ -67,11 +67,17 @@ Add custom lines
   
   renderer.run()
 
+.. image:: images/custom_lines.PNG
+  :width: 600
+  :alt: Alternative text
+
 You can add custom lines with ``.add_line(name, function, line_options)`` that takes following parameters :
 
 * ``name`` : The name of the line.
 * ``function`` : The function takes the History object (converted into a DataFrame) of the episode as a parameter and needs to return a Series, 1-D array, or list of the lenght of the DataFrame.
 * ``line_options`` *(optional)* : A Dict object that can have keys ``color``(str) and ``width``(int) to control the appearance of the plot.
+
+
 
 Add custom metrics
 ~~~~~~~~~~~~
@@ -92,12 +98,12 @@ Add custom metrics
 
   renderer.run()
 
+.. image:: images/custom_metrics.PNG
+  :width: 600
+  :alt: Alternative text
+
 It is possible to add custom metrics with ``.add_metric(name, function)`` that takes following parameters :
 
 * ``name`` : The name of the metrics.
 * ``function`` : The function takes the History object (converted into a DataFrame) of the episode as a parameter and needs to return a string.
 
-
-.. image:: images/custom_lines.PNG
-  :width: 400
-  :alt: Alternative text
