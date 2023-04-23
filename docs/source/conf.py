@@ -1,5 +1,6 @@
 # Configuration file for the Sphinx documentation builder.
-
+import os
+os.system('install sphinx-copybutton')
 # -- Project information
 
 project = 'Gym Trading Env'
@@ -10,7 +11,6 @@ release = '0.1'
 version = '0.1.0'
 
 # -- General configuration
-pip install sphinx-copybutton
 
 extensions = [
     'sphinx.ext.duration',
