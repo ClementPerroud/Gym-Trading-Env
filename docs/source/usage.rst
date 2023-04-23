@@ -146,7 +146,6 @@ Now it's time to enjoy.
   while not done and not truncated:
       # Pick a position by its index in your position list (=[-1, 0, 1])....usually something like : position_index = your_policy(observation)
       position_index = env.action_space.sample() # At every timestep, pick a random position index from your position list (=[-1, 0, 1])
-      
       observation, reward, done, truncated, info = env.step(position_index)
  
 .. code-block:: bash
