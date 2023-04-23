@@ -29,7 +29,7 @@ You can add custom metrics using the method `.add_metric(name, function)` after 
 
 The `.add_metric` method takes 2 parameters :
 
-* name : The displayed name of the metrics
+* `name` : The displayed name of the metrics
 
-* function : The function that takes the history object as parameters and returns a value (we obviously prefer string over other types here). More information about the history object here.
+* `function` : The function that takes the history object as parameters and returns a value (we obviously prefer string over other types here). More information about the history object here.
 
