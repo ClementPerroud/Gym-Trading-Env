@@ -36,9 +36,11 @@ This environment supports more complex positions such as:
 * ``-10`` ? : We can BUT ... We need to borrow 1000% of the portfolio valuation as asset Y. You need to understand that such a "leverage" is very risky. As if the stock price rise by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) of your current portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. GAME OVER, you have 0$ left. The leverage is very useful but also risky, as it increases your gains AND your losses. Always keep in mind that you can lose everything.
 
 
-Import your data
+Market data
 -------------------
 
+Import your own dataset
+~~~~~~~~~~
 
 They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a close price labelled ``close`` for the environment to run, and open, high, low, volume features respectively labelled ``open`` , ``high`` , ``low`` , ``volume`` to perform renders.
 
@@ -50,8 +52,11 @@ They need to be ordered by ascending date. Index must be DatetimeIndex. Your Dat
   df.sort_index(inplace= True)
   df.dropna(inplace= True)
   df.drop_duplicates(inplace=True)
+
   
-The packaging also include an easy way to download historical data of crypto pairs. Its stores data as .pkl for easy usage and fast reading. 
+Easy download for crypto
+~~~~~~~~~~
+The packaging also include an easy way to download historical data of crypto pairs. Its stores data as `.pkl` for easy and fast usage. 
 
 .. code-block:: python
 
