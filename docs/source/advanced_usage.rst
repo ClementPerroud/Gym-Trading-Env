@@ -4,7 +4,7 @@ Advanced
 History object
 --------------
 
-The history object is similar to a DataFrame. It uses timestep and/or columns to access its values. You can use it this way :
+The history object is similar to a DataFrame that is made to be faster. Its stores every training information at each timestep of the training. You can use it this way :
 
 * ``history['column name', t]`` returns the a scalar value of the metrics 'column name' at time step t.
 * ``history['column name']`` returns a numpy array with all the values from timestep 0 to current timestep.
