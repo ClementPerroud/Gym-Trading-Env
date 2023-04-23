@@ -99,7 +99,7 @@ Add custom metrics
   renderer.run()
 
 .. image:: images/custom_metrics.PNG
-  :width: 400
+  :width: 300
   :alt: Alternative text
 
 It is possible to add custom metrics with ``.add_metric(name, function)`` that takes following parameters :
