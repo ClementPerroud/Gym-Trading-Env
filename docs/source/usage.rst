@@ -148,7 +148,11 @@ Now it's time to enjoy.
       position_index = env.action_space.sample() # At every timestep, pick a random position index from your position list (=[-1, 0, 1])
       
       observation, reward, done, truncated, info = env.step(position_index)
-      
+ 
+.. code-block:: bash
+
+  Market Return : 423.10%   |   Portfolio Return : -98.28%  |   Positions : 22023 
+
 
 Your first render
 -------------------
