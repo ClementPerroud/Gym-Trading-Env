@@ -63,10 +63,8 @@ Contents
 ---------------
 
 .. toctree::
-   :maxdepth: 3
    
    getting_started
    usage
    advanced_usage
    environments
-   custom_render
