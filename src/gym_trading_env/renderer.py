@@ -44,12 +44,14 @@ class Renderer():
     def run(self,):
         @self.app.route("/")
         def index():
+            print("UPDATE")
             render_pathes = glob.glob(f"{self.render_logs_dir}/*.pkl")
             render_names = [Path(path).name for path in render_pathes]
             return render_template('index.html', render_names = render_names)
 
         @self.app.route("/update_data/<name>")
         def update(name = None):
+            print("UPDATE DATA")
             if name is None or name == "":
                 render_pathes = glob.glob(f"{self.render_logs_dir}/*.pkl")
                 name = Path(render_pathes[-1]).name
@@ -59,6 +61,7 @@ class Renderer():
 
         @self.app.route("/metrics")
         def get_metrics():
+            print("UPDATE METRICS")
             self.compute_metrics(self.df)
             return jsonify([{'name':metric['name'], 'value':metric['value']} for metric in self.metrics])
 

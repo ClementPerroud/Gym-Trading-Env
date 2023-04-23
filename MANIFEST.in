@@ -1,0 +1,1 @@
+include src/gym_trading_env/templates/*.html
