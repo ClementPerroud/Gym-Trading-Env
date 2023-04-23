@@ -20,6 +20,7 @@ Accessible columns of history object :
 * ``portfolio_valuation`` : Global valuation of the portfolio.
 * It gathers **every data from your initial DataFrame** and labels them with ``data_{column}``. For example : ``data_close`` , ``data_open`` , ``data_high`` ....
 * It stores the **distribution of the portfolio** :
+
   * ``portfolio_distribution_asset`` the amount of owned asset (stock),
   * ``portfolio_distribution_fiat`` the amount of owned fiat currency,
   * ``portfolio_distribution_borrowed_asset`` amount of borrowed asset,
