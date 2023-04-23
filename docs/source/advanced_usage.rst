@@ -1,4 +1,4 @@
-Advanced
+Advanced Usage
 ==========
 
 History object
@@ -31,7 +31,7 @@ Accessible columns of history object :
 Custom logs
 -------------
 
-If ``verbose`` parameters of your trading environment is set to `1` or `2`, the environment display a quick summary of your episode. By default `Market Return` and `Portfolio Return` are the displayed metrics.
+If the ``verbose`` parameter of your trading environment is set to ``1`` or ``2``, the environment display a quick summary of your episode. By default `Market Return` and `Portfolio Return` are the displayed metrics.
 
 .. code-block:: bash
 
