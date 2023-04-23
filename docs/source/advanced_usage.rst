@@ -68,7 +68,7 @@ Add custom lines
   renderer.run()
 
 .. image:: images/custom_lines.PNG
-  :width: 400
+  :width: 600
   :alt: Alternative text
 
 You can add custom lines with ``.add_line(name, function, line_options)`` that takes following parameters :
@@ -99,7 +99,7 @@ Add custom metrics
   renderer.run()
 
 .. image:: images/custom_metrics.PNG
-  :width: 600
+  :width: 400
   :alt: Alternative text
 
 It is possible to add custom metrics with ``.add_metric(name, function)`` that takes following parameters :
