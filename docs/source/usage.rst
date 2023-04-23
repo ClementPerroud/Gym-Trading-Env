@@ -152,11 +152,12 @@ Now it's time to enjoy.
 
   Market Return : 423.10%   |   Portfolio Return : -98.28%  |   Positions : 22023 
 
+Every episode produces an output with basic metrics that you can customize. More informations here ...
 
 Your first render
 -------------------
 
-You can render an easily render an episode. For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. In the *running environment script*, you need to save your logs :
+You can easily render an episode. For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. In the *running environment script*, you need to save your render logs :
 
 .. code-block:: python
 
