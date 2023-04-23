@@ -31,7 +31,7 @@ Accessible columns of history object :
 Custom reward function
 -------------------
 
-Use the history object to create your custom reward function. Bellow is an example with a really basic reward function :math:`reward_{t} = ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t` (this is the default reward function).
+Use the history object to create your custom reward function. Bellow is an example with a really basic reward function :math:`r_{t} = ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t` (this is the default reward function).
 
 .. code-block:: python
 
