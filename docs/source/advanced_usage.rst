@@ -98,3 +98,6 @@ It is possible to add custom metrics with ``.add_metric(name, function)`` that t
 * ``function`` : The function takes the History object (converted into a DataFrame) of the episode as a parameter and needs to return a string.
 
 
+. image:: images/custom_lines.PNG
+  :width: 400
+  :alt: Alternative text
