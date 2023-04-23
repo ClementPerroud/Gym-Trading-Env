@@ -17,3 +17,12 @@ Or using git :
    git clone https://github.com/ClementPerroud/Gym-Trading-Env
 
 
+Import
+---------------
+
+You can import Gym Trading Env with :
+
+.. code-block:: python
+
+   import gym_trading_env
+   
