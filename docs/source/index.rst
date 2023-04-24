@@ -66,5 +66,6 @@ Contents
    
    getting_started
    basic_usage
+   donwload market data
    customization
    environments
