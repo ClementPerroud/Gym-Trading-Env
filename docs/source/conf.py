@@ -14,6 +14,7 @@ version = '0.1.0'
 # -- General configuration
 
 extensions = [
+    'sphinx.ext.githubpages',
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx_copybutton',
