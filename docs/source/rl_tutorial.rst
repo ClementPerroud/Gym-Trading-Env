@@ -157,6 +157,6 @@ Now it's time to enjoy.
 
 Every episode produces an output with basic metrics that you can customize. `More information on how to customize your environment here <https://gym-trading-env.readthedocs.io/en/latest/customization.html#>`_
 
-Want a cool looking render ? `More information on how to render a finished episode here<https://gym-trading-env.readthedocs.io/en/latest/render.html>`_
+Want a cool looking render ? `More information on how to render a finished episode here <https://gym-trading-env.readthedocs.io/en/latest/render.html>`_
 
   
