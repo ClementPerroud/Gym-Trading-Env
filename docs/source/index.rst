@@ -63,11 +63,22 @@ Contents
 ---------------
 
 .. toctree::
-   
+
    getting_started
+
+.. toctree::
+   :caption: 🤖 Reinforcement Learning Tutorials
+   
    basic_usage
    download
    customization
    environments
+
+.. toctree::
+   :caption: 🤖 Backtest Tutorials
+   
    backtest
+ 
+.. toctree::
+
    documentation
