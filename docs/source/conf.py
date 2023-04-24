@@ -1,6 +1,10 @@
 # Configuration file for the Sphinx documentation builder.
 import os
-os.system('pip install sphinx_rtd_theme sphinx-copybutton')
+import sys
+sys.path.insert(0, os.path.abspath('.'))
+os.system('pip install sphinx-copybutton')
+
+
 # -- Project information
 
 project = 'Gym Trading Env'
