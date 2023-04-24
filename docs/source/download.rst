@@ -6,7 +6,7 @@ Cryto market data
 
 The package provides an easy way to download crypto market data (works with CCTX and uses asyncio for FAST download).
 
-For exemple, this code download market data of pairs ``BTC/USDT`` , ``ETH/USDT`` with a 30 minutes timeframe, from all of the three exchanges Binance, Bitfinex and Huobi :
+For exemple, this code download market data of pairs ``BTC/USDT`` , ``ETH/USDT`` with a 1 hour timeframe, from all of the three exchanges Binance, Bitfinex and Huobi :
 
 .. code-block:: python
 
