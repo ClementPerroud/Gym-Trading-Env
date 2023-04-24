@@ -57,9 +57,9 @@ Example with **Bybit** (ccxt id : ``bybit`` ):
   import datetime
 
   EXCHANGE_LIMIT_RATES["bybit"] = {
-      "limit" : 200, # One request will query 1000 data points (aka candlesticks)
-      "pause_every" : 120, # it will pause every 10 request
-      "pause" : 2, # the pause will last 1 second
+      "limit" : 200, # One request will query 200 data points (aka candlesticks).
+      "pause_every" : 120, # it will pause every 120 requests.
+      "pause" : 2, # the pause will last 2 seconds.
   }
   download(
       exchange_names = ["binance", "bitfinex2", "huobi", "bybit"],
