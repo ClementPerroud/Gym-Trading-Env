@@ -155,27 +155,8 @@ Now it's time to enjoy.
 
   Market Return : 423.10%   |   Portfolio Return : -98.28%
 
-Every episode produces an output with basic metrics that you can customize. More informations here ...
+Every episode produces an output with basic metrics that you can customize. `More information on how to customize your environment here <https://gym-trading-env.readthedocs.io/en/latest/customization.html#>`_
 
-Your first render
--------------------
-
-You can easily render an episode. For the render not to perturb the training, it needs to be performed in a separate python script. This way you have plenty of time to perform analysis on your results. In the *running environment script*, you need to save your render logs :
-
-.. code-block:: python
-
-  # At the end of the episode you want to render
-  env.save_for_render(dir = "render_logs")
-
-Then, in a *separate script* :
-
-.. code-block:: python
-
-  from gym_trading_env.renderer import Renderer
-  renderer = Renderer(render_logs_dir="render_logs")
-  renderer.run()
- 
-Enjoy your render, running as a web app in localhost.
-
+Want a cool looking render ? `More information on how to render a finished episode here<https://gym-trading-env.readthedocs.io/en/latest/render.html>`_
 
   
