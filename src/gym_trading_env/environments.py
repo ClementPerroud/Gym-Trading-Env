@@ -18,11 +18,12 @@ def basic_reward_function(history : History):
 
 class TradingEnv(gym.Env):
     """
-    An easy trading environment for OpenAI gym. You can also use:
+    An easy trading environment for OpenAI gym. It is recommended to use it this way :
 
     .. code-block:: python
-    
+
         import gymnasium as gym
+        import gym_trading_env
         env = gym.make('TradingEnv', ...)
 
 
@@ -249,7 +250,59 @@ class TradingEnv(gym.Env):
         render_df.to_pickle(f"{dir}/{self.name}_{datetime.datetime.now().strftime('%Y-%m-%d_%H-%M-%S')}.pkl")
 
 class MultiDatasetTradingEnv(TradingEnv):
-    def __init__(self, dataset_dir, preprocess, *args, **kwargs):
+    """
+    A TradingEnv environment that can handle multiple datasets.
+    It automatically switchs from one dataset to another at the end of an episode.
+    Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea.
+    This should help avoiding overfitting.
+
+    It is recommended to use it this way :
+    
+    .. code-block:: python
+
+        import gymnasium as gym
+        import gym_trading_env
+        env = gym.make('MultiDatasetTradingEnv',
+            dataset_dir = 'data/*.pkl',
+            ...
+        )
+    
+    
+        Inherit from TradingEnv
+    
+    :param dataset_dir: A `glob path <https://docs.python.org/3.6/library/glob.html>`_ that needs to match your datasets. All of your datasets needs to match the dataset requirements (see docs from TradingEnv).
+    :type dataset_dir: str
+
+    :param preprocess: This function takes a pandas.DataFrame and returns a pandas.DataFrame. This function is applied to each dataset before being used in the environment.
+
+    For example, imagine you have a folder named 'data' with several datasets (formated as .pkl)
+
+    .. code-block:: python
+
+        import pandas as pd
+        import numpy as np
+        import gymnasium as gym
+        from gym_trading_env
+
+        # Generating features. (WARNING : the column names still needs to contain keyword 'feature' !)
+        def preprocess(df : pd.DataFrame):
+            df["feature_close"] = df["close"].pct_change()
+            df["feature_open"] = df["open"]/df["close"]
+            df["feature_high"] = df["high"]/df["close"]
+            df["feature_low"] = df["low"]/df["close"]
+            df["feature_volume"] = df["volume"] / df["volume"].rolling(7*24).max()
+            df.dropna(inplace= True)
+            return df
+
+        env = gym.make(
+                "MultiDatasetTradingEnv",
+                dataset_dir= 'examples/data/*.pkl',
+                preprocess= preprocess,
+            )
+    
+    :type preprocess: function<pandas.DataFrame->pandas.DataFrame>
+    """
+    def __init__(self, dataset_dir, *args, preprocess = lambda df : df,**kwargs):
         self.dataset_dir = dataset_dir
         self.preprocess = preprocess
         self.dataset_pathes = glob.glob(self.dataset_dir)
