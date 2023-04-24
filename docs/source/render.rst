@@ -31,7 +31,6 @@ Then, in a *separate script* :
   renderer.run()
  
 .. image:: images/render.gif
-  :width: 600
   :alt: Alternative text
 
 Customize your render
