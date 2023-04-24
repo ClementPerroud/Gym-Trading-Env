@@ -67,7 +67,7 @@ Contents
    getting_started
 
 .. toctree::
-   :caption: 🤖 Reinforcement Learning Tutorials
+   :caption: 🤖 Reinforcement Learning
    
    basic_usage
    download
@@ -75,7 +75,7 @@ Contents
    environments
 
 .. toctree::
-   :caption: 🤖 Backtest Tutorials
+   :caption: 🤖 Backtest
    
    backtest
  
