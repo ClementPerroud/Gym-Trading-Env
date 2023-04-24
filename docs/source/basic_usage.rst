@@ -137,7 +137,7 @@ Now it's time to enjoy.
  
 .. code-block:: bash
 
-  Market Return : 423.10%   |   Portfolio Return : -98.28%  |   Positions : 22023 
+  Market Return : 423.10%   |   Portfolio Return : -98.28%
 
 Every episode produces an output with basic metrics that you can customize. More informations here ...
 
