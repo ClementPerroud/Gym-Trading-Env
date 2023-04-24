@@ -17,7 +17,9 @@ def basic_reward_function(history : History):
     return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2])
 
 class TradingEnv(gym.Env):
-    """A trading environment for OpenAI gym"""
+    """
+    An easy trading environment for OpenAI gym
+    """
     metadata = {'render_modes': ['human']}
     def __init__(self,
                 df : pd.DataFrame,
@@ -26,13 +28,37 @@ class TradingEnv(gym.Env):
                 windows = None,
                 trading_fees = 0,
                 borrow_interest_rate = 0,
-                max_leverage = None,
                 portfolio_initial_value = 1000,
-                initial_position = 0,
+                initial_position = None,
                 include_position_in_features = True,
                 verbose = 1,
                 name = "Stock",
                 ):
+        """
+        Initiate a TradingEnv. You can also use:
+          import gymnasium as gym
+          env = gym.make('TradingEnv', ...)
+        
+        :param df: The market data DataFrame. It must contain 'open', 'high', 'low', 'close'. Index must be DatetimeIndex.
+        :type df: pandas.DataFrame
+        :param positions: List of the positions allowed by the environment.
+        :type positions: optional - list[int or float]
+        :param reward_function: Take the History object of the environment and must return a float.
+        :type reward_function: optional - function<History->float>
+        :param windows: Default is None. If it is set to an int: N, every step observation will return the past N observations. It is recommended for Reccurent Neural Network based Agents.
+        :type windows: optional - None or int
+        :param trading_fees: Transaction trading fees (buy and sell operations). eg: 0.01 correspondss to 1% fees
+        :type trading_fees: optional - float
+        :param borrow_interest_rate: Borrow interest rate per step (only when position < 0 or position > 1). eg: 0.01 correspond to 1% borrow interest rate per STEP ; if your step is 1 hour and you have the 24h borrow interest rate, you need to divide it by 24 (as it does not cumulate, you only need to divide instead of using power operations)
+        :type borrow_interest_rate: optional - float
+        :param portfolio_initial_value: Initial valuation of the portfolio.
+        :type portfolio_initial_value: float or int
+        :param initial_position: Initial position of the environmnent. It must be 
+        
+        :param name: The name of the environment (eg. 'BTC/USDT')
+        :type name: optional - str
+        
+        """
         self.name = name
         self.verbose = verbose
 
@@ -41,9 +67,9 @@ class TradingEnv(gym.Env):
         self.windows = windows
         self.trading_fees = trading_fees
         self.borrow_interest_rate = borrow_interest_rate
-        self.max_leverage =max_leverage
         self.portfolio_initial_value = float(portfolio_initial_value)
         self.initial_position = initial_position
+        if self.initial_position is None: self.initial_position = positions[0]
         assert self.initial_position in self.positions, "The 'initial_position' parameter must one position mentionned in the 'position' (default is [0, 1]) parameter."
         self.include_position_in_features = include_position_in_features
         self._set_df(df)
