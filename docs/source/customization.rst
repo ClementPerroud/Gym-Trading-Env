@@ -4,7 +4,7 @@ Customization
 Custom reward function
 -------------------
 
-Use the history object to create your custom reward function. Bellow is an example with a really basic reward function :math:`r_{t} = ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t` (this is the default reward function).
+Use the `History object <https://gym-trading-env.readthedocs.io/en/latest/history.html>`_ to create your custom reward function. Bellow is an example with a really basic reward function :math:`r_{t} = ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t` (this is the default reward function).
 
 .. code-block:: python
 
@@ -22,7 +22,7 @@ Use the history object to create your custom reward function. Bellow is an examp
 Custom logs
 -------------
 
-If the ``verbose`` parameter of your trading environment is set to ``1`` or ``2``, the environment display a quick summary of your episode. By default `Market Return` and `Portfolio Return` are the displayed metrics.
+Use the `History object <https://gym-trading-env.readthedocs.io/en/latest/history.html>`_ to add custom logs. If the ``verbose`` parameter of your trading environment is set to ``1`` or ``2``, the environment display a quick summary of your episode. By default `Market Return` and `Portfolio Return` are the displayed metrics.
 
 .. code-block:: bash
 
@@ -47,7 +47,7 @@ The ``.add_metric`` method takes 2 parameters :
 
 * ``name`` : The displayed name of the metrics
 
-* ``function`` : The function that takes the history object as parameters and returns a value (we obviously prefer string over other types here).
+* ``function`` : The function that takes the `History object <https://gym-trading-env.readthedocs.io/en/latest/history.html>`_ as parameters and returns a value (you might want to prefer string over other types to avoid error).
 
 
 Custom render
