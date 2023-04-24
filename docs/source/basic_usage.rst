@@ -1,4 +1,4 @@
-Basic usage
+Trading environment tutorial
 ===================
 
 Action spaces
