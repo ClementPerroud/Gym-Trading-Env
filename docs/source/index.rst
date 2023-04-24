@@ -66,6 +66,6 @@ Contents
    
    getting_started
    basic_usage
-   donwload
+   download
    customization
    environments
