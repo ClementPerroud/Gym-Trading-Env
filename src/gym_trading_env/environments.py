@@ -19,9 +19,11 @@ def basic_reward_function(history : History):
 class TradingEnv(gym.Env):
     """
     An easy trading environment for OpenAI gym. You can also use:
+    ```python
         import gymnasium as gym
         env = gym.make('TradingEnv', ...)
-    
+    ```
+
     :param df: The market data DataFrame. It must contain 'open', 'high', 'low', 'close'. Index must be DatetimeIndex.
     :type df: pandas.DataFrame
 
@@ -37,7 +39,7 @@ class TradingEnv(gym.Env):
     :param trading_fees: Transaction trading fees (buy and sell operations). eg: 0.01 correspondss to 1% fees
     :type trading_fees: optional - float
 
-    :param borrow_interest_rate: Borrow interest rate per step (only when position < 0 or position > 1). eg: 0.01 correspond to 1% borrow interest rate per STEP ; if your step is 1 hour and you have the 24h borrow interest rate, you need to divide it by 24 (as it does not cumulate, you only need to divide instead of using power operations)
+    :param borrow_interest_rate: Borrow interest rate per step (only when position < 0 or position > 1). eg: 0.01 correspond to 1% borrow interest rate per STEP ; if your know that your borrow interest rate is 0.05% per day and that your timestep is 1 hour, you need to divide it by 24 -> 0.05/100/24.
     :type borrow_interest_rate: optional - float
 
     :param portfolio_initial_value: Initial valuation of the portfolio.
