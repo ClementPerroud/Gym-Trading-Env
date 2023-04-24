@@ -90,7 +90,7 @@ Add custom lines
 Add custom lines with ``.add_line(name, function, line_options)`` that takes following parameters :
 
 * ``name`` : The name of the line.
-* ``function`` : The function takes the History object (converted into a DataFrame) of the episode as a parameter and needs to return a Series, 1-D array, or list of the lenght of the DataFrame.
+* ``function`` : The function takes the `History object <https://gym-trading-env.readthedocs.io/en/latest/history.html>`_ (converted into a DataFrame because performance does not really matter anymore during renders) of the episode as a parameter and needs to return a Series, 1-D array, or list of the lenght of the DataFrame.
 * ``line_options`` *(optional)* : A Dict object that can have keys ``color``(str) and ``width``(int) to control the appearance of the plot.
 
 
