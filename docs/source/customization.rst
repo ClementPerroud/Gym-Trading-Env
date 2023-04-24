@@ -117,7 +117,7 @@ Then, in a *separate script* :
   renderer.run()
 
 Add custom lines
-~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 .. code-block:: python
   
@@ -142,7 +142,7 @@ Add custom lines with ``.add_line(name, function, line_options)`` that takes fol
 
 
 Add custom metrics
-~~~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 .. code-block:: python
   
