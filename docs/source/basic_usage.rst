@@ -58,6 +58,8 @@ Easy download for crypto
 ^^^^^^^^^^^^^^^^
 The packaging also include an easy way to download historical data of crypto pairs. Its stores data as `.pkl` for easy and fast usage. 
 
+`More information here  <https://gym-trading-env.readthedocs.io/en/latest/download.html>`_
+
 .. code-block:: python
 
   from gym_trading_env.downloader import download
