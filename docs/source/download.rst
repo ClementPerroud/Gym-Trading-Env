@@ -34,7 +34,7 @@ For exemple, this code download market data of pairs ``BTC/USDT`` , ``ETH/USDT``
 This function uses pickle format to save the OHLCV data. You will need to import the dataset with ``pd.read_pickle('... .pkl')`` . The function supports exchange_names ``binance`` , ``biftfinex2`` (API v2) and ``huobi`` .
 
 More exchanges ...
-~~~~~~~~~~
+^^^^^^^^^^^^^
 
 
 It is possible to add other exchanges available in **ccxt**.
