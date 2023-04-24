@@ -63,6 +63,7 @@ Contents
 ---------------
 
 .. toctree::
+   :maxdepth: 3
    
    getting_started
    basic_usage
