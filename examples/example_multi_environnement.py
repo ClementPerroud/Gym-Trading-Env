@@ -4,11 +4,11 @@ sys.path.append("./src")
 import pandas as pd
 import numpy as np
 import gymnasium as gym
-from gym_trading_env.environments import MultiDatasetTradingEnv
+import gym_trading_env
 
 # Generating features
 # WARNING : the column names need to contain keyword 'feature' !
-def preprocess(df):
+def preprocess(df : pd.DataFrame):
     df["feature_close"] = df["close"].pct_change()
     df["feature_open"] = df["open"]/df["close"]
     df["feature_high"] = df["high"]/df["close"]
@@ -16,7 +16,6 @@ def preprocess(df):
     df["feature_volume"] = df["volume"] / df["volume"].rolling(7*24).max()
     df.dropna(inplace= True)
     return df
-
 
 # Create your own reward function with the history object
 def reward_function(history):

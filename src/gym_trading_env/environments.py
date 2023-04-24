@@ -27,7 +27,7 @@ class TradingEnv(gym.Env):
         env = gym.make('TradingEnv', ...)
 
 
-    :param df: The market data DataFrame. It must contain 'open', 'high', 'low', 'close'. Index must be DatetimeIndex.
+    :param df: The market DataFrame. It must contain 'open', 'high', 'low', 'close'. Index must be DatetimeIndex. Your desired inputs need to contain 'feature' in their column name : this way, they will be returned as observation at each step.
     :type df: pandas.DataFrame
 
     :param positions: List of the positions allowed by the environment.
@@ -251,7 +251,7 @@ class TradingEnv(gym.Env):
 
 class MultiDatasetTradingEnv(TradingEnv):
     """
-    A TradingEnv environment that can handle multiple datasets.
+    (Inherits from TradingEnv) A TradingEnv environment that handle multiple datasets.
     It automatically switchs from one dataset to another at the end of an episode.
     Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea.
     This should help avoiding overfitting.
@@ -268,13 +268,12 @@ class MultiDatasetTradingEnv(TradingEnv):
         )
     
     
-        Inherit from TradingEnv
     
     :param dataset_dir: A `glob path <https://docs.python.org/3.6/library/glob.html>`_ that needs to match your datasets. All of your datasets needs to match the dataset requirements (see docs from TradingEnv).
     :type dataset_dir: str
 
     :param preprocess: This function takes a pandas.DataFrame and returns a pandas.DataFrame. This function is applied to each dataset before being used in the environment.
-
+        
         For example, imagine you have a folder named 'data' with several datasets (formated as .pkl)
 
         .. code-block:: python
@@ -284,8 +283,9 @@ class MultiDatasetTradingEnv(TradingEnv):
             import gymnasium as gym
             from gym_trading_env
 
-            # Generating features. (WARNING : the column names still needs to contain keyword 'feature' !)
+            # Generating features.
             def preprocess(df : pd.DataFrame):
+                # You can easily change your inputs this way
                 df["feature_close"] = df["close"].pct_change()
                 df["feature_open"] = df["open"]/df["close"]
                 df["feature_high"] = df["high"]/df["close"]
