@@ -41,7 +41,7 @@ It is possible to add other exchanges available in **ccxt**.
 
 To do that, you need to :
 
-* get ``id of the exchange`` in ccxt avaible `here<https://github.com/ccxt/ccxt/tree/master/python>`.
+* get ``id`` of the exchange from the ccxt's list of exchanges (`avaible here <https://github.com/ccxt/ccxt/tree/master/python>`_).
 * check for API limit rate and query policies of the exchange to complete ``limit`` , ``pause_every`` and ``pause`` parameters. Please, be kind to the APIs to avoid getting banned.
 
 Example with **Bybit** :
