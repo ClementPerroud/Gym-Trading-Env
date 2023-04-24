@@ -275,30 +275,30 @@ class MultiDatasetTradingEnv(TradingEnv):
 
     :param preprocess: This function takes a pandas.DataFrame and returns a pandas.DataFrame. This function is applied to each dataset before being used in the environment.
 
-    For example, imagine you have a folder named 'data' with several datasets (formated as .pkl)
+        For example, imagine you have a folder named 'data' with several datasets (formated as .pkl)
 
-    .. code-block:: python
+        .. code-block:: python
 
-        import pandas as pd
-        import numpy as np
-        import gymnasium as gym
-        from gym_trading_env
+            import pandas as pd
+            import numpy as np
+            import gymnasium as gym
+            from gym_trading_env
 
-        # Generating features. (WARNING : the column names still needs to contain keyword 'feature' !)
-        def preprocess(df : pd.DataFrame):
-            df["feature_close"] = df["close"].pct_change()
-            df["feature_open"] = df["open"]/df["close"]
-            df["feature_high"] = df["high"]/df["close"]
-            df["feature_low"] = df["low"]/df["close"]
-            df["feature_volume"] = df["volume"] / df["volume"].rolling(7*24).max()
-            df.dropna(inplace= True)
-            return df
+            # Generating features. (WARNING : the column names still needs to contain keyword 'feature' !)
+            def preprocess(df : pd.DataFrame):
+                df["feature_close"] = df["close"].pct_change()
+                df["feature_open"] = df["open"]/df["close"]
+                df["feature_high"] = df["high"]/df["close"]
+                df["feature_low"] = df["low"]/df["close"]
+                df["feature_volume"] = df["volume"] / df["volume"].rolling(7*24).max()
+                df.dropna(inplace= True)
+                return df
 
-        env = gym.make(
-                "MultiDatasetTradingEnv",
-                dataset_dir= 'examples/data/*.pkl',
-                preprocess= preprocess,
-            )
+            env = gym.make(
+                    "MultiDatasetTradingEnv",
+                    dataset_dir= 'examples/data/*.pkl',
+                    preprocess= preprocess,
+                )
     
     :type preprocess: function<pandas.DataFrame->pandas.DataFrame>
     """
