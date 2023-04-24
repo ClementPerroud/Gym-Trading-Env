@@ -4,4 +4,4 @@ References
 Environments
 -------------
 
-.. automodule:: gym_trading_env.environments
+.. autoclass:: gym_trading_env.environments.TradingEnv
