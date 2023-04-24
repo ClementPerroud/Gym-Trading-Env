@@ -1,7 +1,7 @@
 Documentation
 =============
 
-client module
+Environments
 -------------
 
 .. automodule:: src.gym_trading_env.environments
