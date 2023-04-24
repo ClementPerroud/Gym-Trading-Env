@@ -5,7 +5,7 @@ Action spaces
 ----------------------
 
 Positions
-~~~~~~~~~~
+^^^^^^^^^
 
 I have seen many environments that consider actions such as BUY, SELL. In my experience, it is a mistake to consider a reinforcement learning agent in the same way as a trader. Because, behind a trade, what really matter is the : **position reached**. In the environment, we label each position by a number :
 *(example with pair BTC/USDT)*
@@ -27,7 +27,7 @@ In fact, it is way simpler for a RL-agent to work with positions. This way, it c
  
 
 Complex positions
-~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 This environment supports more complex positions such as:
 
@@ -40,7 +40,7 @@ Market data
 -------------------
 
 Import your own dataset
-~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 
 They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a close price labelled ``close`` for the environment to run, and open, high, low, volume features respectively labelled ``open`` , ``high`` , ``low`` , ``volume`` to perform renders.
 
@@ -55,7 +55,7 @@ They need to be ordered by ascending date. Index must be DatetimeIndex. Your Dat
 
   
 Easy download for crypto
-~~~~~~~~~~
+^^^^^^^^^^^^^^^^
 The packaging also include an easy way to download historical data of crypto pairs. Its stores data as `.pkl` for easy and fast usage. 
 
 .. code-block:: python
