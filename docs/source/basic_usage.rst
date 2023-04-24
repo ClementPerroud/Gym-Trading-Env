@@ -105,7 +105,11 @@ Your RL-agent will need inputs. It is your job to make sure it has everything it
   df.dropna(inplace= True) # Clean again !
   # Eatch step, the environment will return 5 inputs  : "feature_close", "feature_open", "feature_high", "feature_low", "feature_volume"
   
+.. note::
 
+  By default, the env will always add the **position reached** at the end of all your custom features. Indeed, in Reinforcement Learning, I find it really useful for the agent to know its current position. To disable this, you need to set the ``include_position_in_features`` parameter of the environmnent to ``False``.
+ 
+ 
 Create your first environment
 -------------------
 
