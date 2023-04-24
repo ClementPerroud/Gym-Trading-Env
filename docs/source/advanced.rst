@@ -5,12 +5,14 @@ Now, you know how to create a environment for your RL agent with one dataset. Bu
 
 **Is ONE SINGLE dataset enought for an agent to learn real stuff ?**
 
-In my opinion, one dataset is not enough. The agent will overfit and won't be able to generalize. My solution is simple, adding datasets to the environment. I present your the ``MultiDatasetTradingEnvironment``
+In my opinion, one dataset is not enough. The agent will overfit and won't be able to generalize. My solution is simple, adding multiple datasets to the environment. I present you the *MultiDatasetTradingEnv*.
 
 Multi Dataset Trading Environment
 ---------------------------------
 
-(Inherits from TradingEnv) A TradingEnv environment that handle multiple datasets. It automatically switchs from one dataset to another at the end of an episode. Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea. This should help avoiding overfitting.
+  (Inherits from TradingEnv)
+  
+A TradingEnv environment that handle multiple datasets. It automatically switchs from one dataset to another at the end of an episode. Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea. This should help avoiding overfitting.
 
 How to use ?
 ^^^^^^^^^^^^^
