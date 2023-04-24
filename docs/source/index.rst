@@ -69,3 +69,4 @@ Contents
    download
    customization
    environments
+   backtests
