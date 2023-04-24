@@ -78,7 +78,9 @@ You can add custom metrics using the method ``.add_metric(name, function)`` afte
 
 .. code-block:: python
   
-  #After env.make(...)
+  env = gym.make("TradingEnv",
+         ...
+     )
   env.add_metric('Position Changes', lambda history : np.sum(np.diff(history['position']) != 0) )
   env.add_metric('Episode Lenght', lambda history : len(history['position']) )
   # Then, run your episode(s)
