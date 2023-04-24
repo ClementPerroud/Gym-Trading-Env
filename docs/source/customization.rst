@@ -19,17 +19,15 @@ It was made to make everything easier :
 .. code-block:: python
 
  >>> history[33091]
-
-.. code-block:: python
-
   {
-  # Training info
+   # Training info
    'step': 33091, #Step = t.
    'date': numpy.datetime64('2022-03-01T00:00:00.000000000'), #Date at step t, datetime.
    'position_index': 2, #Index of the position at step t amoung your position list.
    'position': 1, #Portfolio position at step t.
    'reward': 0.0028838985262525257, #Reward at step t.
-  # DataFrame info : Every column (except features) of your initial DataFrame preceded by 'data_'
+   
+   # DataFrame info : Every column (except features) of your initial DataFrame preceded by 'data_'
    'data_symbol': 'BTC/USD', 
    'data_volume': 52.05632, 
    'data_Volume USD': 2254677.3870464, 
@@ -38,7 +36,8 @@ It was made to make everything easier :
    'data_close': 43312.27, 
    'data_unix': 1646092800, 
    'data_low': 43185.48,
-  # Portfolio info : Distribution of the portfolio
+   
+   # Portfolio info : Distribution of the portfolio
    'portfolio_valuation': 45.3857471834205, #Global valuation of the portfolio
    'portfolio_distribution_asset': 0.001047869568779473, #the amount of owned BTC
    'portfolio_distribution_fiat': 0.0001374956603967803, #the amount of owned USD
