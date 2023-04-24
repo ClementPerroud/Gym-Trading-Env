@@ -29,7 +29,7 @@ In fact, it is way simpler for a RL-agent to work with positions. This way, it c
 Complex positions
 ^^^^^^^^^^^^^^^^
 
-This environment supports more complex positions such as:
+This environment supports more complex positions (actually any float from -inf to +inf) such as:
 
 * ``-1`` : Bet 100% of the portfolio value on the decline of BTC (=SHORT). To perform this action, the environment borrows 100% of the portfolio valuation as stock Y to an imaginary person, and immediately sells it. When the agent closes this position, the environment buys the owed amount of stock Y and repays the imaginary person with it. If the price has fallen during the operation, we buy cheaper than we sold what we need to repay : the difference is our gain. The imaginary person is paid a small rent (parameter : borrow_interest_rate).
 * ``+2`` : Bet 100% of the portfolio value of the rise of asset Y. We use the same mechanism explained above, but we borrow currency and buy stock Y.
