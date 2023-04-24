@@ -1,6 +1,12 @@
 Tutorial
 ===================
 
+Welcome to the first tutorial of the Gym Trading Env package. You will learn how to use it. 
+
+.. info:: 
+
+  During the entire tutorial, we will consider that we want to trade on the BTC/USD pair
+
 Action spaces
 ----------------------
 
@@ -8,22 +14,22 @@ Positions
 ^^^^^^^^^
 
 I have seen many environments that consider actions such as BUY, SELL. In my experience, it is a mistake to consider a reinforcement learning agent in the same way as a trader. Because, behind a trade, what really matter is the : **position reached**. In the environment, we label each position by a number :
-*(example with pair BTC/USDT)*
+*(example with pair BTC/USD)*
 
 * ``1`` : All of our portfolio is converted into BTC. **(=BUY ALL)**
-* ``0`` : All of our portfolio is converted into USDT. **(=SELL ALL)**
+* ``0`` : All of our portfolio is converted into USD. **(=SELL ALL)**
 *Now, we can imagine half position and other variants :*
 
-* ``0.5`` : 50% in BTC & 50% in USDT
-* Even : ``0.1`` : 10% in BTC & 90% in USDT ....
+* ``0.5`` : 50% in BTC & 50% in USD
+* Even : ``0.1`` : 10% in BTC & 90% in USD ....
 In fact, it is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
 
 .. code-block::python
   
     positions = [0, 0.5, 1]
-    #... environment has been initialized with your positions list on pair BTC/USDT
+    #... environment has been initialized with your positions list on pair BTC/USD
     _ = env.step(1)
-    # You just told the environment the reached the position : positions[1] = 0.5 ! The environment manages the trades to reach this 50% BTC, 50% USDT
+    # You just told the environment the reached the position : positions[1] = 0.5 ! The environment manages the trades to reach this 50% BTC, 50% USD
  
 
 Complex positions
@@ -31,13 +37,13 @@ Complex positions
 
 This environment supports more complex positions (actually any float from -inf to +inf) such as:
 
-* ``-1`` : Bet 100% of the portfolio value on the decline of BTC (=SHORT). To perform this action, the environment borrows 100% of the portfolio valuation as stock Y to an imaginary person, and immediately sells it. When the agent closes this position, the environment buys the owed amount of stock Y and repays the imaginary person with it. If the price has fallen during the operation, we buy cheaper than we sold what we need to repay : the difference is our gain. The imaginary person is paid a small rent (parameter : borrow_interest_rate).
-* ``+2`` : Bet 100% of the portfolio value of the rise of asset Y. We use the same mechanism explained above, but we borrow currency and buy stock Y.
+* ``-1`` : Bet 100% of the portfolio value on the decline of BTC (=SHORT). To perform this action, the environment borrows 100% of the portfolio valuation as BTC to an imaginary person, and immediately sells it to get USD. When the agent wants to close this position, the environment buys the owed amount of BTC and repays the imaginary person with it. If the price has fallen during the operation, we buy cheaper than we initially sold : the difference is our gain. During the loan, the imaginary person is paid a small rent (parameter : ``borrow_interest_rate`` of the environment).
+* ``+2`` : Bet 100% of the portfolio value of the rise of BTC. We use the same mechanism explained above, but we borrow USD and buy BTC with it.
 
 .. note::
 
   Can we use ``-10`` ?
-  We can BUT ... We need to borrow 1000% of the portfolio valuation as asset Y. You need to understand that such a "leverage" is very risky. Indeed, if the stock price rise by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) of your current portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. GAME OVER, you have 0$ left. The leverage is very useful but also risky, as it increases your gains AND your losses. Always keep in mind that you can lose everything.
+  We can BUT ... We need to borrow 1000% of the portfolio valuation as BTC. You need to understand that such a "leverage" is very risky. Indeed, if the BTC price rise by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) of your current portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. GAME OVER, you have 0$ left. The leverage is very useful but also risky, as it increases your gains AND your losses. Always keep in mind that you can lose everything.
 
 
 Market data
