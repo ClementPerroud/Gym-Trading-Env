@@ -80,5 +80,5 @@ Contents
    backtest
  
 .. toctree::
-
+   :caption: 📚 Reference
    documentation
