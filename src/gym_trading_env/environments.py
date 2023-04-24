@@ -19,10 +19,12 @@ def basic_reward_function(history : History):
 class TradingEnv(gym.Env):
     """
     An easy trading environment for OpenAI gym. You can also use:
-    ```python
+
+    .. code-block:: python
+    
         import gymnasium as gym
         env = gym.make('TradingEnv', ...)
-    ```
+
 
     :param df: The market data DataFrame. It must contain 'open', 'high', 'low', 'close'. Index must be DatetimeIndex.
     :type df: pandas.DataFrame
