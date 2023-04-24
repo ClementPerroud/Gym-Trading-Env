@@ -65,6 +65,6 @@ Contents
 .. toctree::
    
    getting_started
-   usage
-   advanced_usage
+   basic_usage
+   customization
    environments
