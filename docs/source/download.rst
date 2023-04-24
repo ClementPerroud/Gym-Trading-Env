@@ -26,6 +26,7 @@ For exemple, this code download market data of pairs ``BTC/USDT`` , ``ETH/USDT``
   )
 
 Output :
+
 .. code-block:: bash
 
   BTC/USDT downloaded from binance and stored at data/binance-BTCUSDT-1h.pkl
