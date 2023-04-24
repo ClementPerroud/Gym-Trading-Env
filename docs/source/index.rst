@@ -71,3 +71,4 @@ Contents
    customization
    environments
    backtests
+   documentation
