@@ -87,4 +87,5 @@ Contents
 .. toctree::
    :caption: 📚 Reference
    
+   history
    documentation
