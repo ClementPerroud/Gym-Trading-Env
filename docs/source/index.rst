@@ -69,16 +69,22 @@ Contents
 .. toctree::
    :caption: 🤖 Reinforcement Learning
    
-   basic_usage
-   download
+   rl_tutorial
    customization
    environments
 
+.. toctree:: 
+   :caption: 🦾 Functionnalities
+   
+   render
+   download
+
 .. toctree::
-   :caption: 🤖 Backtest
+   :caption: 📈 Backtest
    
    backtest
  
 .. toctree::
    :caption: 📚 Reference
+   
    documentation
