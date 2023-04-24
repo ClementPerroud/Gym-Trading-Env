@@ -25,6 +25,8 @@ For exemple, this code download market data of pairs ``BTC/USDT`` , ``ETH/USDT``
       until = datetime.datetime(year= 2023, month= 1, day=1),
   )
 
+Output :
+
 .. code-block:: bash
 
   BTC/USDT downloaded from binance and stored at data/binance-BTCUSDT-1h.pkl
@@ -42,12 +44,12 @@ More exchanges ...
 
 It is possible to add other exchanges available in **ccxt**.
 
-To do that, you need to :
+To do that, you need to update the ``EXCHANGE_LIMIT_RATES`` variable :
 
 * get ``id`` of the exchange from the ccxt's list of exchanges (`avaible here <https://github.com/ccxt/ccxt/tree/master/python#certified-cryptocurrency-exchanges>`_).
 * check for API limit rate and query policies of the exchange to complete ``limit`` , ``pause_every`` and ``pause`` parameters. Please, be kind to the APIs to avoid getting banned.
 
-Example with **Bybit** :
+Example with **Bybit** (ccxt id : ``bybit`` ):
 
 .. code-block:: python
   
@@ -55,9 +57,9 @@ Example with **Bybit** :
   import datetime
 
   EXCHANGE_LIMIT_RATES["bybit"] = {
-      "limit":200, # One request will query 1000 data points (aka candlesticks)
-      "pause_every": 120, # it will pause every 10 request
-      "pause" : 2, # the pause will last 1 second
+      "limit" : 200, # One request will query 200 data points (aka candlesticks).
+      "pause_every" : 120, # it will pause every 120 requests.
+      "pause" : 2, # the pause will last 2 seconds.
   }
   download(
       exchange_names = ["binance", "bitfinex2", "huobi", "bybit"],

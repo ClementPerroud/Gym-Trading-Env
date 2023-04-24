@@ -1,11 +1,9 @@
-Documentation
+References
 =============
 
 Environments
 -------------
 
-.. automodule:: src.gym_trading_env.environments
-    :imported-members:
-    :members:
-    :undoc-members:
-    :show-inheritance:
+.. autoclass:: gym_trading_env.environments.TradingEnv
+
+.. autoclass:: gym_trading_env.environments.MultiDatasetTradingEnv

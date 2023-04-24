@@ -1,7 +1,7 @@
 # Configuration file for the Sphinx documentation builder.
 import os
 import sys
-sys.path.insert(0, os.path.abspath('../../'))
+sys.path.insert(0, os.path.abspath('../../src'))
 # -- Project information
 
 project = 'Gym Trading Env'
@@ -14,6 +14,7 @@ version = '0.1.0'
 # -- General configuration
 
 extensions = [
+    'sphinx.ext.githubpages',
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx_copybutton',
