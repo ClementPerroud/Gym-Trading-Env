@@ -71,7 +71,7 @@ Contents
    
    rl_tutorial
    customization
-   environments
+   advanced
 
 .. toctree:: 
    :caption: 🦾 Functionnalities
