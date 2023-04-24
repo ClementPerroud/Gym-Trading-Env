@@ -40,12 +40,14 @@ env = gym.make(
         portfolio_initial_value = 1000, # in FIAT (here, USD)
     )
 
+env.add_metric('Position Changes', lambda history : np.sum(np.diff(history['position']) != 0) )
+env.add_metric('Episode Lenght', lambda history : len(history['position']) )
 
 done, truncated = False, False
 observation, info = env.reset()
 while not done and not truncated:
-    action = 1
+    action = env.action_space.sample()
     observation, reward, done, truncated, info = env.step(action)
-
+print(info)
 # Save for render
 env.save_for_render()
