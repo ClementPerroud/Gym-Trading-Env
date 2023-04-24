@@ -70,5 +70,5 @@ Contents
    download
    customization
    environments
-   backtests
+   backtest
    documentation
