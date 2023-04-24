@@ -68,3 +68,9 @@ Example with **Bybit** (ccxt id : ``bybit`` ):
       dir = "examples/data",
       since= datetime.datetime(year= 2023, month= 1, day=1),
   )
+
+
+Stock market data
+-------------------------
+
+Coming soon ...
