@@ -1,12 +1,12 @@
 Download market data
 =====================
 
-Download cryto market data
+Cryto market data
 -------------------------
 
 The package provides an easy way to download crypto market data (works with CCTX and uses asyncio for FAST download).
 
-For exemple, this code download market data of pairs BTC/USDT, ETH/USDT with a 30 minutes timeframe, from all of the three exchanges Binance, Bitfinex and Huobi :
+For exemple, this code download market data of pairs ``BTC/USDT`` , ``ETH/USDT`` with a 30 minutes timeframe, from all of the three exchanges Binance, Bitfinex and Huobi :
 
 .. code-block:: python
 
@@ -31,4 +31,4 @@ For exemple, this code download market data of pairs BTC/USDT, ETH/USDT with a 3
   BTC/USDT downloaded from bitfinex2 and stored at examples/data/bitfinex2-BTCUSDT-1h.pkl
   ETH/USDT downloaded from bitfinex2 and stored at examples/data/bitfinex2-ETHUSDT-1h.pkl
 
-This function uses pickle format to save the OHLCV data. You will need to import the dataset with pd.read_pickle('... .pkl', ...). The function supports exchange_names binance, biftfinex2 (API v2) and huobi.
+This function uses pickle format to save the OHLCV data. You will need to import the dataset with ``pd.read_pickle('... .pkl')`` . The function supports exchange_names ``binance`` , ``biftfinex2`` (API v2) and ``huobi`` .
