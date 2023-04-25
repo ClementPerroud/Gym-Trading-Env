@@ -36,25 +36,25 @@ class TradingEnv(gym.Env):
     :param reward_function: Take the History object of the environment and must return a float.
     :type reward_function: optional - function<History->float>
 
-    :param windows: Default is None. If it is set to an int: N, every step observation will return the past N observations. It is recommended for Reccurent Neural Network based Agents.
+    :param windows: Default is None. If it is set to an int: N, every step observation will return the past N observations. It is recommended for Recurrent Neural Network based Agents.
     :type windows: optional - None or int
 
-    :param trading_fees: Transaction trading fees (buy and sell operations). eg: 0.01 correspondss to 1% fees
+    :param trading_fees: Transaction trading fees (buy and sell operations). eg: 0.01 corresponds to 1% fees
     :type trading_fees: optional - float
 
-    :param borrow_interest_rate: Borrow interest rate per step (only when position < 0 or position > 1). eg: 0.01 correspond to 1% borrow interest rate per STEP ; if your know that your borrow interest rate is 0.05% per day and that your timestep is 1 hour, you need to divide it by 24 -> 0.05/100/24.
+    :param borrow_interest_rate: Borrow interest rate per step (only when position < 0 or position > 1). eg: 0.01 corresponds to 1% borrow interest rate per STEP ; if your know that your borrow interest rate is 0.05% per day and that your timestep is 1 hour, you need to divide it by 24 -> 0.05/100/24.
     :type borrow_interest_rate: optional - float
 
     :param portfolio_initial_value: Initial valuation of the portfolio.
     :type portfolio_initial_value: float or int
 
-    :param initial_position: Initial position of the environmnent. It must contained in the list parameter 'positions'.
+    :param initial_position: Initial position of the environment. It must contained in the list parameter 'positions'.
     :type initial_position: optional - float or int
 
     :param include_position_in_features: Whether or not you want the current position to be added to the step observations. If windows is set an int, it will add the last N-step positions.
     :type include_position_in_features: optional - bool
 
-    :param verbose: If 0, no log is outputed. If 1, the env send episode result logs.
+    :param verbose: If 0, no log is outputted. If 1, the env send episode result logs.
     :type verbose: optional - int
     
     :param name: The name of the environment (eg. 'BTC/USDT')
@@ -257,8 +257,8 @@ class TradingEnv(gym.Env):
 
 class MultiDatasetTradingEnv(TradingEnv):
     """
-    (Inherits from TradingEnv) A TradingEnv environment that handle multiple datasets.
-    It automatically switchs from one dataset to another at the end of an episode.
+    (Inherits from TradingEnv) A TradingEnv environment that handles multiple datasets.
+    It automatically switches from one dataset to another at the end of an episode.
     Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea.
     This should help avoiding overfitting.
 
@@ -275,12 +275,12 @@ class MultiDatasetTradingEnv(TradingEnv):
     
     
     
-    :param dataset_dir: A `glob path <https://docs.python.org/3.6/library/glob.html>`_ that needs to match your datasets. All of your datasets needs to match the dataset requirements (see docs from TradingEnv).
+    :param dataset_dir: A `glob path <https://docs.python.org/3.6/library/glob.html>`_ that needs to match your datasets. All of your datasets needs to match the dataset requirements (see docs from TradingEnv). If it is not the case, you can use the ``preprocess`` param to make your datasets match the requirements.
     :type dataset_dir: str
 
     :param preprocess: This function takes a pandas.DataFrame and returns a pandas.DataFrame. This function is applied to each dataset before being used in the environment.
         
-        For example, imagine you have a folder named 'data' with several datasets (formated as .pkl)
+        For example, imagine you have a folder named 'data' with several datasets (formatted as .pkl)
 
         .. code-block:: python
 
