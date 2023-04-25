@@ -1,7 +1,7 @@
 Download market data
 =====================
 
-Cryto market data
+Crypto market data
 -------------------------
 
 Supported exchanges ...
@@ -9,7 +9,7 @@ Supported exchanges ...
 
 The package provides an easy way to download crypto market data (works with CCTX and uses asyncio for FAST download).
 
-For exemple, this code download market data of pairs ``BTC/USDT`` , ``ETH/USDT`` with a 1 hour timeframe, from all of the three exchanges Binance, Bitfinex and Huobi :
+For example, this code downloads market data of pairs ``BTC/USDT`` , ``ETH/USDT`` with a 1 hour timeframe, from all of the three exchanges Binance, Bitfinex and Huobi :
 
 .. code-block:: python
 
@@ -36,7 +36,7 @@ Output :
   BTC/USDT downloaded from bitfinex2 and stored at data/bitfinex2-BTCUSDT-1h.pkl
   ETH/USDT downloaded from bitfinex2 and stored at data/bitfinex2-ETHUSDT-1h.pkl
 
-This function uses pickle format to save the OHLCV data. You will need to import the dataset with ``pd.read_pickle('... .pkl')`` . The function supports exchange_names ``binance`` , ``biftfinex2`` (API v2) and ``huobi`` .
+This function uses pickle format to save the OHLCV data. You will need to import the dataset with ``pd.read_pickle('... .pkl')`` . The function supports exchange_names ``binance`` , ``bitfinex2`` (API v2) and ``huobi`` .
 
 More exchanges ...
 ^^^^^^^^^^^^^
@@ -46,8 +46,8 @@ It is possible to add other exchanges available in **ccxt**.
 
 To do that, you need to update the ``EXCHANGE_LIMIT_RATES`` variable :
 
-* get ``id`` of the exchange from the ccxt's list of exchanges (`avaible here <https://github.com/ccxt/ccxt/tree/master/python#certified-cryptocurrency-exchanges>`_).
-* check for API limit rate and query policies of the exchange to complete ``limit`` , ``pause_every`` and ``pause`` parameters. Please, be kind to the APIs to avoid getting banned.
+* get ``id`` of the exchange from the ccxt's list of exchanges (`available here <https://github.com/ccxt/ccxt/tree/master/python#certified-cryptocurrency-exchanges>`_).
+* check the API limit rate and query policies of the exchange to complete ``limit`` , ``pause_every`` and ``pause`` parameters. Please, be kind to the APIs to avoid getting banned.
 
 Example with **Bybit** (ccxt id : ``bybit`` ):
 

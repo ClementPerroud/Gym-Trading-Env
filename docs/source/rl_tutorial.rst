@@ -32,7 +32,7 @@ I have seen many environments that consider actions such as BUY, SELL. In my exp
     positions = [0, 0.5, 1]
     #... environment has been initialized with your positions list on pair BTC/USD
     _ = env.step(1)
-    # You just told the environment the reached the position : positions[1] = 0.5 ! The environment manages the trades to reach this 50% BTC, 50% USD
+    # It tells the environment to reach the position : positions[1] = 0.5 ! The environment manages the trades to reach 50% BTC, 50% USD
  
 
 Complex positions
@@ -41,12 +41,12 @@ Complex positions
 This environment supports more complex positions (actually any float from -inf to +inf) such as:
 
 * ``-1`` : Bet 100% of the portfolio value on the decline of BTC (=SHORT). To perform this action, the environment borrows 100% of the portfolio valuation as BTC to an imaginary person, and immediately sells it to get USD. When the agent wants to close this position, the environment buys the owed amount of BTC and repays the imaginary person with it. If the price has fallen during the operation, we buy cheaper than we initially sold : the difference is our gain. During the loan, the imaginary person is paid a small rent (parameter : ``borrow_interest_rate`` of the environment).
-* ``+2`` : Bet 100% of the portfolio value of the rise of BTC. We use the same mechanism explained above, but we borrow USD and buy BTC with it.
+* ``+2`` : Bet 100% of the portfolio value on the rise of BTC. We use the same mechanism as explained above, but we borrow USD and buy BTC with it.
 
 .. note::
 
   Can we use ``-10`` ?
-  We can BUT ... We need to borrow 1000% of the portfolio valuation as BTC. You need to understand that such a "leverage" is very risky. Indeed, if the BTC price rise by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) of your current portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. GAME OVER, you have 0$ left. The leverage is very useful but also risky, as it increases your gains AND your losses. Always keep in mind that you can lose everything.
+  We can BUT ... We need to borrow 1000% of the portfolio valuation as BTC. You need to understand that such a "leverage" is very risky. Indeed, if the BTC price rises by 10%, you need to repay the original 1000% of your portfolio valuation at 1100% (1000%*1.10) of your current portfolio valuation. Well, 100% (1100% - 1000%) of your portfolio is used to repay your debt. GAME OVER, you have 0$ left. The leverage is very useful but also risky, as it increases your gains AND your losses. Always keep in mind that you can lose everything.
 
 
 Market data
@@ -69,7 +69,7 @@ They need to be ordered by ascending date. Index must be DatetimeIndex. Your Dat
   
 Easy download for crypto
 ^^^^^^^^^^^^^^^^
-The packaging also include an easy way to download historical data of crypto pairs. Its stores data as `.pkl` for easy and fast usage. 
+The packaging also include an easy way to download historical data of crypto pairs. It stores data as `.pkl` for easy and fast usage. 
 
 `More information here  <https://gym-trading-env.readthedocs.io/en/latest/download.html>`_
 
@@ -94,7 +94,7 @@ Create your features
 -------------------
 
 Your RL-agent will need inputs. It is your job to make sure it has everything it needs. 
-> **The environment will recognize as inputs every column that contains the keyword 'feature' in its name.**
+**The environment will recognize as inputs every column that contains the keyword 'feature' in its name.**
 
 .. code-block:: python
 
@@ -120,13 +120,13 @@ Your RL-agent will need inputs. It is your job to make sure it has everything it
   
 .. note::
 
-  By default, the env will always add the **position reached** at the end of all your custom features. Indeed, in Reinforcement Learning, I find it really useful for the agent to know its current position. To disable this, you need to set the ``include_position_in_features`` parameter of the environmnent to ``False``.
+  By default, the env will always add the **position reached** at the end of all your custom features. Indeed, in Reinforcement Learning, I find it really useful for the agent to know its current position. To disable this, you need to set the ``include_position_in_features`` parameter of the environment to ``False``.
  
  
 Create your first environment
 -------------------
 
-Well done, you did a good job configuring your fist environment !
+Well done, you did a good job configuring your first environment !
 
 .. code-block:: python
 
@@ -160,6 +160,6 @@ Now it's time to enjoy.
 
 Every episode produces an output with basic metrics that you can customize. `More information on how to customize your environment here <https://gym-trading-env.readthedocs.io/en/latest/customization.html#>`_
 
-Want a cool looking render ? `More information on how to render a finished episode here <https://gym-trading-env.readthedocs.io/en/latest/render.html>`_
+Want a cool-looking render ? `More information on how to render a finished episode here <https://gym-trading-env.readthedocs.io/en/latest/render.html>`_
 
   
