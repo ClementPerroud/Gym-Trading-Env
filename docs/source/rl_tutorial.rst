@@ -22,7 +22,10 @@ I have seen many environments that consider actions such as BUY, SELL. In my exp
 
 * ``0.5`` : 50% in BTC & 50% in USD
 * Even : ``0.1`` : 10% in BTC & 90% in USD ....
-In fact, it is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
+
+.. note::
+
+  It is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
 
 .. code-block::python
   

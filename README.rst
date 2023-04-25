@@ -1,11 +1,4 @@
-.. meta::
-   :title: Crypto Trading Environment
-   :description: A crypto Trading Environment for Reinforcement Learning
-
-.. title:: Crypto Trading Environment for Reinforcement Learning
-
-
-
+================================
 |Crypto Trading Environment|
 ================================
 
@@ -45,7 +38,7 @@ Cryto Trading Env is an OpenAI Gym environment for simulating stocks and train R
 It was designed to be fast and customizable for easy RL trading algorythms implementation.
 
 +---------------------------------------------------------------------------------+
-| `Github <https://github.com/ClementPerroud/Gym-Trading-Env>`_  |
+| `Documentation <https://gym-trading-env.readthedocs.io/en/latest/index.html>`_  |
 +---------------------------------------------------------------------------------+
 
 Key features
@@ -58,7 +51,7 @@ This package aims to greatly simplify the research phase by offering :
 * A high performance rendering (can display several hundred thousand candles simultaneously), customizable to visualize the actions of its agent and its results.
 * (Coming soon) An easy way to backtest any RL-Agents or any king 
 
-.. image:: images/render.gif
+.. image:: docs/source/images/render.gif
 
 Installation
 ---------------
@@ -75,36 +68,6 @@ Or using git :
    
    git clone https://github.com/ClementPerroud/Gym-Trading-Env
 
-   
-Contents
----------------
 
-.. toctree::
-   
-   Introduction <self>
-   getting_started
-
-.. toctree::
-   :caption: 🤖 Reinforcement Learning
-   
-   rl_tutorial
-   customization
-   multi_datasets
-   vectorize_env
-
-.. toctree:: 
-   :caption: 🦾 Functionnalities
-   
-   render
-   download
-
-.. toctree::
-   :caption: 📈 Backtest
-   
-   backtest
- 
-.. toctree::
-   :caption: 📚 Reference
-   
-   history
-   documentation
+`Documentation available here <https://gym-trading-env.readthedocs.io/en/latest/index.html>`_
+-----------------------------------------------------------------------------------------------
