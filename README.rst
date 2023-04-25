@@ -13,7 +13,6 @@
 
 .. |Crypto Trading Environment| image:: docs/source/images/logo_light-bg.png
    :width: 500
-   :align: center
 
 .. raw:: html
 
