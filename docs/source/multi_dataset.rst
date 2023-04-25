@@ -1,4 +1,4 @@
-Advanced
+Multi datasets environment
 ===========
 
 Now, you know how to create a environment for your RL agent with one dataset. But something seems weird ... One good dataset is about 100k data points long. But it sounds very little compared to the millions steps that RL-Agent needs to get good.
