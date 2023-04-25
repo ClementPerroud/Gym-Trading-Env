@@ -27,14 +27,6 @@ I have seen many environments that consider actions such as BUY, SELL. In my exp
 
   It is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
 
-.. code-block::python
-  
-    positions = [0, 0.5, 1]
-    #... environment has been initialized with your positions list on pair BTC/USD
-    _ = env.step(1)
-    # It tells the environment to reach the position : positions[1] = 0.5 ! The environment manages the trades to reach 50% BTC, 50% USD
- 
-
 Complex positions
 ^^^^^^^^^^^^^^^^
 
@@ -59,6 +51,7 @@ They need to be ordered by ascending date. Index must be DatetimeIndex. Your Dat
 
 .. code-block:: python
 
+  import pandas as pd
   # Available in the github repo : examples/data/BTC_USD-Hourly.csv
   url = "https://raw.githubusercontent.com/ClementPerroud/Gym-Trading-Env/main/examples/data/BTC_USD-Hourly.csv"
   df = pd.read_csv(url, parse_dates=["date"], index_col= "date")
@@ -131,6 +124,7 @@ Well done, you did a good job configuring your first environment !
 .. code-block:: python
 
   import gymnasium as gym
+  import gym_trading_env
   env = gym.make("TradingEnv",
           name= "BTCUSD",
           df = df, # Your dataset with your custom features 
@@ -138,7 +132,9 @@ Well done, you did a good job configuring your first environment !
           trading_fees = 0.01/100, # 0.01% per stock buy / sell (Binance fees)
           borrow_interest_rate= 0.0003/100, # 0.0003% per timestep (one timestep = 1h here)
       )
-  
+
+`TradingEnv documentation <https://gym-trading-env.readthedocs.io/en/latest/documentation.html#gym_trading_env.environments.TradingEnv>`_
+
 Run the environment
 -------------------
 
