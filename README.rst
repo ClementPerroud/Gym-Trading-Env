@@ -4,18 +4,9 @@
 |Crypto Trading Environment|
 ===================
 
-.. |Crypto Trading Environment| raw:: html
-   <img src = 'docs/source/images/logo_light-bg.png' style='max-width: 500px;display : block;margin:auto'/>
-
- 
 .. raw:: html
-   <style>
-   h1 img{
-       margin-left: auto;
-       margin-right: auto;
-       display: block;
-   }
-   </style>
+   <h1><img src = 'docs/source/images/logo_light-bg.png' style='max-width: 500px;display : block;margin:auto'/></h1>
+
  
 .. raw:: html
 
