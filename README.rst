@@ -1,11 +1,4 @@
-.. raw:: html
-   <style>
-      h1 img{
-       margin-left: auto;
-       margin-right: auto;
-       display: block;
-   }
-   </style>
+
 
 ===================
 |Crypto Trading Environment|
@@ -13,7 +6,16 @@
 
 .. |Crypto Trading Environment| image:: docs/source/images/logo_light-bg.png
    :width: 500
-
+ 
+.. raw:: html
+   <style>
+   h1 img{
+       margin-left: auto;
+       margin-right: auto;
+       display: block;
+   }
+   </style>
+ 
 .. raw:: html
 
    <section class="shields" style="text-align:center">
