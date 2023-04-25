@@ -13,7 +13,7 @@
  
 .. raw:: html
 
-   <section class="shields" style="text-align:center">
+   <section class="shields" align="center">
       <a href="https://www.python.org/">
          <img src="https://img.shields.io/badge/python-v3-brightgreen.svg"
             alt="python">
