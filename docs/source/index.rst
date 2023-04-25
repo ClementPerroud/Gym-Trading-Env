@@ -8,7 +8,7 @@
 |Crypto Trading Environment|
 ===================
 
-.. |Crypto Trading Environment| image:: "images/logo_light-bg.png"
+.. |Crypto Trading Environment| image:: images/logo_light-bg.png
 
 .. raw:: html
    
