@@ -32,4 +32,5 @@ html_logo = "images/logo_dark-bg.png"
 html_theme_options = {
     'logo_only': True,
     'display_version': False,
+    'style_nav_header_background' : '#312783',
 }
