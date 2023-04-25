@@ -1,5 +1,8 @@
 Vectorize your env
-=================
+===================
+
+Gym vector
+-----------
 
 You still want your agent to perform better ?
 
@@ -15,7 +18,7 @@ Then, I suggest to use Vectorized Environment to parallelize several environment
       "MultiDatasetTradingEnv",
       dataset_dir = "preprocessed_data",
       num_envs = 3)
-    envs.reset()
+    print(envs.reset())
 
 .. code-block:: python
 
@@ -32,3 +35,31 @@ Then, I suggest to use Vectorized Environment to parallelize several environment
 .. note::
 
   Using ``if __name__ == "__main__": `` is recommended as you might encounter errors if you omit it.
+
+Special cases
+--------------
+
+In some cases (Jupiter Notebooks), you might need to use the ``SyncVectorEnv`` object from gym to avoid crashes :
+
+.. code-block:: python
+
+  import gymnasium as gym
+  import gym_trading_env
+  
+  def make_env():
+    env = gym.make(
+        "MultiDatasetTradingEnv",
+        dataset_dir= "preprocessed_data",
+    )
+    return env
+  envs = gym.vector.SyncVectorEnv([lambda: make_env() for _ in range(3)])
+
+Run the environments
+---------------------
+
+.. code-block:: python
+      
+      observation, info = env.reset()
+      while True:
+        actions = [0, 0, 0] # 3D List as we have 3 simultaneous environments
+        observation, reward, done, truncated, info = env.step(actions)
