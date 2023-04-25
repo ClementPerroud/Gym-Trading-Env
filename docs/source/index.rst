@@ -3,9 +3,13 @@
    :description: A crypto Trading Environment for Reinforcement Learning
 
 .. title:: Crypto Trading Environment for Reinforcement Learning
+
 ===================
-Crypto Trading Environment
+|Crypto Trading Environment|
 ===================
+
+.. |Crypto Trading Environment| image:: "images/logo_light-bg.png"
+
 .. raw:: html
    
    <section class="shields">
