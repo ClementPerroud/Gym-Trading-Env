@@ -61,6 +61,8 @@ Imagine you have several raw datasets in a folder named ``raw_data`` .
           preprocess= preprocess,
       )
  
+`MultiDatasetTradingEnv documentation <https://gym-trading-env.readthedocs.io/en/latest/documentation.html#gym_trading_env.environments.TradingEnv>`_ 
+
 Run the environment
 ^^^^^^^^^^^^^^^^^^^
 
