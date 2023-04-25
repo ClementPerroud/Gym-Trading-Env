@@ -31,11 +31,12 @@ Then, in a *separate script* :
   renderer.run()
 
 .. code-block:: bash
+
   ...
   * Running on http://127.0.0.1:5000
   ...
 
-Go to url mentionned by Flask (here `http://127.0.0.1:5000 <http://127.0.0.1:5000>`)
+Go to url mentionned by Flask (here `http://127.0.0.1:5000 <http://127.0.0.1:5000>`_)
  
 .. image:: images/render.gif
   :alt: Alternative text
