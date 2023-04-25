@@ -39,9 +39,9 @@
 Cryto Trading Env is an OpenAI Gym environment for simulating stocks and train Reinforcement Learning (RL) trading agents.
 It was designed to be fast and customizable for easy RL trading algorythms implementation.
 
-+----------------+-------+
-| `Documentation <https://gym-trading-env.readthedocs.io/en/latest/index.html>`_  | Pypi  |
-+----------------+-------+
++---------------------------------------------------------------------------------+
+| `Documentation <https://gym-trading-env.readthedocs.io/en/latest/index.html>`_  |
++---------------------------------------------------------------------------------+
 
 Key features
 ---------------
