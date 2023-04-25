@@ -34,3 +34,4 @@ html_theme_options = {
     'display_version': False,
     'style_nav_header_background' : '#312783',
 }
+html_css_files = ["style.css"]
