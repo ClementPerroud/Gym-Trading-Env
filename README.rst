@@ -49,6 +49,8 @@ This package aims to greatly simplify the research phase by offering :
 * A high performance rendering (can display several hundred thousand candles simultaneously), customizable to visualize the actions of its agent and its results.
 * (Coming soon) An easy way to backtest any RL-Agents or any king 
 
+.. image:: docs/source/images/render.gif
+
 Installation
 ---------------
 
