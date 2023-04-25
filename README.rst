@@ -5,7 +5,10 @@
 ===================
 
 .. raw:: html
-   <h1><img src = 'https://github.com/ClementPerroud/Gym-Trading-Env/raw/main/docs/source/images/logo_light-bg.png' style='max-width: 500px;display : block;margin:auto'/></h1>
+
+   <h1 align='center'>
+      <img src = 'https://github.com/ClementPerroud/Gym-Trading-Env/raw/main/docs/source/images/logo_light-bg.png' width='500'>
+   </h1>
 
  
 .. raw:: html
