@@ -76,7 +76,8 @@ Contents
    
    rl_tutorial
    customization
-   advanced
+   multi_datasets
+   vectorize_env
 
 .. toctree:: 
    :caption: 🦾 Functionnalities
