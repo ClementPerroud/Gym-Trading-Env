@@ -18,7 +18,7 @@
          <img src="https://img.shields.io/badge/python-v3-brightgreen.svg"
             alt="python">
       </a>
-      <a href="https://pypi.org/project/lib-pybroker/">
+      <a href="https://pypi.org/project/gym-trading-env/">
          <img src="https://img.shields.io/badge/pypi-v1.1.3-brightgreen.svg"
             alt="PyPI">
       </a>
@@ -40,7 +40,7 @@ Cryto Trading Env is an OpenAI Gym environment for simulating stocks and train R
 It was designed to be fast and customizable for easy RL trading algorythms implementation.
 
 +----------------+-------+
-| Documentation  | Pypi  |
+| `Documentation <https://gym-trading-env.readthedocs.io/en/latest/index.html>`_  | Pypi  |
 +----------------+-------+
 
 Key features
