@@ -4,9 +4,9 @@ Vectorize your env
 Gym vector
 -----------
 
-You still want your agent to perform better ?
+**You still want your agent to perform better ?**
 
-Then, I suggest to use Vectorized Environment to parallelize several environments. It garanties having multiple simultaneous sources of data during the training.
+Then, I suggest to use Vectorized Environment to parallelize several environments. It garantees having multiple simultaneous sources of data during the training.
 
 .. code-block:: python
 
@@ -39,7 +39,7 @@ Then, I suggest to use Vectorized Environment to parallelize several environment
 Special cases
 --------------
 
-In some cases (Jupiter Notebooks), you might need to use the ``SyncVectorEnv`` object from gym to avoid crashes :
+In some cases (Jupyter Notebooks), you might need to use the ``SyncVectorEnv`` object from gym to avoid crashes :
 
 .. code-block:: python
 
