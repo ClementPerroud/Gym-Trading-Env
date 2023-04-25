@@ -1,3 +1,12 @@
+.. raw:: html
+   <style>
+      img.align-center {
+       margin-left: auto;
+       margin-right: auto;
+       display: block;
+   }
+   </style>
+
 ===================
 |Crypto Trading Environment|
 ===================
@@ -7,7 +16,7 @@
    :align: center
 
 .. raw:: html
-   
+
    <section class="shields">
       <a href="https://www.python.org/">
          <img src="https://img.shields.io/badge/python-v3-brightgreen.svg"
