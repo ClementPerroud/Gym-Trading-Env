@@ -4,21 +4,27 @@
 
 .. title:: Crypto Trading Environment for Reinforcement Learning
 
-===================
+
+
+================================
 |Crypto Trading Environment|
-===================
+================================
 
-.. |Crypto Trading Environment| image:: images/logo_light-bg.png
-   :width: 500
+.. |Crypto Trading Environment| raw:: html
 
+   <h1 align='center'>
+      <img src = 'https://github.com/ClementPerroud/Gym-Trading-Env/raw/main/docs/source/images/logo_light-bg.png' width='500'>
+   </h1>
+
+ 
 .. raw:: html
-   
-   <section class="shields">
+
+   <section class="shields" align="center">
       <a href="https://www.python.org/">
          <img src="https://img.shields.io/badge/python-v3-brightgreen.svg"
             alt="python">
       </a>
-      <a href="https://pypi.org/project/lib-pybroker/">
+      <a href="https://pypi.org/project/gym-trading-env/">
          <img src="https://img.shields.io/badge/pypi-v1.1.3-brightgreen.svg"
             alt="PyPI">
       </a>
@@ -39,6 +45,10 @@
 Cryto Trading Env is an OpenAI Gym environment for simulating stocks and train Reinforcement Learning (RL) trading agents.
 It was designed to be fast and customizable for easy RL trading algorythms implementation.
 
++---------------------------------------------------------------------------------+
+| `Documentation <https://gym-trading-env.readthedocs.io/en/latest/index.html>`_  |
++---------------------------------------------------------------------------------+
+
 Key features
 ---------------
 
@@ -48,6 +58,8 @@ This package aims to greatly simplify the research phase by offering :
 * A simple and fast environment for the user and the AI, but which allows complex operations (Short, Margin trading).
 * A high performance rendering (can display several hundred thousand candles simultaneously), customizable to visualize the actions of its agent and its results.
 * (Coming soon) An easy way to backtest any RL-Agents or any king 
+
+.. image:: docs/source/images/render.gif
 
 Installation
 ---------------
@@ -63,6 +75,7 @@ Or using git :
 .. code-block:: console
    
    git clone https://github.com/ClementPerroud/Gym-Trading-Env
+
    
 Contents
 ---------------
