@@ -34,7 +34,7 @@ Then, I suggest to use Vectorized Environment to parallelize several environment
   
 .. note::
 
-  Using ``if __name__ == "__main__": `` is recommended as you might encounter errors if you omit it.
+  Using ``if __name__ == "__main__":`` is recommended as you might encounter errors if you omit it.
 
 Special cases
 --------------
