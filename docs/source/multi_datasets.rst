@@ -1,7 +1,7 @@
 Multi datasets environment
 ===========
 
-Now, you know how to create a environment for your RL agent with one dataset. But something seems weird ... One good dataset is about 100k data points long. But it sounds very little compared to the millions steps that RL-Agent needs to get good.
+Now, you know how to create an environment for your RL agent with one dataset. But something seems weird ... One good dataset is about 100k data points long. But it sounds very little compared to the millions steps that RL-Agent needs to get good.
 
 **Is ONE SINGLE dataset enough for an agent to learn real stuff ?**
 
@@ -12,13 +12,13 @@ Multi Dataset Trading Environment
 
   (Inherits from TradingEnv)
   
-A TradingEnv environment that handle multiple datasets. It automatically switchs from one dataset to another at the end of an episode. Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea. This should help avoiding overfitting.
+A TradingEnv environment that handle multiple datasets. It automatically switches from one dataset to another at the end of an episode. Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea. This should help avoiding overfitting.
 
 How to use ?
 ^^^^^^^^^^^^^
 
 You need to specify a `glob path <https://docs.python.org/3.6/library/glob.html>`_ that gather all of the datasets (in .pkl format).
-Imagine you have several preprocessed dataset in a folder named ``preprocessed_data`` .
+Imagine you have several preprocessed datasets in a folder named ``preprocessed_data`` .
 
 .. code-block:: python
   
@@ -37,7 +37,7 @@ Easy preprocess
 
 Instead of preprocessing and saving all of your datasets every time you need to change a feature or whatever other change, I added a ``preprocess`` argument to the MultiDatasetTradingEnv. This function takes a pandas.DataFrame and returns a pandas.DataFrame. This function is applied to each dataset before it being used in the environment.
 
-Imagine you have several raw dataset in a folder named ``raw_data`` .
+Imagine you have several raw datasets in a folder named ``raw_data`` .
 
 .. code-block:: python
 
