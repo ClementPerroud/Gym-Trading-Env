@@ -5,10 +5,14 @@
     <title>Dropdown</title>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
     <script type="text/javascript" src="https://assets.pyecharts.org/assets/echarts.min.js"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
 </head>
+
 <style type="text/css">
 body{
-    font-family: 'Helvetica Neue';
+    font-family: 'Poppins', sans-serif;
     font-size:14px;
     color :#333333;
 }
@@ -43,12 +47,15 @@ select{
     max-width: 110px;
     border-radius: 5%;
 }
-
+#author{
+    color : lightgrey;
+    margin-top: 20px;
+}
 </style>
 <body>
 <div id ="main">
     <div>
-        <h2> Stock Chart Dashboard </h2>
+        <img src = "https://raw.githubusercontent.com/ClementPerroud/Gym-Trading-Env/main/docs/source/images/logo_light-bg.png" alt="Gym Trading Env" style="max-width: 350px"/>
         <div id="chart" style="width:950px; height:900px;"></div>
     </div> 
     
@@ -65,6 +72,7 @@ select{
                     <option value= "{{name}}" SELECTED>{{ name }}</option>
                 {% endfor %}
             </select>
+            <div id="author">by Clément Perroud, 2023</div>
         </div>
     </div>
 </div>

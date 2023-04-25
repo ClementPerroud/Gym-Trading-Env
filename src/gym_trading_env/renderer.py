@@ -13,7 +13,7 @@ import pandas as pd
 class Renderer():
     def __init__(self, render_logs_dir):
         self.app = Flask(__name__, static_folder="./templates/")
-        self.app.debug = True
+        # self.app.debug = True
         self.app.config["EXPLAIN_TEMPLATE_LOADING"] = True
         self.df = None
         self.render_logs_dir = render_logs_dir
@@ -44,14 +44,12 @@ class Renderer():
     def run(self,):
         @self.app.route("/")
         def index():
-            print("UPDATE")
             render_pathes = glob.glob(f"{self.render_logs_dir}/*.pkl")
             render_names = [Path(path).name for path in render_pathes]
             return render_template('index.html', render_names = render_names)
 
         @self.app.route("/update_data/<name>")
         def update(name = None):
-            print("UPDATE DATA")
             if name is None or name == "":
                 render_pathes = glob.glob(f"{self.render_logs_dir}/*.pkl")
                 name = Path(render_pathes[-1]).name
@@ -61,7 +59,6 @@ class Renderer():
 
         @self.app.route("/metrics")
         def get_metrics():
-            print("UPDATE METRICS")
             self.compute_metrics(self.df)
             return jsonify([{'name':metric['name'], 'value':metric['value']} for metric in self.metrics])
 

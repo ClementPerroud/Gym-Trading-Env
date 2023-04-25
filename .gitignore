@@ -7,3 +7,4 @@ my_example.py
 .pypirc
 *.egg-info
 *.pkl
+*.ai
