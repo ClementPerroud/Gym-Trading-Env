@@ -3,7 +3,7 @@ Advanced
 
 Now, you know how to create a environment for your RL agent with one dataset. But something seems weird ... One good dataset is about 100k data points long. But it sounds very little compared to the millions steps that RL-Agent needs to get good.
 
-**Is ONE SINGLE dataset enought for an agent to learn real stuff ?**
+**Is ONE SINGLE dataset enough for an agent to learn real stuff ?**
 
 In my opinion, one dataset is not enough. The agent will overfit and won't be able to generalize. My solution is simple, adding multiple datasets to the environment. I present you the *MultiDatasetTradingEnv*.
 
