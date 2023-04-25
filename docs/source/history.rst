@@ -1,11 +1,11 @@
 History Object
 ===============
 
-The history object is similar to a DataFrame, but it was made to be faster. Its stores many training information at each timestep of the training. You can use it this way :
+The history object is similar to a DataFrame, but it was made to be faster. It stores many training information at each timestep of the training. You can use it this way :
 
-* ``history['column name', t]`` returns the a scalar value of the metrics 'column name' at time step t.
+* ``history['column name', t]`` returns a scalar value of the metrics 'column name' at time step t.
 * ``history['column name']`` returns a numpy array with all the values from timestep 0 to current timestep.
-* ``history[t]`` returns a dictionnary with of the metrics as keys with the associated values.
+* ``history[t]`` returns a dictionary with of the metrics as keys with the associated values.
 
 It was made to make everything easier :
 
@@ -20,7 +20,7 @@ It was made to make everything easier :
    # Training info
    'step': 33091, #Step = t.
    'date': numpy.datetime64('2022-03-01T00:00:00.000000000'), #Date at step t, datetime.
-   'position_index': 2, #Index of the position at step t amoung your position list.
+   'position_index': 2, #Index of the position at step t among your position list.
    'position': 1, #Portfolio position at step t.
    'reward': 0.0028838985262525257, #Reward at step t.
    
