@@ -17,7 +17,7 @@ A TradingEnv environment that handle multiple datasets. It automatically switchs
 How to use ?
 ^^^^^^^^^^^^^
 
-You need to specify a `glob path<https://docs.python.org/3.6/library/glob.html>`_ that gather all of the datasets (in .pkl format).
+You need to specify a `glob path <https://docs.python.org/3.6/library/glob.html>`_ that gather all of the datasets (in .pkl format).
 Imagine you have several preprocessed dataset in a folder named ``preprocessed_data`` .
 
 .. code-block:: python
