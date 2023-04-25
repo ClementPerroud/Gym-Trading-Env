@@ -4,8 +4,9 @@
 |Crypto Trading Environment|
 ===================
 
-.. |Crypto Trading Environment| image:: docs/source/images/logo_light-bg.png
-   :width: 500
+.. |Crypto Trading Environment| raw:: html
+   <img src = 'docs/source/images/logo_light-bg.png' style='max-width: 500px;display : block;margin:auto'/>
+
  
 .. raw:: html
    <style>
