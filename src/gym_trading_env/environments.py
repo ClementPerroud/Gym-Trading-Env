@@ -61,7 +61,7 @@ class TradingEnv(gym.Env):
     :type name: optional - str
     
     """
-    metadata = {'render_modes': ['human']}
+    metadata = {'render_modes': ['logs']}
     def __init__(self,
                 df : pd.DataFrame,
                 positions : list = [0, 1],
@@ -74,6 +74,7 @@ class TradingEnv(gym.Env):
                 include_position_in_features = True,
                 verbose = 1,
                 name = "Stock",
+                render_mode= "logs"
                 ):
         self.name = name
         self.verbose = verbose
@@ -88,6 +89,8 @@ class TradingEnv(gym.Env):
         if self.initial_position is None: self.initial_position = positions[0]
         assert self.initial_position in self.positions, "The 'initial_position' parameter must one position mentionned in the 'position' (default is [0, 1]) parameter."
         self.include_position_in_features = include_position_in_features
+        assert render_mode is None or render_mode in self.metadata["render_modes"]
+        self.render_mode = render_mode
         self._set_df(df)
         
 
@@ -162,6 +165,9 @@ class TradingEnv(gym.Env):
         )
 
         return self._get_obs(), self.historical_info[0]
+
+    def render(self):
+        pass
 
     def _trade(self, position, price = None):
         self._portfolio.trade_to_position(
