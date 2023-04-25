@@ -1,6 +1,6 @@
 .. raw:: html
    <style>
-      img.align-center {
+      h1 img{
        margin-left: auto;
        margin-right: auto;
        display: block;
@@ -16,7 +16,7 @@
 
 .. raw:: html
 
-   <section class="shields">
+   <section class="shields" style="text-align:center">
       <a href="https://www.python.org/">
          <img src="https://img.shields.io/badge/python-v3-brightgreen.svg"
             alt="python">
