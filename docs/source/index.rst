@@ -68,7 +68,8 @@ Contents
 ---------------
 
 .. toctree::
-
+   
+   Introduction <self>
    getting_started
 
 .. toctree::
