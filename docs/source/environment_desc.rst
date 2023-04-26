@@ -1,41 +1,39 @@
-Environment Quick summary
-============
-
- 
+Environment Quick Summary
+=========================
 
 .. image:: images/render.gif
   :width: 600
   :align: center
   
   
-This environment is a `Gymnasium <https://gymnasium.farama.org/content/basic_usage/>`_ environment made for trading on a single pair.
+This environment is a `Gymnasium <https://gymnasium.farama.org/content/basic_usage/>`_ environment designed for trading on a single pair.
 
 .. list-table::
    :widths: 25 70
    :header-rows: 0
    
    * - Action Space
-     - ``Discrete( number_of_positions )``
+     - ``Discrete(number_of_positions)``
    * - Observation Space
-     - ``Box( -np.inf, +np.inf, shape = ...)``
+     - ``Box(-np.inf, +np.inf, shape=...)``
    * - Import
-     - ``gymnasium.make("TradingEnv", df = df)``
+     - ``gymnasium.make("TradingEnv", df=df)``
 
 Important Parameters
 --------------------
 
-* ``df`` *(required)*: A pandas.DataFrame with a ``close`` and DatetimeIndex as index. To perform a render, your DataFrame also needs to contain ``open`` , ``low`` , ``high``. 
-* ``positions`` *(optional, default : [-1, 0, 1])* : The list of positions that your agent can take. Each position is represented by a number (as described in section *Action Space*).
+* ``df`` *(required)*: A pandas.DataFrame with a ``close`` and DatetimeIndex as index. To perform a render, your DataFrame also needs to contain ``open``, ``low``, and ``high``. 
+* ``positions`` *(optional, default: [-1, 0, 1])*: The list of positions that your agent can take. Each position is represented by a number (as described in the *Action Space* section).
 
 `Documentation of all the parameters <https://gym-trading-env.readthedocs.io/en/latest/documentation.html#gym_trading_env.environments.TradingEnv>`_
 
 Action Space
 -----------
 
-The action space is a list of **position** given by the user. Every position is labelled from -inf to +inf and corresponds to the ratio of the porfolio valuation engaged in the position ( > 0 to bet on the rise, < 0 to bet on the decrease).
+The action space is a list of **positions** given by the user. Every position is labeled from -inf to +inf and corresponds to the ratio of the portfolio valuation engaged in the position ( > 0 to bet on the rise, < 0 to bet on the decrease).
 
 
-.. list-table:: Example with pair BTC/USDT (%pv means *"Percent of the Portfolio Valuation"*)
+.. list-table:: Example with BTC/USDT pair (%pv means *"Percent of the Portfolio Valuation"*)
    :widths: 10 10 10 10 10
    :header-rows: 1
    
@@ -71,17 +69,17 @@ The action space is a list of **position** given by the user. Every position is 
      -  
      
 
-If ``position < 0`` : the environment performs a SHORT (by borrowing USDT and buying BTC with it).
+If ``position < 0``: the environment performs a SHORT (by borrowing USDT and buying BTC with it).
 
-If ``position > 1`` : the environment uses MARGIN trading (by borrowing BTC and selling it to get USDT).
+If ``position > 1``: the environment uses MARGIN trading (by borrowing BTC and selling it to get USDT).
 
 Observation Space
 ------------------
 
-The obersation space is a np.array containing:
+The observation space is an np.array containing:
 
 * The row of your DataFrame columns containing ``features`` in their name, at a given step.
-* The current position of the environment to allow self-awareness for the agent. You can disable it by setting ``include_position_in_features`` to ``False`` .
+* The current position of the environment to allow self-awareness for the agent. You can disable it by setting ``include_position_in_features`` to ``False``.
 
 .. code-block:: python
 
