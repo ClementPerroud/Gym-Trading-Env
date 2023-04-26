@@ -34,8 +34,8 @@
       <a href='https://gym-trading-env.readthedocs.io/en/latest/?badge=latest'>
           <img src='https://readthedocs.org/projects/gym-trading-env/badge/?version=latest' alt='Documentation Status' />
       </a>
-      <a href = 'https://static.pepy.tech/badge/gym-trading-env'>
-         <img src = 'https://pepy.tech/project/gym-trading-env'>
+      <a href = 'https://pepy.tech/project/gym-trading-env'>
+         <img src = 'https://static.pepy.tech/badge/gym-trading-env'>
       </a>
       <br>
       <a href="https://github.com/ClementPerroud/Gym-Trading-Env">
