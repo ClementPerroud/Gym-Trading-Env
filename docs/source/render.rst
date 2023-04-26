@@ -1,5 +1,5 @@
 Render
-=========
+======
 
 
 
@@ -11,7 +11,7 @@ Render
 
 
 Your first render
--------------------
+-----------------
 
 For the render not to perturb the training, it needs to be performed in a separate python script. This way you can explore your episode results without disturbing your RL-agent training.
 
@@ -42,7 +42,7 @@ Go to URL mentionned by Flask (here `http://127.0.0.1:5000 <http://127.0.0.1:500
   :alt: Alternative text
 
 Customize your render
--------------
+---------------------
 
 Add custom lines
 ^^^^^^^^^^^^^^^^
@@ -70,7 +70,7 @@ Add custom lines with ``.add_line(name, function, line_options)`` that takes fol
 
 
 Add custom metrics
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 .. code-block:: python
   
