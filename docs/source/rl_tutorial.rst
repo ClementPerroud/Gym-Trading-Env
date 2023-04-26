@@ -7,7 +7,7 @@ Welcome to the first tutorial of the Gym Trading Env package. You will learn how
 
   During the entire tutorial, we will consider that we want to trade on the BTC/USD pair
 
-Action spaces
+Understand the action space
 ----------------------
 
 Positions
