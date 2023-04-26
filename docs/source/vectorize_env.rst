@@ -1,8 +1,8 @@
 Vectorize your env
-===================
+==================
 
 Gym vector
------------
+----------
 
 **You still want your agent to perform better ?**
 
@@ -37,7 +37,7 @@ Then, I suggest to use Vectorized Environment to parallelize several environment
   Using ``if __name__ == "__main__":`` is recommended as you might encounter errors if you omit it.
 
 Special cases
---------------
+-------------
 
 In some cases (Jupyter Notebooks), you might need to use the ``SyncVectorEnv`` object from gym to avoid crashes :
 
@@ -55,7 +55,7 @@ In some cases (Jupyter Notebooks), you might need to use the ``SyncVectorEnv`` o
   envs = gym.vector.SyncVectorEnv([lambda: make_env() for _ in range(3)])
 
 Run the environments
----------------------
+--------------------
 
 .. code-block:: python
       
