@@ -1,5 +1,5 @@
 Multi datasets environment
-===========
+==========================
 
 Now, you know how to create an environment for your RL agent with one dataset. But something seems weird ... One good dataset is about 100k data points long. But it sounds very little compared to the millions steps that RL-Agent needs to get good.
 
@@ -15,7 +15,7 @@ Multi Dataset Trading Environment
 A TradingEnv environment that handle multiple datasets. It automatically switches from one dataset to another at the end of an episode. Bringing diversity by having several datasets, even from the same pair from different exchanges, is a good idea. This should help avoiding overfitting.
 
 How to use ?
-^^^^^^^^^^^^^
+^^^^^^^^^^^^
 
 You need to specify a `glob path <https://docs.python.org/3.6/library/glob.html>`_ that gather all of the datasets (in .pkl format).
 Imagine you have several preprocessed datasets in a folder named ``preprocessed_data`` .
