@@ -1,8 +1,8 @@
 Customization
-==========
+=============
 
 Custom reward function
--------------------
+----------------------
 
 Use the `History object <https://gym-trading-env.readthedocs.io/en/latest/history.html>`_ to create your custom reward function. Below is an example with a really basic reward function :math:`r_{t} = ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t` (this is the default reward function).
 
@@ -20,7 +20,7 @@ Use the `History object <https://gym-trading-env.readthedocs.io/en/latest/histor
      )
 
 Custom logs
--------------
+-----------
 
 Use the `History object <https://gym-trading-env.readthedocs.io/en/latest/history.html>`_ to add custom logs. If the ``verbose`` parameter of your trading environment is set to ``1`` or ``2``, the environment displays a quick summary of your episode. By default `Market Return` and `Portfolio Return` are the displayed metrics.
 
