@@ -53,7 +53,6 @@ The obersation space is a np.array containing:
 
 .. code-block:: python
 
-  >>> # df is a DataFrame containing open, high, low, close, volume columns with a DatetimeIndex index.
   >>> df["feature_pct_change"] = df["close"].pct_change()
   >>> df["feature_high"] = df["high"] / df["close"] - 1
   >>> df["feature_low"] = df["low"] / df["close"] - 1
@@ -61,4 +60,16 @@ The obersation space is a np.array containing:
   >>> env = gymnasium.make("TradingEnv", df = df, positions = [-1, 0, 1], initial_position= 1)
   >>> observation, info = env.reset()
   >>> observation
-  array([-0.00120265,  1.0024953 ,  0.992214  ,  1.        ], dtype=float32)
+  array([-2.2766300e-04,  1.0030895e+00,  9.9795288e-01,  1.0000000e+00], dtype=float32)
+
+If the ``windows`` parameter is set to an integer W > 1, the observation is a stack of the last W states.
+
+.. code-block:: python
+  
+  >>> env = gymnasium.make("TradingEnv", df = df, positions = [-1, 0, 1], initial_position= 1, windows = 3)
+  >>> observation, info = env.reset()
+  >>> observation
+  array([[-0.00231082,  1.0052915 ,  0.9991996 ,  1.        ],
+         [ 0.01005705,  1.0078559 ,  0.98854125,  1.        ],
+         [-0.00408145,  1.0069852 ,  0.99777853,  1.        ]],
+         dtype=float32)
