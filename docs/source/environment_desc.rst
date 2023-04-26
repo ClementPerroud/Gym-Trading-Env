@@ -31,15 +31,8 @@ Action Space
 
 The action space is a list of **position** given by the user. Every position is labelled from -inf to +inf and corresponds to the ratio of the porfolio valuation engaged in the position ( > 0 to bet on the rise, < 0 to bet on the decrease).
 
-Some examples on BTC/USDT pair (%pv means *"Percent of the Portfolio Valuation"*):
 
-* 0 : 0%pv in BTC, 100%pv in USDT
-* 1 : 100%pv in BTC, 0%pv in USDT
-* 0.5 : 50%pv in BTC, 50%pv in USDT
-* 2 : 200%pv in BTC, 0%pv in USDT, 100%pv borrowed of USDT (Margin trading)
-* -1 : 0%pv in BTC, 200%pv in USDT, 100%pv borrowed of BTC (Short)
-
-.. list-table:: Example with pair BTC/USDT
+.. list-table:: Example with pair BTC/USDT (%pv means *"Percent of the Portfolio Valuation"*)
    :widths: 20 20 20 20 20
    :header-rows: 1
    
