@@ -3,7 +3,7 @@ Render
 
 
 
-.. info::
+.. note::
 
   The render runs with ``Flask`` on localhost as a web app, and the charts are drawn with the ``pyecharts`` librairy.
 
