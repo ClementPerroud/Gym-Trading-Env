@@ -37,7 +37,7 @@ The action space is a list of **positions** given by the user. Every position is
    :widths: 10 10 10 10 10
    :header-rows: 1
    
-   * - Position
+   * - Position examples
      - BTC (%pv)
      - USDT (%pv)
      - Borrowed BTC (%pv)
