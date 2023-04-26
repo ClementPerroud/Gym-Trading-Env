@@ -87,6 +87,7 @@ Contents
 .. toctree::
    :caption: 🤖 Reinforcement Learning
    
+   environment_desc
    rl_tutorial
    customization
    multi_datasets
