@@ -35,7 +35,7 @@ The action space is a list of **position** given by the user. Every position is 
 
 
 .. list-table:: Example with pair BTC/USDT (%pv means *"Percent of the Portfolio Valuation"*)
-   :widths: 20 20 20 20 20
+   :widths: 10 10 10 10 10
    :header-rows: 1
    
    * - Position
@@ -43,27 +43,27 @@ The action space is a list of **position** given by the user. Every position is 
      - USDT (%pv)
      - Borrowed BTC (%pv)
      - Borrowed USDT (%pv)
-   * - 0
+   * - **0**
      -  
      - 100
      -  
      -  
-   * - 1
+   * - **1**
      - 100
      -  
      -  
      -  
-   * - 0.5
+   * - **0.5**
      - 50
      - 50
      - 
      - 
-   * - 2
+   * - **2**
      - 200
      -  
      -  
      - 100
-   * - -1
+   * - **-1**
      -  
      - 200
      - 100
