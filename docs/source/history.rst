@@ -1,5 +1,5 @@
 History Object
-===============
+==============
 
 The history object is similar to a DataFrame, but it was made to be faster. It stores many training information at each timestep of the training. You can use it this way :
 
