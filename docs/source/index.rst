@@ -7,7 +7,7 @@
 
 
 |Crypto Trading Environment|
-================================
+============================
 
 .. |Crypto Trading Environment| raw:: html
 
@@ -44,12 +44,12 @@
 Crypto Trading Env is an OpenAI Gym environment for simulating stocks and training Reinforcement Learning (RL) trading agents.
 It was designed to be fast and customizable for easy RL trading algorithms implementation.
 
-+---------------------------------------------------------------------------------+
++----------------------------------------------------------------+
 | `Github <https://github.com/ClementPerroud/Gym-Trading-Env>`_  |
-+---------------------------------------------------------------------------------+
++----------------------------------------------------------------+
 
 Key features
----------------
+------------
 
 This package aims to greatly simplify the research phase by offering :
 
@@ -61,7 +61,7 @@ This package aims to greatly simplify the research phase by offering :
 .. image:: images/render.gif
 
 Installation
----------------
+------------
 
 Crypto Trading Env supports Python 3.9+ on Windows, Mac, and Linux. You can install it using pip:
 
@@ -77,7 +77,7 @@ Or using git :
 
    
 Contents
----------------
+--------
 
 .. toctree::
    
