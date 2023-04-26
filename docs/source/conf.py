@@ -28,10 +28,9 @@ templates_path = ['_templates']
 html_theme = 'furo'
 
 html_static_path = ['_static']
-html_logo = "images/logo_light-bg.png"
+
 html_theme_options = {
-    'logo_only': True,
-    'display_version': False,
-    'style_nav_header_background' : '#312783',
+    "light_logo": "logo_light-bg.png",
+    "dark_logo": "logo_dark-bg.png",
 }
 html_css_files = ["style.css"]
