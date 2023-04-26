@@ -1,7 +1,7 @@
 Environment Quick summary
 ============
 
-<br/>
+ 
 
 .. image:: images/render.gif
   :width: 600
