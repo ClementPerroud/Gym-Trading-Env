@@ -29,7 +29,7 @@ I have seen many environments that consider actions such as BUY, SELL. In my exp
   It is way simpler for a RL-agent to work with positions. This way, it can easily make complex operation with a simple action space.
 
 Complex positions
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^
 
 This environment supports more complex positions (actually any float from -inf to +inf) such as:
 
