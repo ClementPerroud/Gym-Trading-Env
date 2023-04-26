@@ -28,7 +28,7 @@ templates_path = ['_templates']
 html_theme = 'furo'
 
 html_static_path = ['_static']
-html_logo = "images/logo_dark-bg.png"
+html_logo = "images/logo_light-bg.png"
 html_theme_options = {
     'logo_only': True,
     'display_version': False,
