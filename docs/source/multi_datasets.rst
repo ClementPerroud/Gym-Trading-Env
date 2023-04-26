@@ -28,9 +28,10 @@ Imagine you have several preprocessed datasets in a folder named ``preprocessed_
       dataset_dir = 'preprocessed_data/*.pkl',
   )
 
-.. info::
+.. note::
   
-  **If you do this, you need to make sure that all your datasets meets the requirements** : They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a ``close`` price labelled close for the environment to run. And open, high, low, volume columns respectively labelled ``open`` , ``high`` , ``low`` , ``volume`` to perform renders. The desired input obersations for your agent needs to contain ``feature`` in their column name).
+    **If you do this, you need to make sure that all your datasets meets the requirements** : They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a ``close`` price labelled close for the environment to run. And open, high, low, volume columns respectively labelled ``open`` , ``high`` , ``low`` , ``volume`` to perform renders. The desired input obersations for your agent needs to contain ``feature`` in their column name).
+
 
 Easy preprocess
 ^^^^^^^^^^^^^^^
