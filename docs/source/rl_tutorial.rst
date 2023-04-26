@@ -19,6 +19,7 @@ I have seen many environments that consider actions such as BUY, SELL. In my exp
 
 * ``1`` : All of our portfolio is converted into BTC. **(=BUY ALL)**
 * ``0`` : All of our portfolio is converted into USD. **(=SELL ALL)**
+
 *Now, we can imagine half position and other variants :*
 
 * ``0.5`` : 50% in BTC & 50% in USD
