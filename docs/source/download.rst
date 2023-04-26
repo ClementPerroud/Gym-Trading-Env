@@ -1,11 +1,11 @@
 Download market data
-=====================
+====================
 
 Crypto market data
--------------------------
+------------------
 
 Supported exchanges ...
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 The package provides an easy way to download crypto market data (works with CCTX and uses asyncio for FAST download).
 
@@ -39,7 +39,7 @@ Output :
 This function uses pickle format to save the OHLCV data. You will need to import the dataset with ``pd.read_pickle('... .pkl')`` . The function supports exchange_names ``binance`` , ``bitfinex2`` (API v2) and ``huobi`` .
 
 More exchanges ...
-^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^
 
 
 It is possible to add other exchanges available in **ccxt**.
@@ -71,6 +71,6 @@ Example with **Bybit** (ccxt id : ``bybit`` ):
 
 
 Stock market data
--------------------------
+-----------------
 
 Coming soon ...
