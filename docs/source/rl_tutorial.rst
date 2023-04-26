@@ -1,14 +1,15 @@
 Tutorial
-===================
+========
 
 Welcome to the first tutorial of the Gym Trading Env package. You will learn how to use it. 
 
 .. info:: 
 
-  During the entire tutorial, we will consider that we want to trade on the BTC/USD pair
+  During the entire tutorial, we will consider that we want to trade on the BTC/USD pair.
+
 
 Understand the action space
-----------------------
+---------------------------
 
 Positions
 ^^^^^^^^^
@@ -42,10 +43,10 @@ This environment supports more complex positions (actually any float from -inf t
 
 
 Market data
--------------------
+-----------
 
 Import your own dataset
-^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^
 
 They need to be ordered by ascending date. Index must be DatetimeIndex. Your DataFrame needs to contain a close price labelled ``close`` for the environment to run, and open, high, low, volume features respectively labelled ``open`` , ``high`` , ``low`` , ``volume`` to perform renders.
 
@@ -61,7 +62,7 @@ They need to be ordered by ascending date. Index must be DatetimeIndex. Your Dat
 
   
 Easy download for crypto
-^^^^^^^^^^^^^^^^
+^^^^^^^^^^^^^^^^^^^^^^^^
 The packaging also include an easy way to download historical data of crypto pairs. It stores data as `.pkl` for easy and fast usage. 
 
 `More information here  <https://gym-trading-env.readthedocs.io/en/latest/download.html>`_
@@ -84,7 +85,7 @@ The packaging also include an easy way to download historical data of crypto pai
 
 
 Create your features
--------------------
+--------------------
 
 Your RL-agent will need inputs. It is your job to make sure it has everything it needs. 
 **The environment will recognize as inputs every column that contains the keyword 'feature' in its name.**
@@ -117,7 +118,7 @@ Your RL-agent will need inputs. It is your job to make sure it has everything it
  
  
 Create your first environment
--------------------
+-----------------------------
 
 Well done, you did a good job configuring your first environment !
 
