@@ -5,9 +5,9 @@ Quick summary
   :width: 600
   :align: center
   
-This environment is a `Gymnasium <https://gymnasium.farama.org/content/basic_usage/>`_ environment made for trading.
+This environment is a `Gymnasium <https://gymnasium.farama.org/content/basic_usage/>`_ environment made for trading on a single pair.
 
-.. list-table:: Title
+.. list-table::
    :widths: 25 70
    :header-rows: 0
    
@@ -38,6 +38,42 @@ Some examples on BTC/USDT pair (%pv means *"Percent of the Portfolio Valuation"*
 * 0.5 : 50%pv in BTC, 50%pv in USDT
 * 2 : 200%pv in BTC, 0%pv in USDT, 100%pv borrowed of USDT (Margin trading)
 * -1 : 0%pv in BTC, 200%pv in USDT, 100%pv borrowed of BTC (Short)
+
+.. list-table:: Example with pair BTC/USDT
+   :widths: 20 20 20 20 20
+   :header-rows: 1
+   
+   * - Position
+     - BTC (%pv)
+     - USDT (%pv)
+     - Borrowed BTC (%pv)
+     - Borrowed USDT (%pv)
+   * - 0
+     - 
+     - 100
+     -
+     -
+   * - 1
+     - 100
+     - 
+     - 
+     -
+   * - 0.5
+     - 50
+     - 50
+     -
+     -
+   * - 2
+     - 200
+     -
+     - 
+     - 100
+   * - -1
+     - 
+     - 200
+     - 100
+     - 0
+     
 
 If ``position < 0`` : the environment performs a SHORT (by borrowing USDT and buying BTC with it).
 
