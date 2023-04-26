@@ -1,7 +1,8 @@
 Environment Quick summary
 ============
 
-<br>
+<br/>
+
 .. image:: images/render.gif
   :width: 600
   :align: center
