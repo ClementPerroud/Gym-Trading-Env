@@ -49,30 +49,30 @@ Some examples on BTC/USDT pair (%pv means *"Percent of the Portfolio Valuation"*
      - Borrowed BTC (%pv)
      - Borrowed USDT (%pv)
    * - 0
-     - 
+     -  
      - 100
-     -
-     -
+     -  
+     -  
    * - 1
      - 100
-     - 
-     - 
-     -
+     -  
+     -  
+     -  
    * - 0.5
      - 50
      - 50
-     -
-     -
+     - 
+     - 
    * - 2
      - 200
-     -
-     - 
+     -  
+     -  
      - 100
    * - -1
-     - 
+     -  
      - 200
      - 100
-     - 0
+     -  
      
 
 If ``position < 0`` : the environment performs a SHORT (by borrowing USDT and buying BTC with it).
