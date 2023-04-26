@@ -73,3 +73,26 @@ If the ``windows`` parameter is set to an integer W > 1, the observation is a st
          [ 0.01005705,  1.0078559 ,  0.98854125,  1.        ],
          [-0.00408145,  1.0069852 ,  0.99777853,  1.        ]],
          dtype=float32)
+
+Reward
+----------
+
+The reward is given by the formula :math:`r_{t} = ln(\frac{p_{t}}{p_{t-1}})\text{ with }p_{t}\text{ = portofolio valuation at timestep }t` . It is highly recommended to `customize the reward function <https://gym-trading-env.readthedocs.io/en/latest/customization.html#custom-reward-function>`_ to your needs.
+
+Starting State
+---------------
+
+The environment explores the given DataFrame and starts at its beginning.
+
+Episode Termination
+--------------------
+
+The episode finishes if:
+
+1 - The environment reaches the end of the DataFrame, ``truncated`` is returned as ``True``
+2 - The portfolio valuation reaches 0 (or bellow). ``done`` is returned as ``True``. It can happen when taking margin positions (>1 or <0).
+
+Arguments
+------------
+
+.. autoclass:: gym_trading_env.environments.TradingEnv
