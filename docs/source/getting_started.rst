@@ -1,8 +1,8 @@
 Gettings Started
-==============
+================
 
 Installation
----------------
+------------
 
 Crypto Trading Env supports Python 3.9+ on Windows, Mac, and Linux. You can install it using pip:
 
@@ -18,7 +18,7 @@ Or using git :
 
 
 Import
----------------
+------
 
 You can import Gym Trading Env with :
 
