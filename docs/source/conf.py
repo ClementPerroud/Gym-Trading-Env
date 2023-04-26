@@ -28,7 +28,7 @@ templates_path = ['_templates']
 html_theme = 'furo'
 html_title = " "
 html_static_path = ['_static']
-
+html_favicon = 'images/favicon.png'
 html_theme_options = {
     "light_logo": "images/logo_light-bg.png",
     "dark_logo": "images/logo_dark-bg.png",
