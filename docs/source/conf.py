@@ -30,7 +30,7 @@ html_title = " "
 html_static_path = ['_static']
 
 html_theme_options = {
-    "light_logo": "logo_light-bg.png",
-    "dark_logo": "logo_dark-bg.png",
+    "light_logo": "images/logo_light-bg.png",
+    "dark_logo": "images/logo_dark-bg.png",
 }
 html_css_files = ["style.css"]
