@@ -1,9 +1,11 @@
 Quick summary
 ============
 
+<br>
 .. image:: images/render.gif
   :width: 600
   :align: center
+  
   
 This environment is a `Gymnasium <https://gymnasium.farama.org/content/basic_usage/>`_ environment made for trading on a single pair.
 
