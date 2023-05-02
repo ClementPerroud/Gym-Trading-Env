@@ -1,12 +1,10 @@
 .. meta::
-   :title: Crypto Trading Environment
    :description: A simple, easy, customizable Open IA Gym environment for trading and easy Reinforcement Learning implementation.
 
-.. title:: Crypto Trading Environment for Reinforcement Learning
 
 
 
-|Crypto Trading Environment|
+|Crypto Trading Environment for Reinforcement Learning|
 ============================
 
 .. |Crypto Trading Environment| raw:: html
