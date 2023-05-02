@@ -1,6 +1,6 @@
 .. meta::
    :title: Crypto Trading Environment
-   :description: A crypto Trading Environment for Reinforcement Learning
+   :description: A simple, easy, customizable Open IA Gym environment for trading and easy Reinforcement Learning implementation.
 
 .. title:: Crypto Trading Environment for Reinforcement Learning
 
@@ -11,9 +11,7 @@
 
 .. |Crypto Trading Environment| raw:: html
 
-   <h1 align='center'>
-      <img src = 'https://github.com/ClementPerroud/Gym-Trading-Env/raw/main/docs/source/images/logo_light-bg.png' width='500'>
-   </h1>
+      <img src = 'https://github.com/ClementPerroud/Gym-Trading-Env/raw/main/docs/source/images/logo_light-bg.png' width='500' alt = "Crypto Trading Environment">
 
  
 .. raw:: html
