@@ -18,6 +18,7 @@ extensions = [
     'sphinx.ext.autodoc',
     'sphinx.ext.intersphinx',
     'sphinx_copybutton',
+    "sphinxext.opengraph"
 ]
 
 
@@ -36,3 +37,14 @@ html_theme_options = {
 }
 
 html_css_files = ["style.css"]
+
+# -- Open Graph Config
+
+ogp_site_url = "https://gym-trading-env.readthedocs.io/"
+ogp_image = "https://gym-trading-env.readthedocs.io/en/latest/_images/render.gif"
+
+ogp_custom_meta_tags = [
+    '<meta name="google-site-verification" content="qlHrEXzlsE1udbL26FLjeuxawDdMPJ2EvmFbsrJsrBw" />',
+]
+
+ogp_enable_meta_description = True
