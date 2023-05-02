@@ -32,5 +32,7 @@ html_favicon = 'images/favicon.png'
 html_theme_options = {
     "light_logo": "logo_light-bg.png",
     "dark_logo": "logo_dark-bg.png",
+    "sidebar_hide_name": True,
 }
+
 html_css_files = ["style.css"]
