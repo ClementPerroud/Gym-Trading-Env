@@ -26,7 +26,7 @@ templates_path = ['_templates']
 # -- Options for HTML output
 
 html_theme = 'furo'
-html_title = " "
+html_title = "Gym Trading Environment"
 html_static_path = ['_static']
 html_favicon = 'images/favicon.png'
 html_theme_options = {
