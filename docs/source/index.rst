@@ -11,7 +11,7 @@
 
 .. |Crypto Trading Environment| raw:: html
 
-      <img src = 'https://github.com/ClementPerroud/Gym-Trading-Env/raw/main/docs/source/images/logo_light-bg.png' width='500' alt = "Crypto Trading Environment">
+      <img src = 'https://github.com/ClementPerroud/Gym-Trading-Env/raw/main/docs/source/images/logo_light-bg.png' width='500' alt = "Crypto Trading Environment" style = "display:block;margin:auto">
 
  
 .. raw:: html
