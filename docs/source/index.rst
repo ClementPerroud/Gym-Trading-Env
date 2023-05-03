@@ -39,7 +39,7 @@
       </a>
    </section>
   
-Gym Trading Env is an OpenAI Gym environment for simulating stocks and training Reinforcement Learning (RL) trading agents.
+Gym Trading Env is an Gymnasium environment for simulating stocks and training Reinforcement Learning (RL) trading agents.
 It was designed to be fast and customizable for easy RL trading algorithms implementation.
 
 +----------------------------------------------------------------+
