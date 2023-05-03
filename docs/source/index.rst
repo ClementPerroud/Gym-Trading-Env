@@ -1,5 +1,5 @@
 .. meta::
-   :description: A simple, easy, customizable Open IA Gym environment for trading and easy Reinforcement Learning implementation.
+   :description: A simple, easy, customizable Gymnasium environment for trading and easy Reinforcement Learning implementation.
 
 
 
