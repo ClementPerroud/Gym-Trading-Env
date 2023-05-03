@@ -81,11 +81,11 @@ Contents
    
    Introduction <self>
    getting_started
+   environment_desc
 
 .. toctree::
    :caption: 🤖 Reinforcement Learning
    
-   environment_desc
    rl_tutorial
    customization
    multi_datasets
@@ -96,11 +96,6 @@ Contents
    
    render
    download
-
-.. toctree::
-   :caption: 📈 Backtest
-   
-   backtest
  
 .. toctree::
    :caption: 📚 Reference
