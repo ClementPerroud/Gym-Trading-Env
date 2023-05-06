@@ -48,7 +48,7 @@ class TradingEnv(gym.Env):
     :param portfolio_initial_value: Initial valuation of the portfolio.
     :type portfolio_initial_value: float or int
 
-    :param initial_position: Initial position of the environment. It must contained in the list parameter 'positions'.
+    :param initial_position: Default is 'random'. You can specify the initial position of the environment. It must contained in the list parameter 'positions'.
     :type initial_position: optional - float or int
 
     :param include_position_in_features: Whether or not you want the current position to be added to the step observations. If windows is set an int, it will add the last N-step positions.
@@ -70,7 +70,7 @@ class TradingEnv(gym.Env):
                 trading_fees = 0,
                 borrow_interest_rate = 0,
                 portfolio_initial_value = 1000,
-                initial_position = None,
+                initial_position ='random',
                 include_position_in_features = True,
                 verbose = 1,
                 name = "Stock",
@@ -86,8 +86,7 @@ class TradingEnv(gym.Env):
         self.borrow_interest_rate = borrow_interest_rate
         self.portfolio_initial_value = float(portfolio_initial_value)
         self.initial_position = initial_position
-        if self.initial_position is None: self.initial_position = positions[0]
-        assert self.initial_position in self.positions, "The 'initial_position' parameter must one position mentionned in the 'position' (default is [0, 1]) parameter."
+        assert self.initial_position in self.positions or self.initial_position == 'random', "The 'initial_position' parameter must be 'random' or a position mentionned in the 'position' (default is [0, 1]) parameter."
         self.include_position_in_features = include_position_in_features
         assert render_mode is None or render_mode in self.metadata["render_modes"]
         self.render_mode = render_mode
@@ -117,7 +116,7 @@ class TradingEnv(gym.Env):
         self._nb_features = len(self._features_columns)
 
         if self.include_position_in_features:
-            df["feature_position"] = self.initial_position
+            df["feature_position"] = 0
             self._features_columns.append("feature_position")
             self._nb_features += 1
         self.df = df
@@ -143,20 +142,22 @@ class TradingEnv(gym.Env):
     def reset(self, seed = None, options=None):
         super().reset(seed = seed)
         self._step = 0
+        self._position = np.random.choice(self.positions) if self.initial_position == 'random' else self.initial_position
         self._limit_orders = {}
+        
         if self.windows is not None: self._step = self.windows
 
         self._portfolio  = TargetPortfolio(
-            position=self.initial_position,
-            value= self.portfolio_initial_value,
+            position = self._position,
+            value = self.portfolio_initial_value,
             price = self._get_price()
         )
-        self._position = self.initial_position
+        
         self.historical_info = History(max_size= len(self.df))
         self.historical_info.set(
             step = self._step,
             date = self.df.index.values[self._step],
-            position_index =self.positions.index(self.initial_position),
+            position_index =self.positions.index(self._position),
             position = self._position,
             data =  dict(zip(self._info_columns, self._info_array[self._step])),
             portfolio_valuation = self.portfolio_initial_value,
