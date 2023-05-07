@@ -32,14 +32,18 @@ env = gym.make(
         borrow_interest_rate= 0.0003/100, #per timestep (= 1h here)
         reward_function = reward_function,
         portfolio_initial_value = 1000, # in FIAT (here, USD)
+        max_episode_duration= 500,
+        episodes_between_dataset_switch = 10
+
     )
 
 # Run the simulation
-truncated = False
-observation, info = env.reset()
-while not truncated:
-    action = env.action_space.sample() #OR manually : action = int(input("Action : ")) 
-    observation, reward, done, truncated, info = env.step(action)
+while True:
+    truncated = False
+    observation, info = env.reset()
+    while not truncated:
+        action = env.action_space.sample() #OR manually : action = int(input("Action : ")) 
+        observation, reward, done, truncated, info = env.step(action)
 
 # Render
-env.save_for_render()
+# env.save_for_render()

@@ -38,6 +38,7 @@ env = gym.make(
         borrow_interest_rate= 0.0003/100, #per timestep (= 1h here)
         reward_function = reward_function,
         portfolio_initial_value = 1000, # in FIAT (here, USD)
+        max_episode_duration = 500,
     )
 
 env.add_metric('Position Changes', lambda history : np.sum(np.diff(history['position']) != 0) )

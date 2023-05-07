@@ -48,11 +48,14 @@ class TradingEnv(gym.Env):
     :param portfolio_initial_value: Initial valuation of the portfolio.
     :type portfolio_initial_value: float or int
 
-    :param initial_position: Default is 'random'. You can specify the initial position of the environment. It must contained in the list parameter 'positions'.
+    :param initial_position: You can specify the initial position of the environment or set it to 'random'. It must contained in the list parameter 'positions'.
     :type initial_position: optional - float or int
 
     :param include_position_in_features: Whether or not you want the current position to be added to the step observations. If windows is set an int, it will add the last N-step positions.
     :type include_position_in_features: optional - bool
+
+    :param max_episode_duration: Can be set to an Integer or to 'max'. If a interger value is set, each episode will be truncated after reaching the max amount of steps (by returning `truncated` as `True`) and each episode will start at a random starting point to maximize exploration.
+    :type max_episode_duration: optional - int or 'max'
 
     :param verbose: If 0, no log is outputted. If 1, the env send episode result logs.
     :type verbose: optional - int
@@ -72,10 +75,12 @@ class TradingEnv(gym.Env):
                 portfolio_initial_value = 1000,
                 initial_position ='random',
                 include_position_in_features = True,
+                max_episode_duration = 'max',
                 verbose = 1,
                 name = "Stock",
                 render_mode= "logs"
                 ):
+        self.max_episode_duration = max_episode_duration
         self.name = name
         self.verbose = verbose
 
@@ -92,7 +97,6 @@ class TradingEnv(gym.Env):
         self.render_mode = render_mode
         self._set_df(df)
         
-
         self.action_space = spaces.Discrete(len(positions))
         self.observation_space = spaces.Box(
             -np.inf,
@@ -114,6 +118,7 @@ class TradingEnv(gym.Env):
         self._features_columns = [col for col in df.columns if "feature" in col]
         self._info_columns = list(set(list(df.columns) + ["close"]) - set(self._features_columns))
         self._nb_features = len(self._features_columns)
+    
 
         if self.include_position_in_features:
             df["feature_position"] = 0
@@ -124,18 +129,19 @@ class TradingEnv(gym.Env):
         self._info_array = np.array(self.df[self._info_columns])
         self._price_array = np.array(self.df["close"])
 
+
     
     def _get_ticker(self, delta = 0):
-        return self.df.iloc[self._step + delta]
+        return self.df.iloc[self._step + self._starting_idx + delta]
     def _get_price(self, delta = 0):
-        return self._price_array[self._step + delta]
+        return self._price_array[self._step + self._starting_idx + delta]
     
     def _get_obs(self):
-        if self.include_position_in_features: self._obs_array[self._step, -1] = self._position
+        if self.include_position_in_features: self._obs_array[self._step + self._starting_idx, -1] = self._position
         if self.windows is None:
-            _step_index = self._step
+            _step_index = self._step + self._starting_idx
         else: 
-            _step_index = np.arange(self._step + 1 - self.windows , self._step + 1)
+            _step_index = np.arange(self._step + self._starting_idx + 1 - self.windows , self._step + self._starting_idx + 1)
         return self._obs_array[_step_index]
 
     
@@ -145,7 +151,12 @@ class TradingEnv(gym.Env):
         self._position = np.random.choice(self.positions) if self.initial_position == 'random' else self.initial_position
         self._limit_orders = {}
         
-        if self.windows is not None: self._step = self.windows
+        self._starting_idx = 0
+
+        if self.max_episode_duration != 'max' and len(self.df) - self.max_episode_duration > 0:
+            windows_adjustement = 0 if self.windows is None else self.windows - 1
+            self._starting_idx = np.random.choice(len(self.df)- self.max_episode_duration - windows_adjustement)
+        if self.windows is not None: self._starting_idx += self.windows - 1
 
         self._portfolio  = TargetPortfolio(
             position = self._position,
@@ -156,10 +167,10 @@ class TradingEnv(gym.Env):
         self.historical_info = History(max_size= len(self.df))
         self.historical_info.set(
             step = self._step,
-            date = self.df.index.values[self._step],
+            date = self.df.index.values[self._step + self._starting_idx],
             position_index =self.positions.index(self._position),
             position = self._position,
-            data =  dict(zip(self._info_columns, self._info_array[self._step])),
+            data =  dict(zip(self._info_columns, self._info_array[self._step + self._starting_idx])),
             portfolio_valuation = self.portfolio_initial_value,
             portfolio_distribution = self._portfolio.get_portfolio_distribution(),
             reward = 0,
@@ -208,17 +219,20 @@ class TradingEnv(gym.Env):
         self._portfolio.update_interest(borrow_interest_rate= self.borrow_interest_rate)
         portfolio_value = self._portfolio.valorisation(price)
         portfolio_distribution = self._portfolio.get_portfolio_distribution()
+
         done, truncated = False, False
         if portfolio_value <= 0: done = True
-        if self._step >= len(self.df) - 1:
+        if self._step + self._starting_idx >= len(self.df) - 1:
             truncated = True
-        
+        if isinstance(self.max_episode_duration,int) and self._step >= self.max_episode_duration - 1:
+            truncated = True
+
         self.historical_info.add(
             step = self._step,
-            date = self.df.index.values[self._step],
+            date = self.df.index.values[self._step + self._starting_idx],
             position_index =position_index,
             position = self._position,
-            data =  dict(zip(self._info_columns, self._info_array[self._step])),
+            data =  dict(zip(self._info_columns, self._info_array[self._step + self._starting_idx])),
             portfolio_valuation = portfolio_value,
             portfolio_distribution = portfolio_distribution, 
             reward = 0
@@ -227,7 +241,9 @@ class TradingEnv(gym.Env):
             reward = self.reward_function(self.historical_info)
             self.historical_info["reward", -1] = reward
 
-        if done or truncated: self.log()
+        if done or truncated:
+            self.log()
+
         return self._get_obs(),  self.historical_info["reward", -1], done, truncated, self.historical_info[-1]
     def add_metric(self, name, function):
         self.log_metrics.append({
@@ -308,15 +324,28 @@ class MultiDatasetTradingEnv(TradingEnv):
                 )
     
     :type preprocess: function<pandas.DataFrame->pandas.DataFrame>
+
+    :param episodes_between_dataset_switch: The number of time a dataset will be used for an episode before switching to another dataset. It can be useful for performances when `max_episode_duration` is low.
+    :type episodes_between_dataset_switch: optional - int
+
     """
-    def __init__(self, dataset_dir, *args, preprocess = lambda df : df,**kwargs):
+    def __init__(self,
+                dataset_dir, 
+                *args, 
+
+                preprocess = lambda df : df,
+                episodes_between_dataset_switch = 1,
+                **kwargs):
         self.dataset_dir = dataset_dir
         self.preprocess = preprocess
+        self.episodes_between_dataset_switch = episodes_between_dataset_switch
+
         self.dataset_pathes = glob.glob(self.dataset_dir)
         self.dataset_nb_uses = np.zeros(shape=(len(self.dataset_pathes), ))
         super().__init__(self.next_dataset(), *args, **kwargs)
 
     def next_dataset(self):
+        self._episodes_on_this_dataset = 0
         # Find the indexes of the less explored dataset
         potential_dataset_pathes = np.where(self.dataset_nb_uses == self.dataset_nb_uses.min())[0]
         # Pick one of them
@@ -328,9 +357,11 @@ class MultiDatasetTradingEnv(TradingEnv):
         return self.preprocess(pd.read_pickle(dataset_path))
 
     def reset(self, seed=None):
-        self._set_df(
-            self.next_dataset()
-        )
+        self._episodes_on_this_dataset += 1
+        if self._episodes_on_this_dataset % self.episodes_between_dataset_switch == 0:
+            self._set_df(
+                self.next_dataset()
+            )
         if self.verbose > 1: print(f"Selected dataset {self.name} ...")
         return super().reset(seed)
     
