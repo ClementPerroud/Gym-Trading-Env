@@ -54,7 +54,7 @@ class TradingEnv(gym.Env):
     :param include_position_in_features: Whether or not you want the current position to be added to the step observations. If windows is set an int, it will add the last N-step positions.
     :type include_position_in_features: optional - bool
 
-    :param max_episode_duration: Can be set to an Integer or to 'max'. If a interger value is set, each episode will be truncated after reaching the max amount of steps (by returning `truncated` as `True`) and each episode will start at a random starting point to maximize exploration.
+    :param max_episode_duration: If a integer value is used, each episode will be truncated after reaching the desired max duration in steps (by returning `truncated` as `True`). When using a max duration, each episode will start at a random starting point.
     :type max_episode_duration: optional - int or 'max'
 
     :param verbose: If 0, no log is outputted. If 1, the env send episode result logs.
@@ -242,6 +242,7 @@ class TradingEnv(gym.Env):
             self.historical_info["reward", -1] = reward
 
         if done or truncated:
+            self.calculate_metrics()
             self.log()
 
         return self._get_obs(),  self.historical_info["reward", -1], done, truncated, self.historical_info[-1]
@@ -250,14 +251,21 @@ class TradingEnv(gym.Env):
             'name': name,
             'function': function
         })
+    def calculate_metrics(self):
+        self.results_metrics = {
+            "Market Return" : f"{100*self.historical_info['data_close', -1] / self.historical_info['data_close', 0] -1:5.2f}%",
+            "Portfolio Return" : f"{100*self.historical_info['portfolio_valuation', -1] / self.historical_info['portfolio_valuation', 0] -1:5.2f}%",
+        }
+
+        for metric in self.log_metrics:
+            self.results_metrics[metric['name']] = metric['function'](self.historical_info)
+    def get_metrics(self):
+        return self.results_metrics
     def log(self):
         if self.verbose > 0:
-            market_return = self.historical_info["data_close", -1] / self.historical_info["data_close", 0] -1
-            portfolio_return = self.historical_info["portfolio_valuation", -1] / self.historical_info["portfolio_valuation", 0] -1
-
-            text = f"""Market Return : {100*market_return:5.2f}%   |   Portfolio Return : {100*portfolio_return:5.2f}%"""
-            for metric in self.log_metrics:
-                text += f"   |   {metric['name']} : {metric['function'](self.historical_info)}"
+            text = ""
+            for key, value in self.results_metrics.items():
+                text += f"{key} : {value}   |   "
             print(text)
     def save_for_render(self, dir = "render_logs"):
         assert "open" in self.df and "high" in self.df and "low" in self.df and "close" in self.df, "Your DataFrame needs to contain columns : open, high, low, close to render !"
@@ -325,7 +333,7 @@ class MultiDatasetTradingEnv(TradingEnv):
     
     :type preprocess: function<pandas.DataFrame->pandas.DataFrame>
 
-    :param episodes_between_dataset_switch: The number of time a dataset will be used for an episode before switching to another dataset. It can be useful for performances when `max_episode_duration` is low.
+    :param episodes_between_dataset_switch: Number of times a dataset is used to create an episode, before moving on to another dataset. It can be useful for performances when `max_episode_duration` is low.
     :type episodes_between_dataset_switch: optional - int
 
     """
