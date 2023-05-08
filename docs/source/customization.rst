@@ -51,7 +51,7 @@ The ``.add_metric`` method takes 2 parameters :
 
 .. note::
 
- If you want to use your metrics to feed a custom logger, to visualize data or to track performance, you can access to results with ``env.get_metrics()``. In this case, it returns :
+ If you want to use your metrics to feed a custom logger, to visualize data or to track performance, you can access to results with ``env.get_metrics()`` **at the end of an episode**. In this case, it returns :
  
  .. code-block:: python
  
