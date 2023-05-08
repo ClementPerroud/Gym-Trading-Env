@@ -259,6 +259,15 @@ class TradingEnv(gym.Env):
             for metric in self.log_metrics:
                 text += f"   |   {metric['name']} : {metric['function'](self.historical_info)}"
             print(text)
+
+    def get_log(self):
+        market_return = self.historical_info["data_close", -1] / self.historical_info["data_close", 0] -1
+        portfolio_return = self.historical_info["portfolio_valuation", -1] / self.historical_info["portfolio_valuation", 0] -1
+        out_logs = {"market_return": market_return, "portfolio_return": portfolio_return}
+        for metric in self.log_metrics:
+            out_logs[metric['name']] = metric['function'](self.historical_info)
+        return out_logs
+
     def save_for_render(self, dir = "render_logs"):
         assert "open" in self.df and "high" in self.df and "low" in self.df and "close" in self.df, "Your DataFrame needs to contain columns : open, high, low, close to render !"
         columns = list(set(self.historical_info.columns) - set([f"date_{col}" for col in self._info_columns]))
