@@ -51,11 +51,11 @@ The ``.add_metric`` method takes 2 parameters :
 
 .. note::
 
- If you want to use your metrics to feed a custom logger, to visualize data or to track performance, you can access to results with `env.get_metrics()`. In this case, it returns :
+ If you want to use your metrics to feed a custom logger, to visualize data or to track performance, you can access to results with ``env.get_metrics()``. In this case, it returns :
  
  .. code-block:: python
  
-  { "Market Return" :  "25.30%", "Portfolio Return" : "45.24%", "Position Changes" : 28417, Episode Lenght : 33087 }
+  { "Market Return" :  "25.30%", "Portfolio Return" : "45.24%", "Position Changes" : 28417, "Episode Lenght" : 33087 }
 
  
 
