@@ -253,8 +253,8 @@ class TradingEnv(gym.Env):
         })
     def calculate_metrics(self):
         self.results_metrics = {
-            "Market Return" : f"{100*self.historical_info['data_close', -1] / self.historical_info['data_close', 0] -1:5.2f}%",
-            "Portfolio Return" : f"{100*self.historical_info['portfolio_valuation', -1] / self.historical_info['portfolio_valuation', 0] -1:5.2f}%",
+            "Market Return" : f"{100*(self.historical_info['data_close', -1] / self.historical_info['data_close', 0] -1):5.2f}%",
+            "Portfolio Return" : f"{100*(self.historical_info['portfolio_valuation', -1] / self.historical_info['portfolio_valuation', 0] -1):5.2f}%",
         }
 
         for metric in self.log_metrics:
