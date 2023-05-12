@@ -49,6 +49,6 @@ print(info)
 while not done and not truncated:
     action = env.action_space.sample()
     observation, reward, done, truncated, info = env.step(action)
-
+    print(observation)
 # Save for render
-env.save_for_render()
+# env.save_for_render()

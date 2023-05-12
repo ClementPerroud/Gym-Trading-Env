@@ -89,7 +89,7 @@ Create your features
 --------------------
 
 Your RL-agent will need inputs. It is your job to make sure it has everything it needs. 
-**The environment will recognize as inputs every column that contains the keyword 'feature' in its name.**
+
 
 .. code-block:: python
 
@@ -112,10 +112,15 @@ Your RL-agent will need inputs. It is your job to make sure it has everything it
   
   df.dropna(inplace= True) # Clean again !
   # Eatch step, the environment will return 5 inputs  : "feature_close", "feature_open", "feature_high", "feature_low", "feature_volume"
-  
+
+.. important::
+
+  The environment will recognize as inputs every column that contains the keyword '**feature**' in its name.
+
+
 .. note::
 
-  By default, the env will always add the **position reached** at the end of all your custom features. Indeed, in Reinforcement Learning, I find it really useful for the agent to know its current position. To disable this, you need to set the ``include_position_in_features`` parameter of the environment to ``False``.
+  By default, the env will always add the 2 dynamics features. More informations in the **Feature** page.
  
  
 Create your first environment

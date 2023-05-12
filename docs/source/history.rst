@@ -21,7 +21,8 @@ It was made to make everything easier :
    'step': 33091, #Step = t.
    'date': numpy.datetime64('2022-03-01T00:00:00.000000000'), #Date at step t, datetime.
    'position_index': 2, #Index of the position at step t among your position list.
-   'position': 1, #Portfolio position at step t.
+   'position': 1, # Last position taken by the agent.
+   'real_position': 1.09848, # Real portfolio position  = (asset owned - asset borrowed - asset interests) * current price / portfolio valuation
    'reward': 0.0028838985262525257, #Reward at step t.
    
    # DataFrame info : Every column (except features) of your initial DataFrame preceded by 'data_'

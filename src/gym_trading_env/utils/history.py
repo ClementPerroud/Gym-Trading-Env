@@ -74,6 +74,3 @@ class History:
         except ValueError as e:
             raise ValueError(f"Feature {column} does not exist ... Check the available features : {self.columns}")
         self.history_storage[:self.size][t, column_index] = value
-
-
-        

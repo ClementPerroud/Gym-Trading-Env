@@ -88,6 +88,7 @@ Contents
    
    rl_tutorial
    customization
+   features
    multi_datasets
    vectorize_env
 

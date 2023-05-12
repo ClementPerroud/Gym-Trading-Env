@@ -78,8 +78,8 @@ Observation Space
 
 The observation space is an np.array containing:
 
-* The row of your DataFrame columns containing ``features`` in their name, at a given step.
-* The current position of the environment to allow self-awareness for the agent. You can disable it by setting ``include_position_in_features`` to ``False``.
+* The row of your DataFrame columns containing ``features`` in their name, at a given step : the **static features**
+* The **dynamic features ** (by default, the last position taken by the agent, and the current real position).
 
 .. code-block:: python
 
