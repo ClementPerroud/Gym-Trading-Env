@@ -90,6 +90,10 @@ Create your features
 
 Your RL-agent will need inputs. It is your job to make sure it has everything it needs. 
 
+.. important::
+
+  The environment will recognize as inputs every column that contains the keyword '**feature**' in its name.
+
 
 .. code-block:: python
 
@@ -113,14 +117,11 @@ Your RL-agent will need inputs. It is your job to make sure it has everything it
   df.dropna(inplace= True) # Clean again !
   # Eatch step, the environment will return 5 inputs  : "feature_close", "feature_open", "feature_high", "feature_low", "feature_volume"
 
-.. important::
-
-  The environment will recognize as inputs every column that contains the keyword '**feature**' in its name.
 
 
 .. note::
 
-  By default, the env will always add the 2 dynamics features. More informations in the **Feature** page.
+  What is presented above are features called **static features**. Indeed, there are computed once before being used in the environement. But you also use **dynamic features** that are computed at each step of the environment. By default, the environment add 2 dynamics features. More information in the **Feature** page.
  
  
 Create your first environment

@@ -8,7 +8,7 @@ This type of feature is called a **static feature** as it is computed once, at t
 
     **But what if you want to use a feature that we can not pre-compute ?**
 
-In this case, you will use a **dynamic feature** that will be compute at each step. 
+In this case, you will use a **dynamic feature** that will be computed at each step. 
 
 Create static features
 ----------------------
@@ -52,7 +52,7 @@ A **dynamic feature** is computed at each step. Be careful, dynamic features are
 
 .. important::
 
-    What is presented below is the default configuration of the dynamic features.
+    The dynamic features presented below are the default dynamic features used by the environment !
 
 .. code-block:: python
 
