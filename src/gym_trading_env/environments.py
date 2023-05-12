@@ -89,10 +89,6 @@ class TradingEnv(gym.Env):
                 borrow_interest_rate = 0,
                 portfolio_initial_value = 1000,
                 initial_position ='random',
-<<<<<<< HEAD
-                include_position_in_features = True,
-=======
->>>>>>> backup1
                 max_episode_duration = 'max',
                 verbose = 1,
                 name = "Stock",
@@ -137,11 +133,7 @@ class TradingEnv(gym.Env):
         self._features_columns = [col for col in df.columns if "feature" in col]
         self._info_columns = list(set(list(df.columns) + ["close"]) - set(self._features_columns))
         self._nb_features = len(self._features_columns)
-<<<<<<< HEAD
-    
-=======
         self._nb_static_features = self._nb_features
->>>>>>> backup1
 
         for i  in range(len(self.dynamic_feature_functions)):
             df[f"dynamic_feature__{i}"] = 0
@@ -156,18 +148,6 @@ class TradingEnv(gym.Env):
 
     
     def _get_ticker(self, delta = 0):
-<<<<<<< HEAD
-        return self.df.iloc[self._step + self._starting_idx + delta]
-    def _get_price(self, delta = 0):
-        return self._price_array[self._step + self._starting_idx + delta]
-    
-    def _get_obs(self):
-        if self.include_position_in_features: self._obs_array[self._step + self._starting_idx, -1] = self._position
-        if self.windows is None:
-            _step_index = self._step + self._starting_idx
-        else: 
-            _step_index = np.arange(self._step + self._starting_idx + 1 - self.windows , self._step + self._starting_idx + 1)
-=======
         return self.df.iloc[self._idx + delta]
     def _get_price(self, delta = 0):
         return self._price_array[self._idx + delta]
@@ -180,7 +160,6 @@ class TradingEnv(gym.Env):
             _step_index = self._idx
         else: 
             _step_index = np.arange(self._idx + 1 - self.windows , self._idx + 1)
->>>>>>> backup1
         return self._obs_array[_step_index]
 
     
@@ -191,15 +170,6 @@ class TradingEnv(gym.Env):
         self._position = np.random.choice(self.positions) if self.initial_position == 'random' else self.initial_position
         self._limit_orders = {}
         
-<<<<<<< HEAD
-        self._starting_idx = 0
-
-        if self.max_episode_duration != 'max' and len(self.df) - self.max_episode_duration > 0:
-            windows_adjustement = 0 if self.windows is None else self.windows - 1
-            self._starting_idx = np.random.choice(len(self.df)- self.max_episode_duration - windows_adjustement)
-        if self.windows is not None: self._starting_idx += self.windows - 1
-=======
->>>>>>> backup1
 
         self._idx = 0
         if self.windows is not None: self._idx = self.windows - 1
@@ -219,18 +189,11 @@ class TradingEnv(gym.Env):
         self.historical_info.set(
             idx = self._idx,
             step = self._step,
-<<<<<<< HEAD
-            date = self.df.index.values[self._step + self._starting_idx],
-            position_index =self.positions.index(self._position),
-            position = self._position,
-            data =  dict(zip(self._info_columns, self._info_array[self._step + self._starting_idx])),
-=======
             date = self.df.index.values[self._idx],
             position_index =self.positions.index(self._position),
             position = self._position,
             real_position = self._position,
             data =  dict(zip(self._info_columns, self._info_array[self._idx])),
->>>>>>> backup1
             portfolio_valuation = self.portfolio_initial_value,
             portfolio_distribution = self._portfolio.get_portfolio_distribution(),
             reward = 0,
@@ -282,15 +245,10 @@ class TradingEnv(gym.Env):
         portfolio_distribution = self._portfolio.get_portfolio_distribution()
 
         done, truncated = False, False
-<<<<<<< HEAD
-        if portfolio_value <= 0: done = True
-        if self._step + self._starting_idx >= len(self.df) - 1:
-=======
 
         if portfolio_value <= 0:
             done = True
         if self._idx >= len(self.df) - 1:
->>>>>>> backup1
             truncated = True
         if isinstance(self.max_episode_duration,int) and self._step >= self.max_episode_duration - 1:
             truncated = True
@@ -298,18 +256,11 @@ class TradingEnv(gym.Env):
         self.historical_info.add(
             idx = self._idx,
             step = self._step,
-<<<<<<< HEAD
-            date = self.df.index.values[self._step + self._starting_idx],
-            position_index =position_index,
-            position = self._position,
-            data =  dict(zip(self._info_columns, self._info_array[self._step + self._starting_idx])),
-=======
             date = self.df.index.values[self._idx],
             position_index =position_index,
             position = self._position,
             real_position = self._portfolio.real_position(price),
             data =  dict(zip(self._info_columns, self._info_array[self._idx])),
->>>>>>> backup1
             portfolio_valuation = portfolio_value,
             portfolio_distribution = portfolio_distribution, 
             reward = 0
@@ -321,10 +272,6 @@ class TradingEnv(gym.Env):
         if done or truncated:
             self.calculate_metrics()
             self.log()
-<<<<<<< HEAD
-
-=======
->>>>>>> backup1
         return self._get_obs(),  self.historical_info["reward", -1], done, truncated, self.historical_info[-1]
 
     def add_metric(self, name, function):
@@ -342,10 +289,6 @@ class TradingEnv(gym.Env):
             self.results_metrics[metric['name']] = metric['function'](self.historical_info)
     def get_metrics(self):
         return self.results_metrics
-<<<<<<< HEAD
-=======
-
->>>>>>> backup1
     def log(self):
         if self.verbose > 0:
             text = ""
@@ -421,10 +364,6 @@ class MultiDatasetTradingEnv(TradingEnv):
 
     :param episodes_between_dataset_switch: Number of times a dataset is used to create an episode, before moving on to another dataset. It can be useful for performances when `max_episode_duration` is low.
     :type episodes_between_dataset_switch: optional - int
-<<<<<<< HEAD
-
-=======
->>>>>>> backup1
     """
     def __init__(self,
                 dataset_dir, 
@@ -436,10 +375,6 @@ class MultiDatasetTradingEnv(TradingEnv):
         self.dataset_dir = dataset_dir
         self.preprocess = preprocess
         self.episodes_between_dataset_switch = episodes_between_dataset_switch
-<<<<<<< HEAD
-
-=======
->>>>>>> backup1
         self.dataset_pathes = glob.glob(self.dataset_dir)
         self.dataset_nb_uses = np.zeros(shape=(len(self.dataset_pathes), ))
         super().__init__(self.next_dataset(), *args, **kwargs)
