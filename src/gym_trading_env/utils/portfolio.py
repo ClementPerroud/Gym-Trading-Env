@@ -11,6 +11,8 @@ class Portfolio:
             - self.interest_asset * price,
             - self.interest_fiat
         ])
+    def real_position(self, price):
+        return (self.asset - self.interest_asset)* price / self.valorisation(price)
     def position(self, price):
         return self.asset * price / self.valorisation(price)
     def trade_to_position(self, position, price, trading_fees):

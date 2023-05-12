@@ -37,6 +37,8 @@ class History:
             self.size = min(self.size+1, self.height)
         else:
             raise ValueError(f"Make sur that your inputs match the initial ones... Initial ones : {self.columns}. New ones {columns}")
+    def __len__(self):
+        return self.size
     def __getitem__(self, arg):
         if isinstance(arg, tuple):
             column, t = arg
@@ -72,6 +74,3 @@ class History:
         except ValueError as e:
             raise ValueError(f"Feature {column} does not exist ... Check the available features : {self.columns}")
         self.history_storage[:self.size][t, column_index] = value
-
-
-        

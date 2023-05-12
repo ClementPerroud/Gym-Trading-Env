@@ -59,3 +59,11 @@ The ``.add_metric`` method takes 2 parameters :
 
  
 
+.. note::
+
+  If you want to use your metrics to feed a custom logger, to visualize data or to track performance, you can access to results with ``env.get_metrics()`` **at the end of an episode**. In this case, it returns :
+
+ .. code-block:: python
+ 
+  { "Market Return" :  "25.30%", "Portfolio Return" : "45.24%", "Position Changes" : 28417, "Episode Lenght" : 33087 }
+ 
