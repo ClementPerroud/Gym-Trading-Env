@@ -23,7 +23,7 @@ It was made to make everything easier :
    'position_index': 2, #Index of the position at step t among your position list.
    'position': 1, # Last position taken by the agent.
    'real_position': 1.09848, # Real portfolio position  = (asset owned - asset borrowed - asset interests) * current price / portfolio valuation
-   'reward': 0.0028838985262525257, #Reward at step t.
+   'reward': 0.0028838985262525257, #Reward at step t. Obviously, you can not be used inside a custom reward function (the value is always 0 as it as not been computed yet).
    
    # DataFrame info : Every column (except features) of your initial DataFrame preceded by 'data_'
    'data_symbol': 'BTC/USD', 
