@@ -68,7 +68,7 @@ select{
             <h2 style="margin-top: 40px;"> Parameters </h2>
             <p>Select render</p>
             <select name='select_dataset' id = 'select_dataset' method="GET" action="/">
-                {% for name in render_names%}
+                {% for name in render_names|sort %}
                     <option value= "{{name}}" SELECTED>{{ name }}</option>
                 {% endfor %}
             </select>
