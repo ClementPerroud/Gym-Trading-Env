@@ -68,9 +68,6 @@ class TradingEnv(gym.Env):
     :param max_episode_duration: If a integer value is used, each episode will be truncated after reaching the desired max duration in steps (by returning `truncated` as `True`). When using a max duration, each episode will start at a random starting point.
     :type max_episode_duration: optional - int or 'max'
 
-    :param max_episode_duration: If a integer value is used, each episode will be truncated after reaching the desired max duration in steps (by returning `truncated` as `True`). When using a max duration, each episode will start at a random starting point.
-    :type max_episode_duration: optional - int or 'max'
-
     :param verbose: If 0, no log is outputted. If 1, the env send episode result logs.
     :type verbose: optional - int
     
