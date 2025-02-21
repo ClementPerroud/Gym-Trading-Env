@@ -34,14 +34,14 @@ df["feature_low"] = df["low"]/df["close"]
 df["feature_volume"] = df["volume"] / df["volume"].rolling(7*24).max()
 df.dropna(inplace= True)
 
-del df["timestamp_open"]
+print(df)
 
 
 def reward_function(history):
     return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2]) #log (p_t / p_t-1 )
 
 if __name__ == "__main__":
-    env = gym.vector.make(
+    env = gym.make_vec(
         id = "TradingEnv",
         num_envs = 3,
 

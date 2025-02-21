@@ -160,8 +160,8 @@ class TradingEnv(gym.Env):
         return self._obs_array[_step_index]
 
     
-    def reset(self, seed = None, options=None):
-        super().reset(seed = seed)
+    def reset(self, seed = None, options=None, **kwargs):
+        super().reset(seed = seed, options = options, **kwargs)
         
         self._step = 0
         self._position = np.random.choice(self.positions) if self.initial_position == 'random' else self.initial_position
@@ -373,6 +373,7 @@ class MultiDatasetTradingEnv(TradingEnv):
         self.preprocess = preprocess
         self.episodes_between_dataset_switch = episodes_between_dataset_switch
         self.dataset_pathes = glob.glob(self.dataset_dir)
+        if len(self.dataset_pathes) == 0:raise FileNotFoundError(f"No dataset found with the path : {self.dataset_dir}")
         self.dataset_nb_uses = np.zeros(shape=(len(self.dataset_pathes), ))
         super().__init__(self.next_dataset(), *args, **kwargs)
 
@@ -388,12 +389,12 @@ class MultiDatasetTradingEnv(TradingEnv):
         self.name = Path(dataset_path).name
         return self.preprocess(pd.read_pickle(dataset_path))
 
-    def reset(self, seed=None):
+    def reset(self, seed=None, options = None, **kwargs):
         self._episodes_on_this_dataset += 1
         if self._episodes_on_this_dataset % self.episodes_between_dataset_switch == 0:
             self._set_df(
                 self.next_dataset()
             )
         if self.verbose > 1: print(f"Selected dataset {self.name} ...")
-        return super().reset(seed)
+        return super().reset(seed = seed, options = options, **kwargs)
     

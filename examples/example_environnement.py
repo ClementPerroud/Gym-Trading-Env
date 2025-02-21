@@ -39,6 +39,7 @@ env = gym.make(
         reward_function = reward_function,
         portfolio_initial_value = 1000, # in FIAT (here, USD)
         max_episode_duration = 500,
+        disable_env_checker= True
     )
 
 env.add_metric('Position Changes', lambda history : np.sum(np.diff(history['position']) != 0) )

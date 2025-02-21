@@ -6,6 +6,8 @@ import numpy as np
 import gymnasium as gym
 import gym_trading_env
 
+# WARNING : Please use the example_download.py script to download the data before!
+
 # Generating features
 # WARNING : the column names need to contain keyword 'feature' !
 def preprocess(df : pd.DataFrame):
@@ -21,9 +23,10 @@ def preprocess(df : pd.DataFrame):
 def reward_function(history):
     return np.log(history["portfolio_valuation", -1] / history["portfolio_valuation", -2]) #log (p_t / p_t-1 )
 
+
 env = gym.make(
         "MultiDatasetTradingEnv",
-        dataset_dir= 'examples/data/*.pkl',
+        dataset_dir= './examples/data/*.pkl', 
         preprocess= preprocess,
         windows= 5,
         positions = [ -1, -0.5, 0, 0.5, 1, 1.5, 2], # From -1 (=full SHORT), to +1 (=full LONG) with 0 = no position

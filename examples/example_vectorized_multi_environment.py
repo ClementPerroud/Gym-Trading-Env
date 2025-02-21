@@ -33,7 +33,7 @@ if __name__ == "__main__":
     #     dir = "examples/data",
     #     since= datetime.datetime(year= 2019, month= 1, day=1),
     # )
-    env = gym.vector.make(
+    env = gym.make_vec(
         id = "MultiDatasetTradingEnv",
         num_envs = 3,
 

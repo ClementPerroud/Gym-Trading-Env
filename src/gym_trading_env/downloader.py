@@ -5,7 +5,10 @@ import datetime
 import numpy as np
 import nest_asyncio
 nest_asyncio.apply()
-
+import sys 
+if sys.platform == 'win32':
+	asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
+    
 EXCHANGE_LIMIT_RATES = {
     "bitfinex2": {
         "limit":10_000,
@@ -82,8 +85,8 @@ async def _download(exchange_names, symbols, timeframe, dir, since : datetime.da
         )
     await asyncio.gather(*tasks)
 def download(*args, **kwargs):
-    loop = asyncio.get_event_loop()
-    loop.run_until_complete(
+    # loop = asyncio.get_event_loop()
+    asyncio.run(
         _download(*args, **kwargs)
     )
 
@@ -99,5 +102,4 @@ async def main():
 
 
 if __name__ == "__main__":
-    asyncio.set_event_loop_policy(asyncio.WindowsSelectorEventLoopPolicy())
     asyncio.run(main())
