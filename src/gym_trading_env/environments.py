@@ -382,8 +382,9 @@ class MultiDatasetTradingEnv(TradingEnv):
         potential_dataset_pathes = np.where(self.dataset_nb_uses == self.dataset_nb_uses.min())[0]
         # Pick one of them
         random_int = np.random.randint(potential_dataset_pathes.size)
-        dataset_path = self.dataset_pathes[random_int]
-        self.dataset_nb_uses[random_int] += 1 # Update nb use counts
+        dataset_idx = potential_dataset_pathes[ random_int ]
+        dataset_path = self.dataset_pathes[dataset_idx]
+        self.dataset_nb_uses[dataset_idx] += 1 # Update nb use counts
 
         self.name = Path(dataset_path).name
         return self.preprocess(pd.read_pickle(dataset_path))
