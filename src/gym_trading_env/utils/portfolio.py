@@ -15,7 +15,7 @@ class Portfolio:
         return (self.asset - self.interest_asset)* price / self.valorisation(price)
     def position(self, price):
         return self.asset * price / self.valorisation(price)
-    def trade_to_position(self, position, price, trading_fees):
+    def trade_to_position(self, position, price, trading_fees, fixed_trading_fees):
         # Repay interest
         current_position = self.position(price)
         interest_reduction_ratio = 1
@@ -41,6 +41,11 @@ class Portfolio:
             asset_fiat = - asset_trade * price
             self.asset = self.asset + asset_trade 
             self.fiat = self.fiat + asset_fiat * (1 - trading_fees)
+
+        #Apply fixed fee
+        if asset_trade != 0.:
+            self.fiat -= fixed_trading_fees
+
     def update_interest(self, borrow_interest_rate):
         self.interest_asset = max(0, - self.asset)*borrow_interest_rate
         self.interest_fiat = max(0, - self.fiat)*borrow_interest_rate
