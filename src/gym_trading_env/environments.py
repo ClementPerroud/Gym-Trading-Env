@@ -56,6 +56,9 @@ class TradingEnv(gym.Env):
     :param trading_fees: Transaction trading fees (buy and sell operations). eg: 0.01 corresponds to 1% fees
     :type trading_fees: optional - float
 
+    :param fixed_trading_fees : Fixed transaction trading fees as constant FIAT amount independend from the trading size
+    :type fixed_trading_fees: optional - float
+
     :param borrow_interest_rate: Borrow interest rate per step (only when position < 0 or position > 1). eg: 0.01 corresponds to 1% borrow interest rate per STEP ; if your know that your borrow interest rate is 0.05% per day and that your timestep is 1 hour, you need to divide it by 24 -> 0.05/100/24.
     :type borrow_interest_rate: optional - float
 
@@ -83,6 +86,7 @@ class TradingEnv(gym.Env):
                 reward_function = basic_reward_function,
                 windows = None,
                 trading_fees = 0,
+                fixed_trading_fees = 0,
                 borrow_interest_rate = 0,
                 portfolio_initial_value = 1000,
                 initial_position ='random',
@@ -100,6 +104,7 @@ class TradingEnv(gym.Env):
         self.reward_function = reward_function
         self.windows = windows
         self.trading_fees = trading_fees
+        self.fixed_trading_fees = fixed_trading_fees 
         self.borrow_interest_rate = borrow_interest_rate
         self.portfolio_initial_value = float(portfolio_initial_value)
         self.initial_position = initial_position
@@ -205,7 +210,8 @@ class TradingEnv(gym.Env):
         self._portfolio.trade_to_position(
             position, 
             price = self._get_price() if price is None else price, 
-            trading_fees = self.trading_fees
+            trading_fees = self.trading_fees,
+            fixed_trading_fees = self.fixed_trading_fees,
         )
         self._position = position
         return
